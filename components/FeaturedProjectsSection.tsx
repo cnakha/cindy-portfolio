@@ -61,11 +61,11 @@ export default function FeaturedProjectsSection() {
 
   return (
     <section
-      id="featured-projects"
-      className="relative mt-8 flex items-start gap-8 px-8"
-    >
-      <aside className="sticky top-8 hidden h-fit min-w-[250px] rounded-3xl border border-mid-gray bg-light-gray p-8 text-black shadow-sm md:block">
-        <h2 className="mb-7 text-tiny font-bold">Featured Projects</h2>
+  id="featured-projects"
+  className="relative mx-auto mt-8 grid max-w-[1440px] grid-cols-[250px_1fr] items-start gap-8 px-8"
+>
+  <aside className="sticky top-8 hidden h-fit rounded-3xl border border-mid-gray bg-light-gray p-8 text-black shadow-sm md:block">
+     <h2 className="mb-7 text-tiny font-bold">Featured Projects</h2>
 
         <ul className="space-y-3 text-list">
           {projects.map((project) => {

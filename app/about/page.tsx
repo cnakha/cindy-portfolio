@@ -2,33 +2,60 @@ import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   return (
-    <main className="px-8 pt-32">
-      <section className="mx-auto max-w-5xl">
-        <h1 className="text-6xl font-black">About Me</h1>
+    <main className="bg-white text-black">
+      <section className="mx-auto grid max-w-[1440px] gap-10 px-8 pt-28 md:grid-cols-2 md:px-16 md:pt-36">
+        {/* mobile image first */}
+        <div className="order-1 h-[230px] rounded-xl bg-[#c9c9c9] md:order-2 md:h-[360px]" />
 
-        {/* <p className="mt-8 max-w-3xl text-xl leading-relaxed text-white/80">
-          I’m Cindy Nakhammouane, a fullstack developer and designer interested
-          in creative technology, product design, playful web experiences, and
-          user-centered tools.
-        </p>
+        <div className="order-2 md:order-1">
+          <section>
+            <h1 className="text-display">Background</h1>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl bg-white p-8 text-black">
-            <h2 className="text-3xl font-black">Design</h2>
-            <p className="mt-4">
-              UX research, prototyping, visual systems, interaction design, and
-              product thinking.
+            <p className="mt-4 max-w-xl text-body leading-tight">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+              volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+              ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+              consequat.
             </p>
-          </div>
+          </section>
 
-          <div className="rounded-3xl bg-white p-8 text-black">
-            <h2 className="text-3xl font-black">Development</h2>
-            <p className="mt-4">
-              React, Next.js, TypeScript, Firebase, APIs, and interactive web
-              experiences.
+          <section className="mt-10">
+            <h2 className="text-subtitle font-semibold">Random facts</h2>
+
+            <p className="mt-4 max-w-xl text-body leading-tight">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+              volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+              ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+              consequat.
             </p>
+          </section>
+        </div>
+
+        <section className="order-3 md:col-start-2">
+          <h2 className="text-display">Tools I Use</h2>
+
+          <div className="mt-8 grid gap-8 md:grid-cols-2">
+            <div>
+              <p className="text-tiny font-bold">Design</p>
+              <ul className="mt-3 text-tiny font-semibold leading-tight">
+                <li>Fullstack Development</li>
+                <li>UI/UX Design</li>
+                <li>Web Design</li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-tiny font-bold">Developer</p>
+              <ul className="mt-3 text-tiny font-semibold leading-tight">
+                <li>Fullstack Development</li>
+                <li>UI/UX Design</li>
+                <li>Web Design</li>
+              </ul>
+            </div>
           </div>
-        </div> */}
+        </section>
       </section>
 
       <Footer />

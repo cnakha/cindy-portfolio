@@ -7,8 +7,8 @@ import { projects } from "@/lib/projects";
 export default function HomePage() {
   return (
     <main className="bg-white">
-      <div className="mx-auto w-full max-w-[1440px] overflow-hidden">
-        <section className="relative h-[600px] overflow-hidden">
+<div className="mx-auto w-full max-w-[1440px]">
+          <section className="relative h-[600px] overflow-hidden">
           <div className="relative h-full w-full">
             <picture>
               <source media="(max-width: 650px)" srcSet="/mobile-hero.svg" />

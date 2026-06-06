@@ -80,19 +80,21 @@ export default function Navbar() {
     });
 };
 
-  const scrollToSection = (id: string) => {
-    setMobileOpen(false);
+const scrollToSection = (id: string) => {
+  setMobileOpen(false);
 
-    if (!isHome) {
-      router.push(`/#${id}`);
-      return;
-    }
+  const section = document.getElementById(id);
 
-    document.getElementById(id)?.scrollIntoView({
+  if (section) {
+    section.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-  };
+    return;
+  }
+
+  router.push(`/#${id}`);
+};
 
   return (
     <>
