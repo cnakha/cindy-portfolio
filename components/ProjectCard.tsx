@@ -10,8 +10,8 @@ type ProjectCardProps = {
 export default function ProjectCard({ project, wide = false }: ProjectCardProps) {
   return (
     <Link
-      href={`/works/${project.slug}`}
-      className="group block rounded-3xl border border-white/70 bg-light-black p-6"
+      href={`/works/${project.id}`}
+      className="group block rounded-3xl border border-white/70 h-full shadow-sm bg-light-black p-6 pb-8"
     >
       <div
         className={`overflow-hidden rounded-2xl bg-neutral-700 ${
@@ -19,7 +19,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
         }`}
       >
         <img
-          src={project.image}
+          src={project.imageUrl}
           alt={project.title}
           className="h-full w-full object-cover"
         />
@@ -37,8 +37,8 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
 
           <div>
             <h3 className="text-body font-bold">{project.title}</h3>
-            <p className="mt-1 max-w-md text-tiny text-white/75">
-              {project.shortDescription}
+            <p className="mt-1 text-tiny text-white/75">
+              {project.description}
             </p>
           </div>
         </div>

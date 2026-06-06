@@ -6,7 +6,7 @@ import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 
 export default function FeaturedProjectsSection() {
-  const [activeSlug, setActiveSlug] = useState(projects[0]?.slug);
+  const [activeSlug, setActiveSlug] = useState(projects[0]?.id);
   const clickedSlugRef = useRef<string | null>(null);
   const unlockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -17,7 +17,7 @@ export default function FeaturedProjectsSection() {
       const triggers = document.querySelectorAll("[data-project-trigger]");
       const targetY = window.innerHeight * 0.38;
 
-      let currentSlug = projects[0]?.slug;
+      let currentSlug = projects[0]?.id;
 
       triggers.forEach((trigger) => {
         const rect = trigger.getBoundingClientRect();
@@ -69,13 +69,13 @@ export default function FeaturedProjectsSection() {
 
         <ul className="space-y-3 text-list">
           {projects.map((project) => {
-            const active = activeSlug === project.slug;
+            const active = activeSlug === project.id;
 
             return (
-              <li key={project.slug}>
+              <li key={project.id}>
                 <a
-                  href={`#project-${project.slug}`}
-                  onClick={() => handleProjectClick(project.slug)}
+                  href={`#project-${project.id}`}
+                  onClick={() => handleProjectClick(project.id)}
                   className={`group relative block pl-4 transition ${
                     active ? "opacity-100" : "opacity-60 hover:opacity-100"
                   }`}
@@ -106,8 +106,8 @@ export default function FeaturedProjectsSection() {
 
         <div className="grid w-full max-w-5xl gap-4">
           <div
-            id={`project-${projects[0].slug}`}
-            data-project-trigger={projects[0].slug}
+            id={`project-${projects[0].id}`}
+            data-project-trigger={projects[0].id}
             className="scroll-mt-28"
           >
             <ProjectCard project={projects[0]} wide />
@@ -115,26 +115,26 @@ export default function FeaturedProjectsSection() {
 
           <div className="relative grid gap-4 md:grid-cols-2">
             <div
-              id={`project-${projects[1].slug}`}
-              data-project-trigger={projects[1].slug}
+              id={`project-${projects[1].id}`}
+              data-project-trigger={projects[1].id}
               className="scroll-mt-28"
             >
               <ProjectCard project={projects[1]} />
             </div>
 
-            <div id={`project-${projects[2].slug}`} className="scroll-mt-28">
+            <div id={`project-${projects[2].id}`} className="scroll-mt-28">
               <ProjectCard project={projects[2]} />
             </div>
 
             <div
-              data-project-trigger={projects[2].slug}
+              data-project-trigger={projects[2].id}
               className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
             />
           </div>
 
           <div
-            id={`project-${projects[3].slug}`}
-            data-project-trigger={projects[3].slug}
+            id={`project-${projects[3].id}`}
+            data-project-trigger={projects[3].id}
             className="scroll-mt-28"
           >
             <ProjectCard project={projects[3]} wide />
@@ -142,19 +142,19 @@ export default function FeaturedProjectsSection() {
 
           <div className="relative grid gap-4 md:grid-cols-2">
             <div
-              id={`project-${projects[4].slug}`}
-              data-project-trigger={projects[4].slug}
+              id={`project-${projects[4].id}`}
+              data-project-trigger={projects[4].id}
               className="scroll-mt-28"
             >
               <ProjectCard project={projects[4]} />
             </div>
 
-            <div id={`project-${projects[5].slug}`} className="scroll-mt-28">
+            <div id={`project-${projects[5].id}`} className="scroll-mt-28">
               <ProjectCard project={projects[5]} />
             </div>
 
             <div
-              data-project-trigger={projects[5].slug}
+              data-project-trigger={projects[5].id}
               className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
             />
           </div>

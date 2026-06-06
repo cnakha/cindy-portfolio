@@ -20,7 +20,7 @@ export default function HomePage() {
                   absolute
                   left-0
                   top-0
-                  w-[500px] md:w-[910px]
+                  w-[570px] sm:w-[750px] md:w-[910px]
                   max-w-none
                 "
               />

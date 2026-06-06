@@ -10,14 +10,14 @@ type ProjectPageProps = {
 
 export function generateStaticParams() {
   return projects.map((project) => ({
-    slug: project.slug,
+    slug: project.id,
   }));
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
 
-  const project = projects.find((project) => project.slug === slug);
+  const project = projects.find((project) => project.id === slug);
 
   if (!project) {
     notFound();
@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {project.description}
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        {/* <div className="mt-8 flex flex-wrap gap-3">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -43,11 +43,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {tag}
             </span>
           ))}
-        </div>
+        </div> */}
 
         <div className="mt-12 overflow-hidden rounded-3xl border border-white/70">
           <img
-            src={project.image}
+            src={project.imageUrl}
             alt={project.title}
             className="w-full object-cover"
           />

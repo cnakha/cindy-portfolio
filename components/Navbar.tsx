@@ -25,7 +25,7 @@ function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
   const underline = !mobile && (
     <span
       className={`absolute left-0 -bottom-1 h-[10px] bg-blue transition-all duration-300 ease-out ${
-        active ? "w-full" : "w-0 group-hover:w-full opacity-50"
+        active ? "w-full" : "w-0  opacity-50"
       }`}
     />
   );
