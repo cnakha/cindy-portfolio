@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div> */}
 
-        <div className="mt-12 overflow-hidden rounded-3xl border border-white/70">
+        {/* <div className="mt-12 overflow-hidden rounded-3xl border border-white/70">
           <img
             src={project.imageUrl}
             alt={project.title}
@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               Add your role, tools, timeline, team, and contribution here.
             </p>
           </div>
-        </section>
+        </section> */}
       </article>
 
       <Footer />

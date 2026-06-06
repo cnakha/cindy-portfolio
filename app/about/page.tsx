@@ -6,7 +6,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-5xl">
         <h1 className="text-6xl font-black">About Me</h1>
 
-        <p className="mt-8 max-w-3xl text-xl leading-relaxed text-white/80">
+        {/* <p className="mt-8 max-w-3xl text-xl leading-relaxed text-white/80">
           I’m Cindy Nakhammouane, a fullstack developer and designer interested
           in creative technology, product design, playful web experiences, and
           user-centered tools.
@@ -28,7 +28,7 @@ export default function AboutPage() {
               experiences.
             </p>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <Footer />
