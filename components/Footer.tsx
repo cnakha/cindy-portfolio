@@ -180,7 +180,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="relative left-1/2 h-[32px] w-screen -translate-x-1/2 bg-cover bg-center bg-repeat-x md:h-[42px]"
+        className="relative left-1/2 h-[32px] w-screen -translate-x-1/2 bg-cover bg-center bg-repeat-x md:h-[30px]"
         style={{
           backgroundImage: "url('/line.svg')",
         }}

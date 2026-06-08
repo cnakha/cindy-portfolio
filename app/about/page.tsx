@@ -31,10 +31,9 @@ export default function AboutPage() {
               consequat.
             </p>
           </section>
-        </div>
+          <section className="order-3 md:col-start-2">
 
-        <section className="order-3 md:col-start-2">
-          <h2 className="text-display">Tools I Use</h2>
+          <h2 className="text-subtitle mt-10">Tools I Use</h2>
 
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             <div>
@@ -56,6 +55,9 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        </div>
+
+        
       </section>
 
       <Footer />

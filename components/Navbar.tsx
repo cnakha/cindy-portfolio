@@ -99,7 +99,7 @@ const scrollToSection = (id: string) => {
   return (
     <>
       {/* Desktop nav */}
-      <nav className="fixed right-6 top-6 shadow-sm z-50 hidden rounded-full border border-mid-gray bg-light-gray px-6 py-3 text-caption text-black md:block">
+      <nav className="fixed right-6 top-6 z-50 hidden rounded-full border border-mid-gray bg-light-gray px-6 py-3 text-caption text-black md:block">
         <div className="flex gap-8">
           <NavItem
             label="Home"
@@ -137,43 +137,51 @@ const scrollToSection = (id: string) => {
         />
       </button>
 
-      {/* Mobile dropdown */}
       <div
-        className={`fixed  z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
+        className={`fixed z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
           mobileOpen
             ? "max-h-[260px] opacity-100"
-            : "max-h-0  pointer-events-none"
+            : "max-h-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col gap-5 px-10 py-5">
-          <NavItem
-            mobile
-            label="Home"
-            active={isHome}
-            onClick={goHome}
+        {/* Mobile dropdown */}
+        <div
+          className={`fixed  z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
+            mobileOpen
+              ? "max-h-[260px] opacity-100"
+              : "max-h-0  pointer-events-none"
+          }`}
+        >
+          <div className="flex flex-col gap-5 px-10 py-5">
+            <NavItem
+              mobile
+              label="Home"
+              active={isHome}
+              onClick={goHome}
+              />
+
+            <NavItem
+              mobile
+              label="Works"
+              active={isWorks}
+              onClick={() => scrollToSection("featured-projects")}
             />
 
-          <NavItem
-            mobile
-            label="Works"
-            active={isWorks}
-            onClick={() => scrollToSection("featured-projects")}
-          />
+            <NavItem
+              mobile
+              label="About"
+              href="/about"
+              active={isAbout}
+              onClick={() => setMobileOpen(false)}
+            />
 
-          <NavItem
-            mobile
-            label="About"
-            href="/about"
-            active={isAbout}
-            onClick={() => setMobileOpen(false)}
-          />
-
-          <NavItem
-            mobile
-            label="Contact"
-            active={false}
-            onClick={() => scrollToSection("contact")}
-          />
+            <NavItem
+              mobile
+              label="Contact"
+              active={false}
+              onClick={() => scrollToSection("contact")}
+            />
+          </div>
         </div>
       </div>
     </>

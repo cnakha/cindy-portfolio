@@ -11,7 +11,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
   return (
     <Link
       href={`/works/${project.id}`}
-      className="group block rounded-3xl border border-white/70 h-full shadow-sm bg-light-black p-6 pb-8"
+      className="group block rounded-3xl border border-dark-gray h-full shadow-sm bg-light-gray p-4 pb-6 md:p-6 md:pb-8"
     >
       <div
         className={`overflow-hidden rounded-2xl bg-neutral-700 ${
@@ -26,7 +26,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
       </div>
 
       <div className="mt-5 flex items-end justify-between gap-4">
-        <div className="flex items-center gap-4">
+        <div className="flex items-start gap-2 md:gap-4">
           <Image
             src="/thumb-icon.svg"
             alt=""
@@ -35,9 +35,9 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
             className="shrink-0"
           />
 
-          <div>
+          <div className="text-black">
             <h3 className="text-body font-bold">{project.title}</h3>
-            <p className="mt-1 text-tiny text-white/75">
+            <p className="mt-1 text-tiny ">
               {project.description}
             </p>
           </div>
@@ -47,6 +47,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
             className="
                 grid size-12 shrink-0 place-items-center
                 rounded-full bg-white
+                border border-dark-gray
 
                 scale-0 opacity-0
                 origin-bottom-right

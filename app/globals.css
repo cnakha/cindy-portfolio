@@ -6,7 +6,8 @@
 
 @theme {
   --color-light-gray: #f2f3f4;
-  --color-mid-gray: #e6e6e6;
+  --color-mid-gray: #d8d8d8;
+  --color-dark-gray: #cccccc;
   --color-light-black: #1a1a1a;
   --color-blue: #22b7ff;
   --font-century: "Century Gothic", Arial, sans-serif;
@@ -38,13 +39,13 @@
 
 @layer components {
   .text-display {
-    @apply font-[var(--font-century)] text-[35px] md:text-[48px] font-bold leading-none;
+    @apply font-[var(--font-century)] text-[32px] md:text-[48px] font-bold leading-none;
   }
 
   .text-subtitle {
     font-family: var(--font-myriad);
     font-variation-settings: "wght" 550;
-    @apply font-[var(--font-myriad)] text-[24px] md:text-[36px] font-semibold leading-[1.1];
+    @apply font-[var(--font-myriad)] text-[20px] md:text-[28px] font-semibold leading-[1.1];
   }
 
   .text-body {
@@ -97,4 +98,30 @@ h1,
 h2,
 h3 {
   font-family: "Myriad Variable", "Century Gothic", Arial, sans-serif;
+}
+
+@keyframes projectSwap {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(18px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
