@@ -1,16 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
-import { extras } from "@/lib/extras";
+import { extras, ExtraProject } from "@/lib/extras";
 
 export default function FeaturedProjectsSection() {
   const [activeSlug, setActiveSlug] = useState(projects[0]?.id);
   const [mode, setMode] = useState<"featured" | "extra">("featured");
-  const [selectedExtra, setSelectedExtra] = useState<(typeof extras)[0] | null>(
+  const [selectedExtra, setSelectedExtra] = useState<ExtraProject | null>(
     null
   );
 
@@ -143,7 +143,7 @@ export default function FeaturedProjectsSection() {
                         <button
                           onClick={() => {
                             setActiveSlug(item.id);
-                            setSelectedExtra(item);
+                            setSelectedExtra(item as ExtraProject);
                           }}
                           className={`group relative block cursor-pointer pl-4 text-left transition ${
                             active ? "opacity-100" : "opacity-60 hover:opacity-100"
@@ -348,7 +348,7 @@ export default function FeaturedProjectsSection() {
   );
 }
 
-const projectItemVariants = {
+const projectItemVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 28,
@@ -360,7 +360,7 @@ const projectItemVariants = {
     scale: 1,
     transition: {
       duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -381,7 +381,7 @@ const asideContainerVariants = {
   },
 };
 
-const asideFadeVariants = {
+const asideFadeVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 8,
@@ -391,7 +391,7 @@ const asideFadeVariants = {
     y: 0,
     transition: {
       duration: 0.25,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
   exit: {
@@ -399,7 +399,7 @@ const asideFadeVariants = {
     y: -6,
     transition: {
       duration: 0.18,
-      ease: "easeIn",
+      ease: "easeIn" ,
     },
   },
 };
@@ -419,7 +419,7 @@ const asideListVariants = {
   },
 };
 
-const asideItemVariants = {
+const asideItemVariants: Variants = {
   hidden: {
     opacity: 0,
     x: -12,
@@ -429,7 +429,7 @@ const asideItemVariants = {
     x: 0,
     transition: {
       duration: 0.28,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
   exit: {

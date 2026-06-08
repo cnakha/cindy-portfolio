@@ -1,4 +1,4 @@
-type ExtraProject = {
+export type ExtraProject = {
   id: string;
   coverImage: string;
   images: string[];
