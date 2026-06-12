@@ -3,7 +3,7 @@ export interface Project {
   title: string;
   description: string;
   timeline: string;
-  category: string;
+  context: string;
   fullDescription: string;
   role: string;
   skills: string[];
@@ -32,9 +32,9 @@ export const projects: Project[] = [
   title: "WorldNotes",
   timeline: "June 2025 — Present",
   description: "Blurring the line between social platform and digital graffiti, explore the world through 3D notes and doodles left behind by others on a street map view.",
-  category: "Fullstack Web Development and UI/UX Design for a Creative Social Media App",
+  context: "Solo Fullstack Web App Development and UI/UX Design",
   fullDescription:
-    "WorldNotes is a spatial web experiment blending maps, art, and 3D spaces. Users create notes by sharing thoughts and doodles, then post and anchor them to a globally shared street view map. Designed for casual web strolling, this web app fuels the creative spirit and builds a global community centering authentic creative expression.",
+    "WorldNotes is a spatial web experiment blending maps, art, and 3D spaces. Users create notes by sharing thoughts and drawing doodles then posting and anchoring them to a globally shared street view map. Designed for casual web strolling, this web app fuels the creative spirit and builds a global community centering authentic creative expression.",
   role: "Project Manager, Lead Fullstack Developer and UI/UX Designer. I built this app end-to-end from ideation to launch",
   skills: ["UI/UX Design", "Fullstack Development", "Web App Development", "Webflow Development", "Wireframing", "SEO"],
   tools: ["React", "Next.js", "TypeScript", "Three.js", "NoSQL"],
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     id: "foliofolds",
     title: "FolioFolds",
     description: "Assemble and share interactive 3D mockups of books, cards, zines, origamis, and fliers with support of complex folds, bindings, cutouts, and AR viewing",
-    category: "Fullstack Development of 3D Model Editors and Web Design",
+    context: "Product Design",
     fullDescription: "From birthday cards to origami, FolioFolds is a web application for designing, assembling, and sharing interactive 3D mockups of unique printed forms. The platform supports complex folds, bindings, cutouts, and offers AR viewing capabilities.",
     features: [
       "Supports PDF, PNG, and JPEG imports to create 3D models",
@@ -104,8 +104,10 @@ export const projects: Project[] = [
    {
     id: "graffgraff",
     title: "GraffGraff",
-    description: "A collaborative drawing and party game.",
-    category: "Fullstack Development, Hardware Assembly, and UI and User Experience Design for Wearable Health Monitoring Devices",
+    status: "View the live site",
+    link: "https://graffgraff.com",
+    description: "Website and community gallery hosting online nonsensical art games made to empower and inspire being more creative in daily life.",
+    context: "Web App Development and UI/UX Design",
     fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
@@ -135,7 +137,7 @@ export const projects: Project[] = [
     id: "YCGH",
     title: "You Can Grow Here",
     description: "Therapeutic VR journey for anxiety management, published research on adapting anxiety relief wellness techniques in VR (SIGGRAPH 2025, HCI 2026).",
-    category: "VR Application and Research Paper on VR Applications Centering Health and Well-Being Presented at SIGGRAPH 2025 Convention",
+    context: "VR Application and Research Paper (SIGGRAPH 2025 Convention and HCII 2026 Conference)",
     fullDescription: "You Can Grow Here is an immersive VR experience developed for and exhibited at the CAVE2™ environment in the Electronic Visualization Laboratory at the University of Illinois Chicago, aligning with the United Nation's Sustainable Development Goal of Good Health and Well-Being. In response to the mental health challenges intensified by the COVID-19 pandemic, the project explores how interactive storytelling, ambient sound, and 3D typography can support emotional reflection, explore modes of group therapy, and teach anxiety coping strategies. Built in Unity with custom assets from Blender and Maya, the experience differs from most clinical VR programs, allowing users to independently explore emotions, manage anxiety, and practice evidence-based calming techniques within a safe, narrative-driven space that builds emotional resilience.",
     features: [
       "Interactive 3D Typography",
@@ -172,7 +174,7 @@ export const projects: Project[] = [
     id: "biomed",
     title: "Sensing Through Life",
     description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
-    category: "Fullstack Development, Hardware Assembly, and UI and User Experience Design for Wearable Health Monitoring Devices",
+    context: "Fullstack Development, Hardware Assembly, and UI/UX Design",
     fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
@@ -202,7 +204,7 @@ export const projects: Project[] = [
     id: "bento",
     title: "Bento",
     description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
-    category: "Fullstack Development, Hardware Assembly, and UI and User Experience Design for Wearable Health Monitoring Devices",
+    context: "Design Engineering",
     fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",

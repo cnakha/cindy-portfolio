@@ -27,16 +27,10 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
 
       <div className="mt-5 flex items-end justify-between gap-4">
         <div className="flex items-start gap-2 md:gap-4">
-          <Image
-            src="/thumb-icon.svg"
-            alt=""
-            width={44}
-            height={44}
-            className="shrink-0"
-          />
 
           <div className="text-black">
             <h3 className="text-body font-bold">{project.title}</h3>
+            <p className="text-tiny opacity-50">{project.context}</p>
             <p className="mt-1 text-tiny ">
               {project.description}
             </p>
@@ -45,7 +39,8 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
 
        <div
             className="
-                grid size-12 shrink-0 place-items-center
+                hidden sm:grid
+                size-12 shrink-0 place-items-center
                 rounded-full bg-white
                 border border-dark-gray
 
