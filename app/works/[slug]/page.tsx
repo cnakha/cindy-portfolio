@@ -73,7 +73,7 @@ export default function ProjectPage() {
               <div className="flex items-center gap-2">
                 <p className="text-tiny gray-title">Context</p>
               </div>
-                <p className="text-body mt-2">
+                <p className="text-body mt-2 max-w-[75%]">
                   {project.context}
                 </p>
             </div>
@@ -81,7 +81,7 @@ export default function ProjectPage() {
               <div className="flex items-center gap-2">
                 <p className="text-tiny gray-title">Role(s)</p>
               </div>
-              <p className="text-body mt-2">
+              <p className="text-body mt-2 max-w-[75%]">
                 {project.role}
               </p>
             </div>
@@ -93,21 +93,21 @@ export default function ProjectPage() {
               <div className="flex items-center gap-2">
                 <p className="text-tiny gray-title">Skills</p>
               </div>
-              <p className="text-body mt-2">
-                {project.skills}
+              <p className="text-body mt-2 max-w-[75%]">
+                {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
               </p>
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <p className="text-tiny gray-title">Tools</p>
               </div>
-              <p className="text-body mt-2">
-                {project.tools}
+              <p className="text-body mt-2 max-w-[75%]">
+                {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
               </p>
             </div>
           </div>
-
-          <div className="h-px bg-mid-gray my-10"></div>
+          <div className="mt-20"/>
+          {/* <div className="h-px bg-mid-gray my-10"></div> */}
 
           {/* Project Details */}
           {slug === "bento" && <Bento />}
