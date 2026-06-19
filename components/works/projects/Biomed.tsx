@@ -70,6 +70,26 @@ export default function Biomed() {
 
       <div className="mt-20"/>
       <Solution solution={biomed.solution} />
+
+      <section className="mt-10">
+        <div className="w-full h-full px-6">
+          <div className="rounded-xl border border-mid-gray bg-light-gray p-6 pb-10">
+            <h3 className="text-body mb-4 font-semibold">Key Features</h3>
+            <div className="grid grid-cols-1 gap-2 md:gap-8 md:grid-cols-2">
+              <ul className="text-caption list-disc list-inside space-y-2">
+                {features.slice(0, Math.ceil(features.length / 2)).map((feature, idx) => (
+                  <li key={idx}>{feature}</li>
+                ))}
+              </ul>
+              <ul className="text-caption list-disc list-inside space-y-2">
+                {features.slice(Math.ceil(features.length / 2)).map((feature, idx) => (
+                  <li key={idx + Math.ceil(features.length / 2)}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
       
       <div className="mt-20"/>
 
@@ -80,6 +100,7 @@ export default function Biomed() {
         <p className="text-subtitle mt-10">Understanding Technologies</p>
         <p className="text-body leading-relaxed">Before participating in this lab, I had limited experience with biomedical device design nor engineering in general. Through these projects, I gained hands-on experience in sensor integration, hardware engineering, data acquisition, UI/UX design, frontend development, and real-time monitoring. The following tools were instrumental in bringing the various biomedical devices to life:</p>
       
+        <div className="mt-4"/>
         <Items titles={tech} descriptions={techDescriptions} />
 
         <p className="text-subtitle mt-10">Prototyping</p>

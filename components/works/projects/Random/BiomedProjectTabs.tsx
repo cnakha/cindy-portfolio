@@ -224,7 +224,7 @@ export default function BiomedProjectsTabs() {
         aria-label="Biomedical projects"
         className="mb-4 hidden justify-center md:flex"
       >
-        <div className="flex gap-4 px-6 rounded-full border border-mid-gray bg-light-gray p-2">
+        <div className="flex gap-10 px-6 rounded-full border border-mid-gray bg-light-gray p-2">
           {PROJECTS.map(({ key, label }) => {
             const selected = active === key;
 
