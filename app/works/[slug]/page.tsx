@@ -5,6 +5,7 @@ import { projects } from "@/lib/projects";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
+import { useEffect } from "react";
 
 import Status  from "@/components/works/Status";
 import Bento  from "@/components/works/projects/Bento";
@@ -29,6 +30,10 @@ export default function ProjectPage() {
     notFound();
   }
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [slug]);
+
   return (
     <main className="pt-32 bg-white text-black">
       <div className="mx-4 sm:mx-6 lg:mx-10">
@@ -38,8 +43,8 @@ export default function ProjectPage() {
           <div className="flex">
             <div 
               onClick={() => router.push("/")}
-              className="cursor-pointer right-6 top-6 z-50 hidden rounded-full border border-mid-gray bg-light-gray 
-              px-6 py-3 text-caption text-black md:flex md:items-center md:gap-2 md:block hover:-translate-x-2 transition ease-in-out">
+              className="cursor-pointer right-6 top-6 z-50  rounded-full border border-mid-gray bg-light-gray 
+              px-6 py-3 text-caption text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
               <p className="text-caption text-black/60 hover:text-black/100 transition">Cindy Nakhammouane</p>
             </div>
@@ -68,44 +73,48 @@ export default function ProjectPage() {
           </p>
 
           {/* Overview Details */}
-          <div className="mt-10 mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="text-tiny gray-title">Context</p>
+          <div className="mt-10 border border-mid-gray p-4 pt-6 md:p-6 md:pt-8 rounded-2xl">
+            <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <p className="text-tiny gray-title">Context</p>
+                </div>
+                  <p className="text-body mt-2 max-w-[75%]">
+                    {project.context}
+                  </p>
               </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <p className="text-tiny gray-title">Role(s)</p>
+                </div>
                 <p className="text-body mt-2 max-w-[75%]">
-                  {project.context}
+                  {project.role}
                 </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="text-tiny gray-title">Role(s)</p>
               </div>
-              <p className="text-body mt-2 max-w-[75%]">
-                {project.role}
-              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <div>
+                <div className="flex items-center gap-2">
+                  <p className="text-tiny gray-title">Skills</p>
+                </div>
+                <p className="text-body mt-2 max-w-[75%]">
+                  {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
+                </p>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <p className="text-tiny gray-title">Tools</p>
+                </div>
+                <p className="text-body mt-2 max-w-[75%]">
+                  {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="text-tiny gray-title">Skills</p>
-              </div>
-              <p className="text-body mt-2 max-w-[75%]">
-                {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="text-tiny gray-title">Tools</p>
-              </div>
-              <p className="text-body mt-2 max-w-[75%]">
-                {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
-              </p>
-            </div>
-          </div>
+
           <div className="mt-20"/>
           {/* <div className="h-px bg-mid-gray my-10"></div> */}
 
@@ -116,6 +125,17 @@ export default function ProjectPage() {
           {slug === "ycgh" && <YCGH />}
           {slug === "graffgraff" && <Graffgraff />}
           {slug === "worldnotes" && <Worldnotes />}
+
+          {/* Return to top button */}
+          <div className="flex justify-end">
+            <div 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
+              px-6 py-3 text-caption text-black flex items-center gap-2 hover:-translate-y-2 transition ease-in-out">
+              <p className="text-caption text-black/60 hover:text-black/100 transition">Go back to the top</p>
+              <Image src="/arrow.svg" alt="" width={24} height={24} className="-rotate-90" />
+            </div>
+          </div>
 
         </article>
       </div>

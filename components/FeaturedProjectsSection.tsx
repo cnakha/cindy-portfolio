@@ -229,7 +229,7 @@ export default function FeaturedProjectsSection() {
                   <ProjectCard project={projects[0]} wide />
                 </motion.div>
 
-                <div className="relative grid gap-4 md:grid-cols-2">
+                <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
                     variants={projectItemVariants}
                     id={`project-${projects[1].id}`}
@@ -262,7 +262,7 @@ export default function FeaturedProjectsSection() {
                   <ProjectCard project={projects[3]} wide />
                 </motion.div>
 
-                <div className="relative grid gap-4 md:grid-cols-2">
+                <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
                     variants={projectItemVariants}
                     id={`project-${projects[4].id}`}
@@ -312,7 +312,10 @@ export default function FeaturedProjectsSection() {
       </section>
 
       {selectedExtra && (
-        <div className="fixed inset-0 z-[100] bg-black/70">
+        <div 
+          onClick={() => setSelectedExtra(null)}
+          className="fixed inset-0 z-[100] bg-black/70"
+        >
           <div className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-4xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg">
             <div>
               <h2 className="text-body font-bold">{selectedExtra.title}</h2>
@@ -321,10 +324,10 @@ export default function FeaturedProjectsSection() {
 
             <button
               onClick={() => setSelectedExtra(null)}
-              className="grid size-10 cursor-pointer place-items-center border border-mid-gray rounded-full bg-light-gray text-black transition hover:scale-105"
+              className="grid p-3 cursor-pointer place-items-center border border-mid-gray rounded-full bg-light-gray text-black transition hover:scale-105"
               aria-label="Close project popup"
             >
-              <Image src="/x.svg" alt="" width={24} height={24} />
+              <Image src="/x.svg" alt="" width={24} height={24}/>
             </button>
           </div>
 

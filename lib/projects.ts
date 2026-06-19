@@ -187,7 +187,7 @@ export const projects: Project[] = [
     skills: ["UI/UX Design", "Fullstack Development", "Entrepreneurship", "Internet of Things", "Hardware Engineering", "User Testing", "Websockets"],
     problem: "Wearable technology has the potential to revolutionize personal health tracking, yet many devices fail due to not meeting consumer needs.",
     subProblem: "After researching users and wearable assistive health tech, listed are key problems we identified in the wearable health tech space:",
-    solution: "My team developed five wearable bluetooth devices that monitor biometrics such as heart rate, oxygen levels, stress, and activity patterns. The devices feature ergonomic designs, wireless communication, and intuitive UIs that provide real-time data visualization and alerts, helping users track their personal health and receive timely notifications on health anomalies.",
+    solution: "My team developed five wearable bluetooth devices that monitor biometrics across heart rate, oxygen levels, stress, and activity patterns. The devices feature ergonomic designs, wireless communication, and intuitive accessibility focused UIs that provide real-time data visualization and alerts, helping users track their personal health and receive timely notifications on health anomalies.",
     keyProblems:[
       "Lack of Accessible Health Monitoring",
       "Poor Integration into Daily Life",
@@ -200,8 +200,8 @@ export const projects: Project[] = [
       ],
     
   },
-   {
-    id: "bento",
+  {
+    id: "nxmf",
     title: "Bento",
     description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
     context: "Design Engineering",
@@ -230,4 +230,34 @@ export const projects: Project[] = [
       ],
     
   },
+  //  {
+  //   id: "bento",
+  //   title: "Bento",
+  //   description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
+  //   context: "Design Engineering",
+  //   fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
+  //   tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
+  //   challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
+  //   outcome: "Successfully developed 5 different wearable biomedical devices that monitor various health metrics, each successfully tested and validated in real-world scenarios.",
+  //   imageUrl: "projects/biomed/thumbnail.png",
+  //   imageUrl2: "projects/biomed/thumbnail.png",
+  //   githubUrl: "https://github.com/cnakha/Wearable_Biomedical_Devices",
+  //   timeline: "Jan 2025 — May 2025",
+  //   role: "Lead Frontend Developer and UI/UX Designer, Fullstack Developer and Hardware Engineer alongside Kegan Jones, Rohan Kakarlapudi, and Sufyan Siddiqui",
+  //   skills: ["UI/UX Design", "Fullstack Development", "Entrepreneurship", "Internet of Things", "Hardware Engineering", "User Testing", "Websockets"],
+  //   problem: "Wearable technology has the potential to revolutionize personal health tracking, yet many devices fail due to not meeting consumer needs.",
+  //   subProblem: "After researching users and wearable assistive health tech, listed are key problems we identified in the wearable health tech space:",
+  //   solution: "My team developed five wearable bluetooth devices that monitor biometrics such as heart rate, oxygen levels, stress, and activity patterns. The devices feature ergonomic designs, wireless communication, and intuitive UIs that provide real-time data visualization and alerts, helping users track their personal health and receive timely notifications on health anomalies.",
+  //   keyProblems:[
+  //     "Lack of Accessible Health Monitoring",
+  //     "Poor Integration into Daily Life",
+  //     "Need for Real-Time, Continuous Monitoring"
+  //   ],
+  //   keyProblemDescriptions:[
+  //     "Many existing health monitoring devices are unaffordable or too complex for everyday users.",
+  //     "There is a gap in designing devices that seamlessly blend into users' routines while maintaining comfort, aesthetics, and continuous operation without disruption.",
+  //     "Current solutions don’t consistently offer real-time, continuous data streams that are accurate and intuitive enough to provide meaningful feedback or alerts."
+  //     ],
+    
+  // },
 ];

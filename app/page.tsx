@@ -38,7 +38,7 @@ export default function HomePage() {
               </picture>
             </motion.div>
 
-            <div className="absolute left-[30px] top-[170px] z-10 max-w-[620px] text-black sm:left-[100px] sm:top-[180px] md:left-[160px] md:top-[214px]">
+            <div className="absolute left-[30px] top-[160px] z-10 max-w-[620px] text-black sm:left-[60px] sm:top-[170px] md:left-[160px] md:top-[214px]">
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function HomePage() {
                   duration: 0.5,
                   ease: "easeOut",
                 }}
-                className="text-subtitle font-semibold"
+                className="text-list font-medium"
               >
                 Hi, I’m Cindy Nakhammouane
               </motion.p>
