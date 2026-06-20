@@ -95,21 +95,26 @@ export default function Biomed() {
 
       <div className="flex flex-col gap-4">
         <p className="text-display">The Development Cycle</p>
-        <p className="text-body leading-relaxed">Each device followed a similar development cycle, beginning with research on existing biomedical wearables and sensor solutions to gain insight on product and app design. Then followed conceptualizing, diagraming, low fidelity prototyping and UI designs, final construction, testing, and final review.</p>
+        <p className="text-body leading-relaxed">Each device followed a similar development cycle, beginning with research on existing adjacent solutions to gain insight on successful product and app design. Then followed conceptualizing, diagraming, low fidelity prototyping, formal UI designs, final construction, user testing, and final review.</p>
 
         <p className="text-subtitle mt-10">Understanding Technologies</p>
-        <p className="text-body leading-relaxed">Before participating in this lab, I had limited experience with biomedical device design nor engineering in general. Through these projects, I gained hands-on experience in sensor integration, hardware engineering, data acquisition, UI/UX design, frontend development, and real-time monitoring. The following tools were instrumental in bringing the various biomedical devices to life:</p>
+        <p className="text-body leading-relaxed">Before participating in this lab, I had limited experience with biomedical device design and engineering in general. 
+          Through these projects, I gained hands-on experience in hardware engineering, real-time data acquisition, UI/UX design, and frontend development.
+          The following tools were instrumental in bringing the various biomedical devices to life:</p>
       
         <div className="mt-4"/>
         <Items titles={tech} descriptions={techDescriptions} />
 
         <p className="text-subtitle mt-10">Prototyping</p>
-        <p className="text-body leading-relaxed">Sketches of physical device designs and UI were made followed by circuit diagrams to plan hardware integration and creating low-fidelity prototypes to test sensor response, placements, and data acquisition. UI assets were initially designed in Figma then finalized in Illustrator and Photoshop.</p>
+        <p className="text-body leading-relaxed">Sketches of physical device designs and UI wire frames were made followed by circuit diagrams to plan hardware integration and creating low-fidelity prototypes. UI assets were initially designed in Figma then finalized in Illustrator and Photoshop.</p>
       
         <Picture type={"captioned"} popup={true} source={"/projects/biomed/circuit_diagram.png"} description={"MotionSense Circuit Diagram"} />
 
-        <p className="text-subtitle mt-10">Reflection and Designing for Health</p>
-        <p className="text-body leading-relaxed">I found that the most important step in designing these devices was grasping a strong understanding of the patients' specific needs and overall health goals. Learning about the nuances and difficulties a variety of patients face when managing personal health devices and apps was key in ensuring compassionate designs. It was very important to prioritized clarity, accessibility, and comfort as displaying biometric data can often be non-intuitive, confusing, and overwhelming. Researching existing health monitoring UIs helped to identify effective hierarchy of information and the importance of clear labeling and soft visuals.</p>
+        <p className="text-subtitle mt-10">Designing for Health</p>
+        <p className="text-body leading-relaxed">I found that the most important step in designing the UI was grasping a strong understanding of the patients' specific needs and overall health goals. Learning about the nuances and difficulties patients face when managing personal health devices and apps were key in ensuring a compassionate design. 
+          It was very important to prioritized clarity, accessibility, and comfort as displaying biometric data can often be non-intuitive, confusing, and quickly overwhelming. 
+          Researching existing health monitoring UIs helped to identify effective hierarchy of information and the importance of clear labeling and soft visuals. 
+        </p>
         <div className="mt-10"/>
       </div>
     </div>

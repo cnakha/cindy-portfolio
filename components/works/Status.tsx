@@ -13,12 +13,12 @@ export default function Status({ message, hasLink, link }: Status) {
     const [active, setActive] = useState(false);
 
      const underline = (
-            <span
-                className={`absolute left-0  h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
-                    active ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
-                }`}
-            />
-        );
+    <span
+        className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
+        active ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
+        }`}
+    />
+    );
 
     return (
         <div className="flex">
@@ -27,12 +27,13 @@ export default function Status({ message, hasLink, link }: Status) {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative cursor-pointer "
+                    className="relative inline-block cursor-pointer"
                     onMouseEnter={() => setActive(true)}
                     onMouseLeave={() => setActive(false)}
                 >
                     <h2 className="text-tiny font-semibold">{message}</h2>
                     {underline}
+                    
                 </a>
             ) : (
                 <div className="relative flex flex-col">

@@ -63,7 +63,7 @@ export const projects: Project[] = [
   status: "WorldNotes is currently under development",
   },
  {
-    id: "foliofolds",
+    id: "folio",
     title: "FolioFolds",
     description: "Assemble and share interactive 3D mockups of books, cards, zines, origamis, and fliers with support of complex folds, bindings, cutouts, and AR viewing",
     context: "Product Design",
@@ -88,7 +88,7 @@ export const projects: Project[] = [
     tools: ["Figma", "React", "Next.js", "Typescript", "Three.js", "WebGL"],
     problem: "Designers want a tool to help display interactable printworks in 3D that's both intuitive and accessible to expert designers and casual users.",
     subProblem: "There is a need for a stream-lined way to construct complex 3D versions of printworks that provides accessibility. Here are key problems we identified:",
-    solution: "Wanting a better way to showcase my design projects online, I made FolioFolds, a web application that allows users to create and share interactive 3D mockups of printworks. The platform makes creating paper folds, cutouts, and bindings easier by provided tailored tools for paper engineering. Users can embedd finished piece into a website or view it in AR using their mobile devices. Publications can be flipped through manually or viewed through animated video, fostering a vibrant ecosystem of print design enthusiasts.",
+    solution: "Wanting a better way to showcase my design projects online, I designed FolioFolds, a web application that allows users to create and share interactive 3D mockups of printed works. The platform makes creating paper folds, cutouts, and bindings easier by provided tailored tools for paper engineering. Users can embedd finished piece into a website or view it in AR using their mobile devices. Publications can be flipped through manually or viewed through animated video, fostering a vibrant ecosystem of print design enthusiasts.",
     keyProblems:[
       "Lack of Intuitive 3D Visualization for Printed Materials",
       "Physical Prototyping Is Time-Consuming and Expensive",
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     link: "https://graffgraff.com",
     description: "Website and community gallery hosting online nonsensical art games made to empower and inspire being more creative in daily life.",
     context: "Web App Development and UI/UX Design",
-    fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
+    fullDescription: "GraffGraff is a website and community gallery made to empower and inspire being more creative in our daily lives. Online nonsensical art games were a natural vehicle to push this message as they provide an approachable environment of low stakes and stress free exploration of creative expression.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
     outcome: "Successfully developed 5 different wearable biomedical devices that monitor various health metrics, each successfully tested and validated in real-world scenarios.",

@@ -54,7 +54,6 @@ export default function Worldnotes() {
         description={"The note creation canvas provides custom tools and brushes. Drawing, text, pixel art, and animation are all supported along with a layers panel, color picker, and color palette creator."}
       />
 
-
       <div className="mt-30"/>
       <div className="relative flex flex-col">
           <h2 className="text-display">Project Breakdown</h2>
