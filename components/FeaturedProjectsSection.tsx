@@ -272,7 +272,7 @@ export default function FeaturedProjectsSection() {
                     <ProjectCard project={projects[4]} />
                   </motion.div>
 
-                  <motion.div
+                  {/* <motion.div
                     variants={projectItemVariants}
                     id={`project-${projects[5].id}`}
                     className="scroll-mt-28"
@@ -283,7 +283,7 @@ export default function FeaturedProjectsSection() {
                   <div
                     data-project-trigger={projects[5].id}
                     className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
-                  />
+                  /> */}
                 </div>
               </>
             ) : (

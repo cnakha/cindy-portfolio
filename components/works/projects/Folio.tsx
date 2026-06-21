@@ -60,7 +60,7 @@ export default function Folio() {
         description={"Move and resize elements freely to create unique layouts. Choose from various binding and page styles like spiral binds, stitched binds, textured paper, to glossy paper."}
       />
       <div className="mt-2"/>
-      <Picture type={"left"} source={"/projects/folio/cutting.png"}
+      <Picture type={"left"} popup={true} source={"/projects/folio/cutting.png"}
         title={"Cut Pages with Ease and Precision"}
         description={"Users can easily create cutouts and custom shapes on their pages using cutting tools inspired by paper cutter sliders."}
       />

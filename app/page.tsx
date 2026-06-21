@@ -47,7 +47,7 @@ export default function HomePage() {
                   duration: 0.5,
                   ease: "easeOut",
                 }}
-                className="text-list font-medium"
+                className="text-list font-semibold"
               >
                 Hi, I’m Cindy Nakhammouane
               </motion.p>

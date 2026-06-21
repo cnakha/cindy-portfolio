@@ -56,6 +56,7 @@ export default function ProjectPage() {
             <Status 
               message={project.status} 
               hasLink={project.link !== undefined}
+              link={project.link}
             />
           }
 
@@ -73,7 +74,7 @@ export default function ProjectPage() {
           </p>
 
           {/* Overview Details */}
-          <div className="mt-10 border border-mid-gray p-4 pt-6 md:p-6 md:pt-8 rounded-2xl">
+          <div className="mt-10 ">
             <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center gap-2">
