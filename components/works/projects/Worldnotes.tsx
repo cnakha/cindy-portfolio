@@ -58,7 +58,7 @@ export default function Worldnotes() {
       <div className="relative flex flex-col">
           <h2 className="text-display">Project Breakdown</h2>
           <span
-              className={`absolute left-0 -bottom-4 h-[5px] bg-blue transition-all duration-300 ease-out w-full`}
+            className={`absolute left-0 -bottom-4 h-[5px] bg-blue transition-all duration-300 ease-out w-full`}
           />
       </div>
       <div className="mt-20"/>
@@ -74,7 +74,7 @@ export default function Worldnotes() {
 
       <div className="mt-20"/>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-4xl">
         <p className="text-display">Creating the MVP</p>
         <p className="text-subtitle mt-10">Inspiration and Discovery</p>
         <p className="text-body leading-relaxed">WorldNote's creative direction embraces geo-located hand-drawn pictorial posts over the standard text-based or video/photo uploaded content to offer a quirky nuance and emotional depth in social interactions that is under explored today. <br/>The challenge then became:</p>
@@ -84,7 +84,7 @@ export default function Worldnotes() {
 
       <div className="mt-20"/>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-4xl">
         <p className="text-subtitle mt-10">Storyboarding & Designing App Structure</p>
         <p className="text-body leading-relaxed">With the vision set, I focused on structuring the app and story boarding user flows. There's a diverse set of traversals I had to consider: note traversal, content browsing, the note creation process, etc., so I mapped the app structure out to visualize navigation routes between different sections, ensuring a concise logical user flow.</p>
       </div>
@@ -93,8 +93,8 @@ export default function Worldnotes() {
       
       <div className="mt-20"/>
 
-      <div className="flex flex-col gap-4">
-        <p className="text-subtitle mt-10">Wireframing the Layout</p>
+      <div className="flex flex-col gap-4 max-w-4xl">
+        <p className="text-subtitle mt-10">Wireframing and Prototyping</p>
         <p className="text-body leading-relaxed">I sketched out how key pages like the user profile, community page, and subsequent news and updates page would look and interact. Early iterations helped me find balance between clean and simpler layouts and a stylized scrap book layout without over investing in visuals too soon.</p>
       </div>
       <div className="mt-10"/>
@@ -102,7 +102,7 @@ export default function Worldnotes() {
       
       <div className="mt-20"/>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-4xl">
         <p className="text-subtitle mt-10">Formal UI Design</p>
         <p className="text-body leading-relaxed">After validating layouts, I shifted toward creating a formal visual design of components using Figma and Illustrator. In doing this process, I found myself redesigning elements multiple times to refine usability and aesthetics.</p>
         <p className="text-body leading-relaxed">WorldNote's branding embraces playfulness, bright colors, references the paper medium, and carries a lighthearted aesthetic to reflect the project’s creative spirit. The UI is intentionally inviting, encouraging hesitant users to have casual fun.</p>
@@ -116,7 +116,7 @@ export default function Worldnotes() {
 
       <div className="mt-20"/>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-4xl">
         <p className="text-subtitle mt-10">Fullstack Development</p>
         <p className="text-body leading-relaxed">I followed an Agile workflow with short sprints and modular commits to keep momentum and organization. Each development cycle began with defining small testable goals then designing the feature, implementing it, validating behavior, and gathering informal user feedback.</p>
         <div className="mt-10"/>

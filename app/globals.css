@@ -70,7 +70,7 @@
   .text-quote {
     font-family: var(--font-myriad);
     font-variation-settings: "wght" 550;
-    @apply font-[var(--font-myriad)] text-[16px] italic leading-[1.5];
+    @apply font-[var(--font-myriad)] text-[18px] italic leading-[1.5];
   }
 
   .text-list {

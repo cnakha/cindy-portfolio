@@ -4,13 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 
 type PictureProps = {
-  type: "wide" | "half" | "third" | "left" | "right" | "captioned";
+  type: "wide" | "half" | "third" | "left" | "right" | "captioned" | "video";
   source: string;
   source2?: string;
   source3?: string;
   title?: string;
   description?: string;
   popup?: boolean;
+
+  autoplay?: boolean;         
+  useAspectRatio?: boolean;
 };
 
 export default function Picture({
@@ -21,6 +24,8 @@ export default function Picture({
   title,
   description,
   popup = false,
+  autoplay = true,
+  useAspectRatio = false,
 }: PictureProps) {
   const [popupImage, setPopupImage] = useState<string | null>(null);
 
@@ -88,10 +93,27 @@ export default function Picture({
       <>
         <ImageWithPopup
           src={source}
-          className="w-full rounded-2xl object-cover"
+          className={
+            useAspectRatio
+              ? "w-full rounded-2xl h-auto"
+              : "w-full rounded-2xl object-cover"
+          }
         />
         <Popup />
       </>
+    );
+  }
+
+  if (type === "video") {
+    return (
+      <video
+        src={source}
+        className="w-full rounded-2xl object-cover"
+        autoPlay={autoplay}
+        controls
+        muted={autoplay}
+        playsInline
+      />
     );
   }
 
@@ -115,27 +137,66 @@ export default function Picture({
   if (type === "half") {
     return (
       <>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <ImageWithPopup src={source} alt="" className={`${imageClass} aspect-[4/3]`} />
-          {source2 && <ImageWithPopup src={source2} alt="" className={`${imageClass} aspect-[4/3]`} />}
+        <div className=" grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <ImageWithPopup
+            src={source}
+            alt=""
+            className={useAspectRatio ? imageClass : `${imageClass} aspect-[4/3]`}
+          />
+
+          {source2 && (
+            <ImageWithPopup
+              src={source2}
+              alt=""
+              className={useAspectRatio ? imageClass : `${imageClass} aspect-[4/3]`}
+            />
+          )}
         </div>
         <Popup />
       </>
     );
   }
 
-  if (type === "third") {
-    return (
-      <>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <ImageWithPopup src={source} alt="" className={`${imageClass} aspect-[4/3]`} />
-          {source2 && <ImageWithPopup src={source2} alt="" className={`${imageClass} aspect-[4/3]`} />}
-          {source3 && <ImageWithPopup src={source3} alt="" className={`${imageClass} aspect-[4/3]`} />}
-        </div>
-        <Popup />
-      </>
-    );
-  }
+ if (type === "third") {
+  const imageCount = [source, source2, source3].filter(Boolean).length;
+
+  return (
+    <>
+      <div
+        className={`grid gap-4 ${
+          imageCount === 1
+            ? "grid-cols-1 max-w-md mx-auto"
+            : imageCount === 2
+            ? "grid-cols-1 sm:grid-cols-2"
+            : "grid-cols-1 sm:grid-cols-3"
+        }`}
+      >
+        <ImageWithPopup
+          src={source}
+          alt=""
+          className={useAspectRatio ? imageClass : `${imageClass} aspect-[4/3]`}
+        />
+
+        {source2 && (
+          <ImageWithPopup
+            src={source2}
+            alt=""
+            className={useAspectRatio ? imageClass : `${imageClass} aspect-[4/3]`}
+          />
+        )}
+
+        {source3 && (
+          <ImageWithPopup
+            src={source3}
+            alt=""
+            className={useAspectRatio ? imageClass : `${imageClass} aspect-[4/3]`}
+          />
+        )}
+      </div>
+      <Popup />
+    </>
+  );
+}
 
   if (type === "left" || type === "right") {
     const textBlock = (

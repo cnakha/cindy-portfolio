@@ -7,9 +7,9 @@ type QuoteProps = {
 
 export default function Quote({ text, author }: QuoteProps) {
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
-        <p className="text-body">{text}</p>
-        <p className="text-caption italic">{author}</p>
+    <div className="flex flex-col gap-4 justify-center text-center items-center max-w-3xl mx-auto">
+        <p className="text-caption">"{text}"</p>
+        <p className="text-quote italic opacity-60">— {author}</p>
     </div>
   );
 }

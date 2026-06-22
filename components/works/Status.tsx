@@ -7,17 +7,27 @@ type Status = {
     link?: string;
     message: string;
     hasLink: boolean;
+    github?: string;
 }
 
-export default function Status({ message, hasLink, link }: Status) {
+export default function Status({ message, hasLink, link, github }: Status) {
     const [active, setActive] = useState(false);
+    const [active2, setActive2] = useState(false);
 
-     const underline = (
-    <span
-        className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
-        active ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
-        }`}
-    />
+    const underline = (
+        <span
+            className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
+            active ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
+            }`}
+        />
+    );
+
+    const underline2 = (
+        <span
+            className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
+            active2 ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
+            }`}
+        />
     );
 
     return (
@@ -43,7 +53,20 @@ export default function Status({ message, hasLink, link }: Status) {
                     />
                 </div>
             )}
-            
+            {github && (
+                <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-block cursor-pointer ml-2"
+                    onMouseEnter={() => setActive2(true)}
+                    onMouseLeave={() => setActive2(false)}
+                >
+                    <h2 className="text-tiny font-semibold">Github</h2>
+                    {underline2}
+                    
+                </a>
+            )}
         </div>
     );
 }

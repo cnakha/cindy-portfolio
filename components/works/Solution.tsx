@@ -11,7 +11,7 @@ export default function Solution({ solution }: SolutionProps) {
         <div className="flex">
             <p className="text-tiny gray-title">Solution</p>
         </div>
-      <p className="text-subtitle font-medium opacity-60 max-w-3xl">{solution}</p>
+      <p className="text-subtitle font-medium opacity-60 max-w-5xl">{solution}</p>
     </div>
   );
 }

@@ -112,7 +112,7 @@ export default function Folio() {
 
         <p className="text-subtitle mt-10">Technologies</p>
         <p className="text-body leading-relaxed">The following tools make up the core technology stack for FolioFolds:</p>
-        <div className="mt-10"/>
+        <div className=""/>
         <Items titles={tech} descriptions={techDescriptions} />
 
         <p className="text-subtitle mt-20"/>

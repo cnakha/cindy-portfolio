@@ -36,8 +36,8 @@ export default function ProjectPage() {
 
   return (
     <main className="pt-32 bg-white text-black">
-      <div className="mx-4 sm:mx-6 lg:mx-10">
-        <article className="sm:mx-10 lg:mx-auto max-w-5xl">
+      <div className="mx-4 sm:mx-6 lg:mx-8">
+        <article className="sm:mx-10 lg:mx-auto max-w-6xl">
 
           {/* Return to home button */}
           <div className="flex">
@@ -55,8 +55,9 @@ export default function ProjectPage() {
           {project.status && 
             <Status 
               message={project.status} 
-              hasLink={project.link !== undefined}
+              hasLink={project.link !== undefined || project.githubUrl !== undefined}
               link={project.link}
+              github={project.githubUrl ? project.githubUrl : undefined}
             />
           }
 
@@ -69,7 +70,7 @@ export default function ProjectPage() {
             </div>
           </div>
 
-          <p className="max-w-4xl text-subtitle font-medium mt-2 opacity-60">
+          <p className="max-w-5xl text-subtitle font-medium mt-2 opacity-60">
             {project.fullDescription}
           </p>
 
@@ -123,7 +124,7 @@ export default function ProjectPage() {
           {slug === "bento" && <Bento />}
           {slug === "biomed" && <Biomed />}
           {slug === "folio" && <Folio />}
-          {slug === "ycgh" && <YCGH />}
+          {slug === "ycgh" && <YCGH/>}
           {slug === "graffgraff" && <Graffgraff />}
           {slug === "worldnotes" && <Worldnotes />}
 

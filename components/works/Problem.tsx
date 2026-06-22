@@ -13,8 +13,8 @@ export default function Problem({ problem, subProblem, keyProblems, keyProblemDe
         <div className="flex">
             <p className="text-tiny gray-title">Problem</p>
         </div>
-      <p className="text-subtitle max-w-2xl">{problem}</p>
-      {subProblem && <p className="text-caption opacity-60 mb-8 max-w-xl">{subProblem}</p>}
+      <p className="text-subtitle max-w-5xl">{problem}</p>
+      {subProblem && <p className="text-caption opacity-60 mb-8 max-w-4xl">{subProblem}</p>}
 
       {keyProblems && keyProblems.length > 0 && keyProblemDescriptions && keyProblemDescriptions.length === keyProblems.length && (
             <div className="px-10 flex flex-wrap gap-6 justify-center w-full">
