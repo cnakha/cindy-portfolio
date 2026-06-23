@@ -72,14 +72,24 @@ export default function FeaturedProjectsSection() {
     }, 800);
   };
 
-  const toggleMode = () => {
-    setMode(showingExtra ? "featured" : "extra");
-    setActiveSlug(showingExtra ? projects[0]?.id : extras[0]?.id);
-  };
+const toggleMode = () => {
+  setMode(showingExtra ? "featured" : "extra");
+  setActiveSlug(showingExtra ? projects[0]?.id : extras[0]?.id);
+
+  const section = document.getElementById("featured-projects");
+
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 
   const listItems = showingExtra ? extras : projects;
   const asideContentRef = useRef<HTMLDivElement | null>(null);
   const [asideHeight, setAsideHeight] = useState<number | "auto">("auto");
+  const closePopup = () => setSelectedExtra(null);
 
   useEffect(() => {
     if (!asideContentRef.current) return;
@@ -311,42 +321,75 @@ export default function FeaturedProjectsSection() {
         </div>
       </section>
 
-      {selectedExtra && (
-        <div 
-          onClick={() => setSelectedExtra(null)}
-          className="fixed inset-0 z-[100] bg-black/70"
-        >
-          <div className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-4xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg">
-            <div>
-              <h2 className="text-body font-bold">{selectedExtra.title}</h2>
-              <p className="text-tiny">{selectedExtra.description}</p>
-            </div>
-
-            <button
-              onClick={() => setSelectedExtra(null)}
-              className="grid p-3 cursor-pointer place-items-center border border-mid-gray rounded-full bg-light-gray text-black transition hover:scale-105"
-              aria-label="Close project popup"
-            >
-              <Image src="/x.svg" alt="" width={24} height={24}/>
-            </button>
-          </div>
-
-          <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-36">
-            <div className="mx-auto grid max-w-2xl gap-6">
-              {[selectedExtra.coverImage, ...selectedExtra.images].map(
-                (image, index) => (
-                  <img
-                    key={`${image}-${index}`}
-                    src={image}
-                    alt=""
-                    className="w-full rounded-2xl object-cover"
-                  />
-                )
-              )}
-            </div>
-          </div>
+      <AnimatePresence>
+  {selectedExtra && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={closePopup}
+      className="fixed inset-0 z-[100] bg-black/70"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.25 }}
+        onClick={(e) => e.stopPropagation()}
+        className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg"
+      >
+        <div>
+          <h2 className="text-body font-bold">{selectedExtra.title}</h2>
+          <p className="text-tiny">{selectedExtra.description}</p>
         </div>
-      )}
+
+        <button
+          onClick={closePopup}
+          className="grid cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray p-3 text-black transition hover:scale-105"
+          aria-label="Close project popup"
+        >
+          <Image src="/x.svg" alt="" width={24} height={24} />
+        </button>
+      </motion.div>
+
+      <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-36">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="mx-auto grid max-w-2xl gap-6"
+        >
+          {/* <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, delay: 0.05 }}
+            className="rounded-2xl bg-white px-6 py-5 text-black shadow-lg"
+          >
+            <h2 className="text-body font-bold">{selectedExtra.title}</h2>
+            <p className="mt-1 text-tiny opacity-70">
+              {selectedExtra.description}
+            </p>
+          </motion.div> */}
+
+          {[selectedExtra.coverImage, ...selectedExtra.images].map(
+            (image, index) => (
+              <motion.img
+                key={`${image}-${index}`}
+                src={image}
+                alt=""
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.25, delay: 0.12 + index * 0.05 }}
+                className="w-full rounded-2xl object-cover"
+              />
+            )
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </>
   );
 }

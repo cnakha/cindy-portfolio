@@ -74,7 +74,9 @@
   }
 
   .text-list {
-    @apply font-[var(--font-century)] text-[16px] leading-[1.2];
+    font-family: var(--font-myriad);
+    font-variation-settings: "wght" 550;
+    @apply font-[var(--font-myriad)] text-[16px] leading-[1.2];
   }
 
   .gray-title {

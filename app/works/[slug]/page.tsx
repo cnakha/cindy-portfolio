@@ -5,8 +5,7 @@ import { projects } from "@/lib/projects";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
-import { useEffect } from "react";
-
+import { useLayoutEffect } from "react";
 import Status  from "@/components/works/Status";
 import Bento  from "@/components/works/projects/Bento";
 import Biomed from "@/components/works/projects/Biomed";
@@ -30,9 +29,9 @@ export default function ProjectPage() {
     notFound();
   }
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [slug]);
+ useLayoutEffect(() => {
+  window.scrollTo(0, 0);
+}, [slug]);
 
   return (
     <main className="pt-32 bg-white text-black">

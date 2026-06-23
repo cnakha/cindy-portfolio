@@ -1,22 +1,24 @@
+"use client";
+import Picture from "@/components/works/Picture";
 import Footer from "@/components/Footer";
 
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
-      <section className="mx-auto grid max-w-[1440px] gap-4 px-8 pt-28 md:grid-cols-2 md:px-16 md:pt-36">
-        {/* mobile image first */}
-
-        <img
-          src="/wood.jpg"
-          alt=""
-          className="order-1 h-[230px] max-w-none rounded-xl md:order-2 md:h-[300px]"
+      <section className="flex flex-col justify-content items-center mx-auto max-w-5xl gap-4 px-8  pt-20">
+     
+        <Picture
+          source="/wood.jpg"
+          description="A photo of me in front of a wooden wall."
+          type="wide"
+          useAspectRatio={true}
         />
 
-        <div className="order-2 md:order-1">
+        <div className="">
           <section>
             <h1 className="text-subtitle">Background</h1>
 
-            <p className="mt-4 max-w-xl text-body ">
+            <p className="mt-4 text-body ">
               I'm Cindy Nakhammouane, a Fullstack Developer, UI/UX Designer and recent graduate from the 
               University of Illinois Chicago’s first ever Computer Science and Design cohort 
               combining the capabilities of modern computer programming and visual design.
@@ -37,9 +39,11 @@ export default function AboutPage() {
 
           <h2 className="text-subtitle mt-10">Tools I Use</h2>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 max-w-[400px]">
+          <div className="mt-4 grid gap-4 md:grid-cols-2 max-w-[400px]">
             <div>
-              <p className="text-tiny font-bold">Design</p>
+              <div className="flex">
+              <p className="text-tiny font-bold gray-title">Design</p>
+              </div>
               <ul className="mt-3 text-tiny leading-tight">
                 <li>Adobe Creative Suite</li>
                 <li>Photoshop</li>
@@ -50,9 +54,10 @@ export default function AboutPage() {
                 <li>Canva</li>
               </ul>
             </div>
-
             <div>
-              <p className="text-tiny font-bold">Developer</p>
+            <div className="flex">
+              <p className="text-tiny font-bold gray-title">Developer</p>
+            </div>
               <ul className="mt-3 text-tiny  leading-tight">
                 <li>React</li>
                 <li>Next.js</li>

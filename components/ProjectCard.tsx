@@ -31,8 +31,8 @@ export default function ProjectCard({
       <div className="mt-5">
         <div className="text-black">
           <h3 className="text-body font-bold">{project.title}</h3>
-          <p className="text-tiny opacity-50">{project.context}</p>
-          <p className="mt-1 text-tiny ">
+          <p className="text-tiny font-semibold opacity-60">{project.context}</p>
+          <p className="mt-1 text-tiny opacity-60">
             {project.description}
           </p>
         </div>

@@ -69,7 +69,6 @@ export default function Graffgraff() {
           <p className="text-subtitle mt-10">Research & Conceptual Development</p>
           <p className="text-body leading-relaxed max-w-4xl">Preliminary conceptual development started with brain dumping topics related to nonsensical creativity, looking specifically for sources of nonsense and creative inspiration in my own life and in the world around me.</p>
           <p className="text-body leading-relaxed max-w-4xl">My research explored methodologies to nonsense, the relationship between nonsensical creativity and forming digital communities, ways to strengthen creativity, and different modes of socialization.</p>
-          <p className="text-body leading-relaxed"></p>
           <Note text="The consensus I found was that creativity is considered a skill that can be developed with practice and consistency, and that people are often more creative when they are in a social setting or collaborating with others. This lead me to experimenting with using games as a vehicle for this, experimenting with several modes of socialization/game play per creativity game." 
             title="Research Findings"/>
           <p className="text-body leading-relaxed max-w-4xl">In terms of market research, I searched for existing platforms and games that encourage creativity and self expression. Some notable places of inspiration were Gartic Phone, Jackbox, and Scribbl.io. Here I gained inspiration on user experience and game content design.</p>
@@ -79,7 +78,7 @@ export default function Graffgraff() {
           <p className="text-body leading-relaxed max-w-4xl">I conducted interviews with people of various levels of creativity to gain understanding on creative practices and views on creativity. I also guided them through various experimental nonsensical creativity exercises. Done with physical paper, I tested the game flow of potential games, measuring how much fun they had and how creative it made them feel afterwards.</p>
           <Note text= "People felt doing creative things consistently/daily made them feel more creative, they preferred drawing games over verbal, and preferred playing games with a social aspect" 
             title="Interview Findings"/>
-          <p className="text-body leading-relaxed">Continuing the efforts of my field interviews, I made a Google Forms survey to gain additional insight on people's current views on creativity and personal creative practices. I used these insights to help influence what exercises/features I should include in my social creativity games based on sentiment analysis regarding factors that played into creative discouragement.</p>
+          <p className="text-body leading-relaxed max-w-4xl">Continuing the efforts of my field interviews, I made a Google Forms survey to gain additional insight on people's current views on creativity and personal creative practices. I used these insights to help influence what exercises/features I should include in my social creativity games based on sentiment analysis regarding factors that played into creative discouragement.</p>
           <Picture type={"half"} popup={true} useAspectRatio source={"/projects/graffgraff/survey.png"} source2={"/projects/graffgraff/testing.png"}/>
           
           <p className="text-subtitle mt-10">Wireframing, Ideation, & Designing App Structure</p>
