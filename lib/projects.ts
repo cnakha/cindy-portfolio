@@ -67,7 +67,7 @@ export const projects: Project[] = [
     title: "FolioFolds",
     description: "Assemble and share interactive 3D mockups of books, cards, zines, origamis, and fliers with support of complex folds, bindings, cutouts, and AR viewing",
     context: "Product Design",
-    fullDescription: "From birthday cards to origami, FolioFolds is a web application for designing, assembling, and sharing interactive 3D mockups of unique printed forms. The platform supports complex folds, bindings, cutouts, and offers AR viewing capabilities.",
+    fullDescription: "From birthday cards to origami, FolioFolds is a web application I designed for designing, assembling, and sharing interactive 3D mockups of unique printed forms. The platform supports complex folds, bindings, cutouts, and offers AR viewing capabilities.",
     features: [
       "Supports PDF, PNG, and JPEG imports to create 3D models",
       "Drag-and-drop interface",
@@ -99,7 +99,7 @@ export const projects: Project[] = [
       "Physically prototyping folds, bindings, cutouts, and page structures often requires multiple physical mockups",
       "Traditional digital documentations (flat scans, photos, or videos) struggle to capture the dimensionality, tactility, and interactive discovery of physical publications.",
     ],
-    status: "FolioFolds is finalizing its design and beginning development... Stay tuned for updates!",
+    // status: "FolioFolds is finalizing its design and beginning development... Stay tuned for updates!",
     },
    {
     id: "graffgraff",
@@ -119,18 +119,7 @@ export const projects: Project[] = [
     role: "Solo Fullstack Developer and UI/UX Designer",
     skills: ["UI/UX Design", "Fullstack Development", "Project Management"],
     problem: "People want to be more creative, so I asked myself, how can we use digital communities to inspire nonsensical creativity?",
-    solution: "What drew me to creating this project was the desire to find a way to reduce dread to the creative process as well as the feeling of lacking creativity that I’ve observed my friends and peers experiencing. Creative discouragement can come from an assortment of reasons such as the pressure to create something good, not feeling talented, or overthinking. Through GRAFFGRAFF I strive to create an approachable place to escape creative discouragement and remind people to embrace the fun and nonsensical nature of creativity again. What I created was a website and community gallery made to empower and inspire being more creative in our daily lives through hosting online multiplayer nonsensical creativity games/exercises. Additionally, I designed a signage display, sticker sheets, custom letter forms, and handouts to promote the project",
-    // keyProblems:[
-    //   "Lack of Accessible Health Monitoring",
-    //   "Poor Integration into Daily Life",
-    //   "Need for Real-Time, Continuous Monitoring"
-    // ],
-    // keyProblemDescriptions:[
-    //   "Many existing health monitoring devices are unaffordable or too complex for everyday users.",
-    //   "There is a gap in designing devices that seamlessly blend into users' routines while maintaining comfort, aesthetics, and continuous operation without disruption.",
-    //   "Current solutions don’t consistently offer real-time, continuous data streams that are accurate and intuitive enough to provide meaningful feedback or alerts."
-    //   ],
-    
+    solution: "What drew me to creating this project was the desire to find a way to reduce dread to the creative process as well as the feeling of lacking creativity that I’ve observed my friends and peers experiencing. Creative discouragement can come from an assortment of reasons such as the pressure to create something good, not feeling talented, or overthinking. Through GRAFFGRAFF I strive to create an approachable place to escape creative discouragement and remind people to embrace the fun and nonsensical nature of creativity again. What I created was a website and community gallery made to empower and inspire being more creative in our daily lives through hosting online multiplayer nonsensical creativity games/exercises. Additionally, I designed a signage display, sticker sheets, custom letter forms, and handouts to promote the project",    
   },
   {
     id: "ycgh",
