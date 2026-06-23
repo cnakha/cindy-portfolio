@@ -31,23 +31,35 @@ export default function Picture({
 
   const imageClass = "h-full w-full object-cover rounded-2xl";
 
-const Popup = () =>
-  popupImage ? (
-    <div
-      className="fixed inset-0 z-[9999] flex cursor-pointer items-center justify-center bg-black/70 p-4"
-      onClick={() => setPopupImage(null)}
-    >
-      <Image
-        src={popupImage}
-        alt={title || "Project image popup"}
-        width={1400}
-        height={1000}
-        sizes="90vw"
-        className="max-h-[90vh] w-auto max-w-[90vw] rounded-2xl object-contain"
-        onClick={(e) => e.stopPropagation()}
-      />
-    </div>
-  ) : null;
+  const Popup = () =>
+    popupImage ? (
+      <div
+        className="fixed inset-0 z-[9999] flex cursor-pointer items-center justify-center bg-black/70 p-4"
+        onClick={() => setPopupImage(null)}
+      >
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setPopupImage(null);
+          }}
+          className="fixed right-5 top-5 z-[10000] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110"
+          aria-label="Close image popup"
+        >
+          <Image src="/x.svg" alt="" width={24} height={24} />
+        </button>
+
+        <Image
+          src={popupImage}
+          alt={title || "Project image popup"}
+          width={1400}
+          height={1000}
+          sizes="90vw"
+          className="max-h-[90vh] w-auto max-w-[90vw] rounded-2xl object-contain"
+          onClick={(e) => e.stopPropagation()}
+        />
+      </div>
+    ) : null;
 
  const ImageWithPopup = ({
   src,

@@ -23,8 +23,16 @@ export default function HomePage() {
         <section className="relative h-[450px] overflow-hidden md:h-[600px]">
           <div className="relative h-full w-full">
             <motion.div
-              className="absolute left-0 top-0"
-              initial={
+              className="
+                absolute
+                left-1/2
+                top-0
+                -translate-x-1/2
+
+                sm:left-0
+                sm:translate-x-0
+              "
+                initial={
                 shouldAnimate
                   ? { opacity: 0, y: 100, scale: 0.96 }
                   : false
@@ -45,8 +53,26 @@ export default function HomePage() {
               </picture>
             </motion.div>
 
-            <div className="absolute left-[85px] top-[140px] z-10 max-w-[620px] text-black sm:left-[110px] sm:top-[170px] md:left-[210px] md:top-[214px]">
-              <motion.p
+              <div
+                className="
+                  absolute
+                  left-1/2
+                  top-[140px]
+                  z-10
+                  w-[310px]
+                  -translate-x-1/2
+                  text-black
+
+                  sm:left-[110px]
+                  sm:w-auto
+                  sm:translate-x-0
+                  sm:top-[170px]
+
+                  md:left-[210px]
+                  md:top-[214px]
+                "
+              >
+                <motion.p
                 initial={shouldAnimate ? { opacity: 0, y: 14 } : false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{

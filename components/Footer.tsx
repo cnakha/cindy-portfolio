@@ -44,7 +44,7 @@ export default function Footer() {
           Let’s work <br/> together!
         </h2>
 
-        <p className="ml-4 sm:ml-24 md:ml-0 mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-tight md:mt-4 md:max-w-xl">
+        <p className="ml-4 sm:ml-24 md:ml-0 mt-12 sm:mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-tight md:mt-4 md:max-w-xl">
           I’m always interested in new opportunities and exciting projects.
           Let’s get in touch and build something amazing!
         </p>

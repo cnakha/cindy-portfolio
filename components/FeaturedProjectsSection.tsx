@@ -225,6 +225,7 @@ export default function FeaturedProjectsSection({
             }}
             className="grid w-full max-w-5xl gap-4"
           >
+            <p className="md:hidden text-subtitle text-black">Featured Projects</p>
             {!showingExtra ? (
               <>
                 <motion.div
@@ -282,6 +283,7 @@ export default function FeaturedProjectsSection({
               </>
             ) : (
               <div className="columns-2 gap-3 md:columns-3">
+                <p className="md:hidden text-subtitle text-black">Extra Works</p>
                 {extras.map((project, index) => (
                   <motion.button
                     variants={projectItemVariants}

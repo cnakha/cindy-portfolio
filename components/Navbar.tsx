@@ -15,7 +15,7 @@ type NavItemProps = {
 
 function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
   const className = mobile
-    ? `relative flex w-fit items-center gap-2 text-caption transition ${
+    ? `relative flex w-fit cursor-pointer items-center gap-2 text-caption transition ${
         active ? "font-bolder opacity-100" : "opacity-60"
       }`
     : `group relative cursor-pointer pb-1 transition ${

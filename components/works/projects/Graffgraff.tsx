@@ -73,7 +73,6 @@ export default function Graffgraff() {
             title="Research Findings"/>
           <p className="text-body leading-relaxed max-w-4xl">In terms of market research, I searched for existing platforms and games that encourage creativity and self expression. Some notable places of inspiration were Gartic Phone, Jackbox, and Scribbl.io. Here I gained inspiration on user experience and game content design.</p>
           <div className="mt-2"/>
-          {/* <Picture type={"half"} popup={true} source={"/projects/graffgraff/braindump.jpg"} source2={"/projects/graffgraff/socialization.png"}/> */}
           <p className="text-subtitle mt-10">6 Field Interviews and Conducting Field Surveys (30 Responses)</p>
           <p className="text-body leading-relaxed max-w-4xl">I conducted interviews with people of various levels of creativity to gain understanding on creative practices and views on creativity. I also guided them through various experimental nonsensical creativity exercises. Done with physical paper, I tested the game flow of potential games, measuring how much fun they had and how creative it made them feel afterwards.</p>
           <Note text= "People felt doing creative things consistently/daily made them feel more creative, they preferred drawing games over verbal, and preferred playing games with a social aspect" 
@@ -92,7 +91,7 @@ export default function Graffgraff() {
           <p className="text-body leading-relaxed max-w-4xl">I followed an Agile workflow with short sprints and modular commits to keep momentum and organization. Each development cycle began with defining small testable goals then designing the feature, implementing it, validating behavior, and gathering informal user feedback.</p>
         
           <p className="text-subtitle mt-10">Play Testing</p>
-          <p className="text-body leading-relaxed max-w-4xl">Frequent play tests with control groups took place to evaluate the effectiveness of the game mechanics and user experience. It was imperative the design and game flow was intuitive, friendly, and engaging.</p>
+          <p className="text-body leading-relaxed max-w-4xl">Frequent play tests with control groups took place throughout the development process to evaluate the effectiveness of the game mechanics and user experience. It was imperative the design and game flow was intuitive, friendly, and engaging. The final product was exhibited at the University of Illinois Chicago's Year End Show to an audience of <span className="font-semibold">200+</span> people,</p>
           <Picture type={"third"} popup={true} source={"/projects/graffgraff/people5.jpg"} 
           source2={"/projects/graffgraff/people2.jpg"} source3={"/projects/graffgraff/people3.jpg"}/>
           <p className="text-subtitle mt-10">Next Milestones</p>
