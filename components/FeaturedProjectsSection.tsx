@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { extras, ExtraProject } from "@/lib/extras";
+import Picture from "@/components/works/Picture";
 
 export default function FeaturedProjectsSection() {
   const [activeSlug, setActiveSlug] = useState(projects[0]?.id);
@@ -281,19 +282,7 @@ const toggleMode = () => {
                   >
                     <ProjectCard project={projects[4]} />
                   </motion.div>
-
-                  {/* <motion.div
-                    variants={projectItemVariants}
-                    id={`project-${projects[5].id}`}
-                    className="scroll-mt-28"
-                  >
-                    <ProjectCard project={projects[5]} />
-                  </motion.div>
-
-                  <div
-                    data-project-trigger={projects[5].id}
-                    className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
-                  /> */}
+      
                 </div>
               </>
             ) : (
@@ -341,7 +330,7 @@ const toggleMode = () => {
       >
         <div>
           <h2 className="text-body font-bold">{selectedExtra.title}</h2>
-          <p className="text-tiny">{selectedExtra.description}</p>
+          <p className="text-tiny mt-1">{selectedExtra.description}</p>
         </div>
 
         <button
@@ -358,18 +347,16 @@ const toggleMode = () => {
           onClick={(e) => e.stopPropagation()}
           className="mx-auto grid max-w-2xl gap-6"
         >
-          {/* <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25, delay: 0.05 }}
-            className="rounded-2xl bg-white px-6 py-5 text-black shadow-lg"
-          >
-            <h2 className="text-body font-bold">{selectedExtra.title}</h2>
-            <p className="mt-1 text-tiny opacity-70">
-              {selectedExtra.description}
-            </p>
-          </motion.div> */}
+          {selectedExtra.video && (
+            <motion.video
+              src={selectedExtra.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full rounded-2xl object-cover"
+            />
+          )}
 
           {[selectedExtra.coverImage, ...selectedExtra.images].map(
             (image, index) => (
@@ -397,15 +384,13 @@ const toggleMode = () => {
 const projectItemVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 28,
-    scale: 0.96,
+    y: 24,
   },
   show: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.45,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1] as const,
     },
   },
