@@ -25,7 +25,7 @@ function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
   const underline = !mobile && (
     <span
       className={`absolute left-0 -bottom-1 h-[10px] bg-blue transition-all duration-300 ease-out ${
-        active ? "w-full" : "w-0  opacity-50"
+        active ? "w-full" : "w-0 opacity-50"
       }`}
     />
   );
@@ -51,7 +51,7 @@ function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
   }
 
   return (
-    <button onClick={onClick} className={className}>
+    <button type="button" onClick={onClick} className={className}>
       {content}
     </button>
   );
@@ -64,54 +64,48 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
   const isAbout = pathname === "/about";
-  const isWorks = pathname.startsWith("/works");
+  const isExtras = pathname === "/extras";
+
+  const closeMobile = () => setMobileOpen(false);
 
   const goHome = () => {
-    setMobileOpen(false);
+    closeMobile();
 
     if (pathname !== "/") {
-        router.push("/");
-        return;
+      router.push("/");
+      return;
     }
 
     window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
-};
-
-const scrollToSection = (id: string) => {
-  setMobileOpen(false);
-
-  const section = document.getElementById(id);
-
-  if (section) {
-    section.scrollIntoView({
+      top: 0,
       behavior: "smooth",
-      block: "start",
     });
-    return;
-  }
+  };
 
-  router.push(`/#${id}`);
-};
+  const scrollToSection = (id: string) => {
+    closeMobile();
+
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      return;
+    }
+
+    router.push(`/#${id}`);
+  };
 
   return (
     <>
       {/* Desktop nav */}
       <nav className="fixed right-6 top-6 z-50 hidden rounded-full border border-mid-gray bg-light-gray px-6 py-3 text-caption text-black md:block">
         <div className="flex gap-8">
-          <NavItem
-            label="Home"
-            active={isHome}
-            onClick={goHome}
-            />
+          <NavItem label="Home" active={isHome} onClick={goHome} />
 
-          <NavItem
-            label="Works"
-            active={isWorks}
-            onClick={() => scrollToSection("featured-projects")}
-          />
+          <NavItem label="Extras" active={isExtras} href="/extras" />
 
           <NavItem label="About" href="/about" active={isAbout} />
 
@@ -123,11 +117,21 @@ const scrollToSection = (id: string) => {
         </div>
       </nav>
 
+      {/* Mobile dark overlay */}
+      <div
+        onClick={closeMobile}
+        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 md:hidden ${
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
+
       {/* Mobile hamburger */}
       <button
+        type="button"
         onClick={() => setMobileOpen((prev) => !prev)}
-        className="fixed right-5 top-5 z-[60] cursor-pointer hover:scale-110 transition border border-mid-gray grid size-11 place-items-center rounded-full bg-light-gray md:hidden"
+        className="fixed right-5 top-5 z-[60] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110 md:hidden"
         aria-label="Toggle menu"
+        aria-expanded={mobileOpen}
       >
         <Image
           src={mobileOpen ? "/x.svg" : "/hamburger.svg"}
@@ -137,51 +141,39 @@ const scrollToSection = (id: string) => {
         />
       </button>
 
+      {/* Mobile dropdown */}
       <div
-        className={`fixed z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
+        className={`fixed left-0 top-0 z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
           mobileOpen
             ? "max-h-[260px] opacity-100"
-            : "max-h-0 pointer-events-none"
+            : "pointer-events-none max-h-0 opacity-0"
         }`}
       >
-        {/* Mobile dropdown */}
-        <div
-          className={`fixed  z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
-            mobileOpen
-              ? "max-h-[260px] opacity-100"
-              : "max-h-0  pointer-events-none"
-          }`}
-        >
-          <div className="flex flex-col gap-5 px-10 py-5">
-            <NavItem
-              mobile
-              label="Home"
-              active={isHome}
-              onClick={goHome}
-              />
+        <div className="flex flex-col gap-5 px-10 py-5">
+          <NavItem mobile label="Home" active={isHome} onClick={goHome} />
 
-            <NavItem
-              mobile
-              label="Works"
-              active={isWorks}
-              onClick={() => scrollToSection("featured-projects")}
-            />
+          <NavItem
+            mobile
+            label="Extras"
+            active={isExtras}
+            href="/extras"
+            onClick={closeMobile}
+          />
 
-            <NavItem
-              mobile
-              label="About"
-              href="/about"
-              active={isAbout}
-              onClick={() => setMobileOpen(false)}
-            />
+          <NavItem
+            mobile
+            label="About"
+            href="/about"
+            active={isAbout}
+            onClick={closeMobile}
+          />
 
-            <NavItem
-              mobile
-              label="Contact"
-              active={false}
-              onClick={() => scrollToSection("contact")}
-            />
-          </div>
+          <NavItem
+            mobile
+            label="Contact"
+            active={false}
+            onClick={() => scrollToSection("contact")}
+          />
         </div>
       </div>
     </>

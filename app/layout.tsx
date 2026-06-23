@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "Cindy Nakhammouane",
@@ -21,6 +22,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <ScrollToTop />
         <Navbar />
         {children}
       </body>

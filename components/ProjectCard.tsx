@@ -11,8 +11,10 @@ export default function ProjectCard({
   project,
   wide = false,
 }: ProjectCardProps) {
+  
   return (
     <Link
+      scroll={true}
       href={`/works/${project.id}`}
       className="group relative block h-full rounded-3xl border border-dark-gray bg-light-gray p-4 pb-6 shadow-sm md:p-6 md:pb-8"
     >

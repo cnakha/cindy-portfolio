@@ -40,12 +40,12 @@ export default function HomePage() {
                 <img
                   src="/web-hero.svg"
                   alt=""
-                  className="-translate-x-[45px] w-[500px] max-w-none sm:w-[550px] md:w-[920px]"
+                  className="-translate-x-[0px] w-[500px] max-w-none sm:w-[550px] md:w-[920px]"
                 />
               </picture>
             </motion.div>
 
-            <div className="absolute left-[30px] top-[160px] z-10 max-w-[620px] text-black sm:left-[60px] sm:top-[170px] md:left-[160px] md:top-[214px]">
+            <div className="absolute left-[85px] top-[140px] z-10 max-w-[620px] text-black sm:left-[110px] sm:top-[170px] md:left-[210px] md:top-[214px]">
               <motion.p
                 initial={shouldAnimate ? { opacity: 0, y: 14 } : false}
                 animate={{ opacity: 1, y: 0 }}

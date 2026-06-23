@@ -31,57 +31,54 @@ export default function Picture({
 
   const imageClass = "h-full w-full object-cover rounded-2xl";
 
-  const Popup = () =>
-    popupImage ? (
-      <div
-        className=" cursor-pointer fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-4"
-        onClick={() => setPopupImage(null)}
-      >
-        <img
-          src={popupImage}
-          alt={title || "Project image popup"}
-          className="max-h-[90vh] max-w-[90vw] rounded-2xl object-contain"
-          onClick={(e) => e.stopPropagation()}
-        />
-      </div>
-    ) : null;
+const Popup = () =>
+  popupImage ? (
+    <div
+      className="fixed inset-0 z-[9999] flex cursor-pointer items-center justify-center bg-black/70 p-4"
+      onClick={() => setPopupImage(null)}
+    >
+      <Image
+        src={popupImage}
+        alt={title || "Project image popup"}
+        width={1400}
+        height={1000}
+        sizes="90vw"
+        className="max-h-[90vh] w-auto max-w-[90vw] rounded-2xl object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  ) : null;
 
  const ImageWithPopup = ({
   src,
   alt = title || "Project image",
   className,
+  width = 1200,
+  height = 800,
 }: {
   src: string;
   alt?: string;
   className: string;
+  width?: number;
+  height?: number;
 }) => (
-  <div className={`group relative overflow-hidden rounded-2xl ${popup ? "cursor-pointer" : ""}`}>
-    <img
+  <div
+    className={`group relative overflow-hidden rounded-2xl ${
+      popup ? "cursor-pointer" : ""
+    }`}
+  >
+    <Image
       src={src}
       alt={alt}
+      width={width}
+      height={height}
+      sizes="(max-width: 768px) 100vw, 50vw"
       className={className}
       onClick={() => popup && setPopupImage(src)}
     />
 
     {popup && (
-      <div
-        className="
-          pointer-events-none absolute bottom-4 right-4 z-10
-          hidden sm:grid
-          size-12 shrink-0 place-items-center
-          rounded-full bg-white
-          border border-dark-gray
-
-          scale-0 opacity-0
-          origin-bottom-right
-
-          transition-all duration-500
-          ease-[cubic-bezier(0.22,1,0.36,1)]
-
-          group-hover:scale-100
-          group-hover:opacity-100
-        "
-      >
+      <div className="pointer-events-none absolute bottom-4 right-4 z-10 hidden size-12 shrink-0 origin-bottom-right scale-0 place-items-center rounded-full border border-dark-gray bg-white opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-100 group-hover:opacity-100 sm:grid">
         <Image src="/zoom.svg" alt="" width={24} height={24} />
       </div>
     )}

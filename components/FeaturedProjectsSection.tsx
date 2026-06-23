@@ -6,21 +6,46 @@ import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { extras, ExtraProject } from "@/lib/extras";
-import Picture from "@/components/works/Picture";
 
-export default function FeaturedProjectsSection() {
-  const [activeSlug, setActiveSlug] = useState(projects[0]?.id);
-  const [mode, setMode] = useState<"featured" | "extra">("featured");
-  const [selectedExtra, setSelectedExtra] = useState<ExtraProject | null>(
-    null
+const MotionImage = motion(Image);
+
+type FeaturedProjectsSectionProps = {
+  showExtras?: boolean;
+};
+
+export default function FeaturedProjectsSection({
+  showExtras = false,
+}: FeaturedProjectsSectionProps) {
+  const showingExtra = showExtras;
+
+  const [activeSlug, setActiveSlug] = useState(
+    showingExtra ? extras[0]?.id : projects[0]?.id
   );
+  const [selectedExtra, setSelectedExtra] = useState<ExtraProject | null>(null);
+  const [asideHeight, setAsideHeight] = useState<number | "auto">("auto");
 
   const clickedSlugRef = useRef<string | null>(null);
   const unlockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const asideContentRef = useRef<HTMLDivElement | null>(null);
 
-  const showingExtra = mode === "extra";
+  const listItems = showingExtra ? extras : projects;
 
-  
+  const closePopup = () => setSelectedExtra(null);
+
+  const isValidImageSrc = (src?: string) => {
+  return Boolean(src) && (src!.startsWith("/") || src!.startsWith("http"));
+};
+
+  const preloadImages = (images: Array<string | undefined>) => {
+    images.filter(isValidImageSrc).forEach((src) => {
+      const img = new window.Image();
+      img.src = src as string;
+    });
+  };
+
+  useEffect(() => {
+    setActiveSlug(showingExtra ? extras[0]?.id : projects[0]?.id);
+  }, [showingExtra]);
 
   useEffect(() => {
     if (showingExtra) return;
@@ -30,7 +55,6 @@ export default function FeaturedProjectsSection() {
 
       const triggers = document.querySelectorAll("[data-project-trigger]");
       const targetY = window.innerHeight * 0.38;
-
       let currentSlug = projects[0]?.id;
 
       triggers.forEach((trigger) => {
@@ -60,38 +84,6 @@ export default function FeaturedProjectsSection() {
     };
   }, [showingExtra]);
 
-  const handleProjectClick = (id: string) => {
-    clickedSlugRef.current = id;
-    setActiveSlug(id);
-
-    if (unlockTimeoutRef.current) {
-      clearTimeout(unlockTimeoutRef.current);
-    }
-
-    unlockTimeoutRef.current = setTimeout(() => {
-      clickedSlugRef.current = null;
-    }, 800);
-  };
-
-const toggleMode = () => {
-  setMode(showingExtra ? "featured" : "extra");
-  setActiveSlug(showingExtra ? projects[0]?.id : extras[0]?.id);
-
-  const section = document.getElementById("featured-projects");
-
-  if (section) {
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-};
-
-  const listItems = showingExtra ? extras : projects;
-  const asideContentRef = useRef<HTMLDivElement | null>(null);
-  const [asideHeight, setAsideHeight] = useState<number | "auto">("auto");
-  const closePopup = () => setSelectedExtra(null);
-
   useEffect(() => {
     if (!asideContentRef.current) return;
 
@@ -106,117 +98,121 @@ const toggleMode = () => {
     observer.observe(asideContentRef.current);
 
     return () => observer.disconnect();
-  }, [mode, listItems.length]);
+  }, [showingExtra, listItems.length]);
+
+  const handleProjectClick = (id: string) => {
+    clickedSlugRef.current = id;
+    setActiveSlug(id);
+
+    if (unlockTimeoutRef.current) {
+      clearTimeout(unlockTimeoutRef.current);
+    }
+
+    unlockTimeoutRef.current = setTimeout(() => {
+      clickedSlugRef.current = null;
+    }, 800);
+  };
+
+  const handleExtraOpen = (project: ExtraProject) => {
+    setActiveSlug(project.id);
+    preloadImages([project.coverImage, ...project.images]);
+    setSelectedExtra(project);
+  };
 
   return (
     <>
       <section
-        id="featured-projects"
-        className="relative mx-auto md:mt-8 md:grid max-w-[1440px] grid-cols-[260px_1fr] items-start gap-8 px-6 md:px-8"
+        id={showingExtra ? "extra-projects" : "featured-projects"}
+        className="relative mx-auto max-w-[1440px] grid-cols-[260px_1fr] items-start gap-8 px-6 md:mt-8 md:grid md:px-8"
       >
-      <motion.aside
-        animate={{ height: asideHeight }}
-        transition={{
-          height: {
-            duration: 0.55,
-            ease: [0.16, 1, 0.3, 1],
-          },
-        }}
-        className="sticky md:top-8 hidden overflow-hidden rounded-3xl border border-mid-gray bg-light-gray text-black md:block"
-      >
-        <div ref={asideContentRef} className="p-8">
+        <motion.aside
+          animate={{ height: asideHeight }}
+          transition={{
+            height: {
+              duration: 0.55,
+              ease: [0.16, 1, 0.3, 1],
+            },
+          }}
+          className="sticky hidden overflow-hidden rounded-3xl border border-mid-gray bg-light-gray text-black md:top-8 md:block"
+        >
+          <div ref={asideContentRef} className="p-8">
             <AnimatePresence mode="wait">
-            <motion.div
-              key={mode}
-              layout
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              variants={asideContainerVariants}
-            >
-              <motion.h2
-                variants={asideFadeVariants}
-                className="mb-7 text-tiny font-bold"
+              <motion.div
+                key={showingExtra ? "extra" : "featured"}
+                layout
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                variants={asideContainerVariants}
               >
-                {showingExtra ? "Extra Works" : "Featured Projects"}
-              </motion.h2>
+                <motion.h2
+                  variants={asideFadeVariants}
+                  className="mb-7 text-tiny font-bold"
+                >
+                  {showingExtra ? "Extra Works" : "Featured Projects"}
+                </motion.h2>
 
-              <motion.ul
-                variants={asideListVariants}
-                className="space-y-3 text-list"
-              >
-                {listItems.map((item) => {
-                  const active = activeSlug === item.id;
+                <motion.ul
+                  variants={asideListVariants}
+                  className="space-y-3 text-list"
+                >
+                  {listItems.map((item) => {
+                    const active = activeSlug === item.id;
 
-                  return (
-                    <motion.li key={item.id} variants={asideItemVariants}>
-                      {showingExtra ? (
-                        <button
-                          onClick={() => {
-                            setActiveSlug(item.id);
-                            setSelectedExtra(item as ExtraProject);
-                          }}
-                          className={`group relative block cursor-pointer pl-4 text-left transition ${
-                            active ? "opacity-100" : "opacity-60 hover:opacity-100"
-                          }`}
-                        >
-                          <span
-                            className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                    return (
+                      <motion.li key={item.id} variants={asideItemVariants}>
+                        {showingExtra ? (
+                          <button
+                            onClick={() => handleExtraOpen(item as ExtraProject)}
+                            className={`group relative block cursor-pointer pl-4 text-left transition ${
                               active
-                                ? "scale-y-100 opacity-100"
-                                : "scale-y-0 opacity-0"
+                                ? "opacity-100"
+                                : "opacity-60 hover:opacity-100"
                             }`}
-                          />
-
-                          {item.title}
-                        </button>
-                      ) : (
-                        <a
-                          href={`#project-${item.id}`}
-                          onClick={() => handleProjectClick(item.id)}
-                          className={`group relative block pl-4 transition ${
-                            active ? "opacity-100" : "opacity-60 hover:opacity-100"
-                          }`}
-                        >
-                          <span
-                            className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                          >
+                            <span
+                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                                active
+                                  ? "scale-y-100 opacity-100"
+                                  : "scale-y-0 opacity-0"
+                              }`}
+                            />
+                            {item.title}
+                          </button>
+                        ) : (
+                          <a
+                            href={`#project-${item.id}`}
+                            onClick={() => handleProjectClick(item.id)}
+                            className={`group relative block pl-4 transition ${
                               active
-                                ? "scale-y-100 opacity-100"
-                                : "scale-y-0 opacity-0"
+                                ? "opacity-100"
+                                : "opacity-60 hover:opacity-100"
                             }`}
-                          />
-
-                          {item.title}
-                        </a>
-                      )}
-                    </motion.li>
-                  );
-                })}
-              </motion.ul>
-
-              <motion.button
-                variants={asideFadeVariants}
-                onClick={toggleMode}
-                className="group mt-10 flex cursor-pointer flex-row items-center gap-2 text-list"
-              >
-                <span>
-                  {showingExtra ? "View Featured Works" : "View Extra Works"}
-                </span>
-
-                <div className="transition-transform duration-200 group-hover:translate-x-1">
-                  <Image src="/arrow.svg" alt="" width={24} height={24} />
-                </div>
-              </motion.button>
-            </motion.div>
-          </AnimatePresence>
+                          >
+                            <span
+                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                                active
+                                  ? "scale-y-100 opacity-100"
+                                  : "scale-y-0 opacity-0"
+                              }`}
+                            />
+                            {item.title}
+                          </a>
+                        )}
+                      </motion.li>
+                    );
+                  })}
+                </motion.ul>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </motion.aside>
 
-        <div className="flex w-full mt-8">
+        <div className="mt-8 flex w-full">
           <div className="flex-1" />
 
           <motion.div
-            key={mode}
+            key={showingExtra ? "extra" : "featured"}
             initial="hidden"
             animate="show"
             variants={{
@@ -282,24 +278,27 @@ const toggleMode = () => {
                   >
                     <ProjectCard project={projects[4]} />
                   </motion.div>
-      
                 </div>
               </>
             ) : (
               <div className="columns-2 gap-3 md:columns-3">
-                {extras.map((project) => (
+                {extras.map((project, index) => (
                   <motion.button
                     variants={projectItemVariants}
                     key={project.id}
-                    onClick={() => {
-                      setActiveSlug(project.id);
-                      setSelectedExtra(project);
-                    }}
+                    onClick={() => handleExtraOpen(project)}
+                    onMouseEnter={() =>
+                      preloadImages([project.coverImage, ...project.images])
+                    }
                     className="mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-2xl border border-mid-gray bg-light-black"
                   >
-                    <img
+                    <Image
                       src={project.coverImage}
                       alt={project.title}
+                      width={600}
+                      height={800}
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      priority={index < 3}
                       className="h-auto w-full object-contain transition duration-300 hover:scale-105"
                     />
                   </motion.button>
@@ -311,72 +310,80 @@ const toggleMode = () => {
       </section>
 
       <AnimatePresence>
-  {selectedExtra && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      onClick={closePopup}
-      className="fixed inset-0 z-[100] bg-black/70"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.25 }}
-        onClick={(e) => e.stopPropagation()}
-        className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg"
-      >
-        <div>
-          <h2 className="text-body font-bold">{selectedExtra.title}</h2>
-          <p className="text-tiny mt-1">{selectedExtra.description}</p>
-        </div>
+        {selectedExtra && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={closePopup}
+            className="fixed inset-0 z-[100] bg-black/70"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg"
+            >
+              <div>
+                <h2 className="text-body font-bold">{selectedExtra.title}</h2>
+                <p className="mt-1 text-tiny">{selectedExtra.description}</p>
+              </div>
 
-        <button
-          onClick={closePopup}
-          className="grid cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray p-3 text-black transition hover:scale-105"
-          aria-label="Close project popup"
-        >
-          <Image src="/x.svg" alt="" width={24} height={24} />
-        </button>
-      </motion.div>
+              <button
+                onClick={closePopup}
+                className="grid cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray p-3 text-black transition hover:scale-105"
+                aria-label="Close project popup"
+              >
+                <Image src="/x.svg" alt="" width={24} height={24} />
+              </button>
+            </motion.div>
 
-      <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-36">
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="mx-auto grid max-w-2xl gap-6"
-        >
-          {selectedExtra.video && (
-            <motion.video
-              src={selectedExtra.video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full rounded-2xl object-cover"
-            />
-          )}
+            <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-36">
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="mx-auto grid max-w-2xl gap-6"
+              >
+                {selectedExtra.video && (
+                  <motion.video
+                    src={selectedExtra.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full rounded-2xl object-cover"
+                  />
+                )}
 
-          {[selectedExtra.coverImage, ...selectedExtra.images].map(
-            (image, index) => (
-              <motion.img
-                key={`${image}-${index}`}
-                src={image}
-                alt=""
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }}
-                transition={{ duration: 0.25, delay: 0.12 + index * 0.05 }}
-                className="w-full rounded-2xl object-cover"
-              />
-            )
-          )}
-        </div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                {[selectedExtra.coverImage, ...selectedExtra.images]
+                  .filter((image): image is string => Boolean(image) && image.startsWith("/"))
+                  .map((image, index) => (
+                    <MotionImage
+                      key={`${image}-${index}`}
+                      src={image}
+                      alt={`${selectedExtra.title} image ${index + 1}`}
+                      width={900}
+                      height={1200}
+                      sizes="(max-width: 768px) 100vw, 672px"
+                      priority={index === 0}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 12 }}
+                      transition={{
+                        duration: 0.25,
+                        delay: 0.12 + index * 0.05,
+                      }}
+                      className="h-auto w-full rounded-2xl object-cover"
+                    />
+                  ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
@@ -430,7 +437,7 @@ const asideFadeVariants: Variants = {
     y: -6,
     transition: {
       duration: 0.18,
-      ease: "easeIn" ,
+      ease: "easeIn",
     },
   },
 };
