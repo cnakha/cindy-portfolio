@@ -75,11 +75,10 @@ export default function Picture({
   height?: number;
 }) => (
   <div
-    className={`group relative overflow-hidden 
-      ${ type === "captioned" ? "rounded-t-2xl" : "rounded-2xl" } 
-      ${popup ? "cursor-pointer" : ""
-    }`}
-  >
+  className={`group relative overflow-hidden ${
+    type === "captioned" ? "w-fit max-w-full rounded-t-2xl" : "rounded-2xl"
+  } ${popup ? "cursor-pointer" : ""}`}
+>
     <Image
       src={src}
       alt={alt}
