@@ -75,8 +75,9 @@ export default function Picture({
   height?: number;
 }) => (
   <div
-    className={`group relative overflow-hidden rounded-2xl ${
-      popup ? "cursor-pointer" : ""
+    className={`group relative overflow-hidden 
+      ${ type === "captioned" ? "rounded-t-2xl" : "rounded-2xl" } 
+      ${popup ? "cursor-pointer" : ""
     }`}
   >
     <Image
@@ -127,21 +128,23 @@ export default function Picture({
   }
 
   if (type === "captioned") {
-    return (
-      <>
-        <div className="flex flex-col justify-center items-center">
-          <ImageWithPopup
-            src={source}
-            className="w-full rounded-t-2xl border border-mid-gray border-b-0 object-cover"
-          />
-          <div className="flex justify-center items-center rounded-b-2xl w-full bg-light-gray px-6 py-4 gap-4 border border-mid-gray">
-            <p className="text-caption opacity-60">{description}</p>
-          </div>
+  return (
+    <>
+      <div className="mx-auto flex w-fit max-w-full flex-col">
+        <ImageWithPopup
+          src={source}
+          className="h-auto max-w-full rounded-t-2xl border border-mid-gray border-b-0 object-contain"
+        />
+
+        <div className="flex w-full items-center justify-center rounded-b-2xl border border-mid-gray bg-light-gray px-6 py-4">
+          <p className="text-caption opacity-60">{description}</p>
         </div>
-        <Popup />
-      </>
-    );
-  }
+      </div>
+
+      <Popup />
+    </>
+  );
+}
 
   if (type === "half") {
     return (
