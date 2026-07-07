@@ -16,10 +16,10 @@ export default function ProjectCard({
     <Link
       scroll={true}
       href={`/works/${project.id}`}
-      className="group relative block h-full rounded-3xl border border-dark-gray bg-light-gray p-4 pb-6 shadow-sm md:p-6 md:pb-8"
+      className="group relative block h-full rounded-3xl border border-dark-gray bg-light-gray hover:bg-light-black transition-ease-all duration-700 shadow-sm "
     >
       <div
-        className={`overflow-hidden rounded-2xl bg-neutral-700 ${
+        className={`overflow-hidden rounded-t-2xl bg-neutral-700 ${
           wide ? "aspect-[16/7]" : "aspect-[16/9]"
         }`}
       >
@@ -30,11 +30,11 @@ export default function ProjectCard({
         />
       </div>
 
-      <div className="mt-5">
-        <div className="text-black">
+      <div className="">
+        <div className="text-black group-hover:text-white p-4 sm:p-6 pb-6 sm:pb-8">
           <h3 className="text-body font-bold">{project.title}</h3>
           <p className="text-tiny font-semibold opacity-60">{project.context}</p>
-          <p className="mt-1 text-tiny opacity-60">
+          <p className="mt-2 text-tiny opacity-60">
             {project.description}
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function ProjectCard({
 
       <div
         className="
-          absolute bottom-5 right-5 z-10
+          absolute top-5 right-5 z-10
           size-12 place-items-center
           rounded-full border border-dark-gray bg-white
           scale-0 opacity-0 origin-bottom-right

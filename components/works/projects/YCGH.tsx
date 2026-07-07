@@ -35,7 +35,7 @@ export default function YCGH() {
         <div className="relative flex flex-col">
             <h2 className="text-display">Project Overview</h2>
             <span
-                className={`absolute left-0 -bottom-4 h-[5px] bg-blue transition-all duration-300 ease-out w-full`}
+                className={`absolute left-0 -bottom-4 h-[5px] bg-black transition-all duration-300 ease-out w-full`}
             />
         </div>
         <div className="mt-20"/>

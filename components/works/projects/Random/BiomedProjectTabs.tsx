@@ -245,7 +245,7 @@ export default function BiomedProjectsTabs() {
               >
                 {label}
                 <span
-                    className={`absolute left-0 -bottom-0 h-[10px] bg-blue transition-all duration-300 ease-out ${
+                    className={`absolute left-0 -bottom-0 h-[10px] bg-black transition-all duration-300 ease-out ${
                         selected ? "w-full" : "w-0  opacity-50"
                     }`}
                 />

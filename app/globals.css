@@ -12,6 +12,15 @@
   --color-blue: #22b7ff;
   --font-century: "Century Gothic", Arial, sans-serif;
   --font-myriad: "myriad-variable-concept", sans-serif;
+
+  --dodger-blue: #3996FFff;
+  --cornflower-blue: #769FFFff;
+  --baby-blue-ice: #97B5FFff;
+  --wisteria-blue: #8396FFff;
+  --soft-periwinkle: #AA9CFFff;
+  --periwinkle: #D2C8FFff;
+  --ghost-white: #F1F4FFff;
+
 }
 
 @font-face {

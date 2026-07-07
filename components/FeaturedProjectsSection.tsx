@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
 import { extras, ExtraProject } from "@/lib/extras";
+import { useRouter } from "next/navigation";
 
 const MotionImage = motion(Image);
 
@@ -17,6 +18,7 @@ export default function FeaturedProjectsSection({
   showExtras = false,
 }: FeaturedProjectsSectionProps) {
   const showingExtra = showExtras;
+  const router = useRouter();
 
   const [activeSlug, setActiveSlug] = useState(
     showingExtra ? extras[0]?.id : projects[0]?.id
@@ -125,6 +127,8 @@ export default function FeaturedProjectsSection({
         id={showingExtra ? "extra-projects" : "featured-projects"}
         className="relative mx-auto max-w-[1440px] grid-cols-[260px_1fr] items-start gap-8 px-6 md:mt-8 md:grid md:px-8"
       >
+
+        {/* Aside and project list content here... */}
         <motion.aside
           animate={{ height: asideHeight }}
           transition={{
@@ -133,7 +137,7 @@ export default function FeaturedProjectsSection({
               ease: [0.16, 1, 0.3, 1],
             },
           }}
-          className="sticky hidden overflow-hidden rounded-3xl border border-mid-gray bg-light-gray text-black md:top-8 md:block"
+          className="sticky hidden overflow-hidden rounded-3xl border border-light-black bg-black text-light-black md:top-18 md:block"
         >
           <div ref={asideContentRef} className="p-8">
             <AnimatePresence mode="wait">
@@ -145,16 +149,10 @@ export default function FeaturedProjectsSection({
                 exit="exit"
                 variants={asideContainerVariants}
               >
-                <motion.h2
-                  variants={asideFadeVariants}
-                  className="mb-7 text-tiny font-bold"
-                >
-                  {showingExtra ? "Extra Works" : "Featured Projects"}
-                </motion.h2>
 
                 <motion.ul
                   variants={asideListVariants}
-                  className="space-y-3 text-list"
+                  className="space-y-3 text-body"
                 >
                   {listItems.map((item) => {
                     const active = activeSlug === item.id;
@@ -164,14 +162,14 @@ export default function FeaturedProjectsSection({
                         {showingExtra ? (
                           <button
                             onClick={() => handleExtraOpen(item as ExtraProject)}
-                            className={`group relative block cursor-pointer pl-4 text-left transition ${
+                            className={`group relative block cursor-pointer pl-4 text-left text-white transition ${
                               active
                                 ? "opacity-100"
                                 : "opacity-60 hover:opacity-100"
                             }`}
                           >
                             <span
-                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-white transition-all duration-200 ${
                                 active
                                   ? "scale-y-100 opacity-100"
                                   : "scale-y-0 opacity-0"
@@ -183,14 +181,14 @@ export default function FeaturedProjectsSection({
                           <a
                             href={`#project-${item.id}`}
                             onClick={() => handleProjectClick(item.id)}
-                            className={`group relative block pl-4 transition ${
+                            className={`group relative block pl-4 transition text-white ${
                               active
                                 ? "opacity-100"
                                 : "opacity-60 hover:opacity-100"
                             }`}
                           >
                             <span
-                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue transition-all duration-200 ${
+                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-white transition-all duration-200 ${
                                 active
                                   ? "scale-y-100 opacity-100"
                                   : "scale-y-0 opacity-0"
@@ -208,7 +206,7 @@ export default function FeaturedProjectsSection({
           </div>
         </motion.aside>
 
-        <div className="mt-8 flex w-full">
+        <div className=" flex w-full">
           <div className="flex-1" />
 
           <motion.div
@@ -223,52 +221,72 @@ export default function FeaturedProjectsSection({
                 },
               },
             }}
-            className="grid w-full max-w-5xl gap-4"
+            className="grid w-full max-w-6xl gap-4"
           >
-            <p className="md:hidden text-subtitle text-black">Featured Projects</p>
+            
             {!showingExtra ? (
               <>
-                <motion.div
-                  variants={projectItemVariants}
-                  id={`project-${projects[0].id}`}
-                  data-project-trigger={projects[0].id}
-                  className="scroll-mt-28"
-                >
-                  <ProjectCard project={projects[0]} wide />
-                </motion.div>
+              <div className="flex justify-between mb-2 ">
+                <p className="text-display text-black">Featured Projects</p>
+                {/* Go to extras page button */}
+                <div className="flex">
+                  <div 
+                    onClick={() => router.push("/extras")}
+                    className="hidden lg:flex cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
+                    px-6 py-3 text-caption text-black flex items-center gap-2 hover:translate-x-2 transition ease-in-out">
+                    <p className="text-caption text-black/60 hover:text-black/100 font-semibold transition">View Extra Works</p>
+                    <Image src="/arrow.svg" alt="" width={24} height={24} className="" />
+                  </div>
+                </div>
+              </div>
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
                     variants={projectItemVariants}
+                    id={`project-${projects[0].id}`}
+                    data-project-trigger={projects[0].id}
+                    className="scroll-mt-28"
+                  >
+                    <ProjectCard project={projects[0]} />
+                  </motion.div>
+
+                  <motion.div
+                    variants={projectItemVariants}
                     id={`project-${projects[1].id}`}
-                    data-project-trigger={projects[1].id}
                     className="scroll-mt-28"
                   >
                     <ProjectCard project={projects[1]} />
                   </motion.div>
 
+                  <div
+                    data-project-trigger={projects[1].id}
+                    className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
+                  />
+                </div>
+
+                <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
                     variants={projectItemVariants}
                     id={`project-${projects[2].id}`}
+                    data-project-trigger={projects[2].id}
                     className="scroll-mt-28"
                   >
                     <ProjectCard project={projects[2]} />
                   </motion.div>
 
+                  <motion.div
+                    variants={projectItemVariants}
+                    id={`project-${projects[3].id}`}
+                    className="scroll-mt-28"
+                  >
+                    <ProjectCard project={projects[3]} />
+                  </motion.div>
+
                   <div
-                    data-project-trigger={projects[2].id}
+                    data-project-trigger={projects[3].id}
                     className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
                   />
                 </div>
-
-                <motion.div
-                  variants={projectItemVariants}
-                  id={`project-${projects[3].id}`}
-                  data-project-trigger={projects[3].id}
-                  className="scroll-mt-28"
-                >
-                  <ProjectCard project={projects[3]} wide />
-                </motion.div>
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
@@ -282,8 +300,9 @@ export default function FeaturedProjectsSection({
                 </div>
               </>
             ) : (
+              <div className="flex flex-col gap-4">
+              <p className="text-display text-black ">Extra Works</p>
               <div className="columns-2 gap-3 md:columns-3">
-                <p className="md:hidden text-subtitle text-black">Extra Works</p>
                 {extras.map((project, index) => (
                   <motion.button
                     variants={projectItemVariants}
@@ -305,6 +324,7 @@ export default function FeaturedProjectsSection({
                     />
                   </motion.button>
                 ))}
+              </div>
               </div>
             )}
           </motion.div>

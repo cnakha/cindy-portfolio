@@ -41,7 +41,7 @@ export default function ProjectPage() {
               className="cursor-pointer right-6 top-6 z-50  rounded-full border border-mid-gray bg-light-gray 
               px-6 py-3 text-caption text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
-              <p className="text-caption text-black/60 hover:text-black/100 transition">Cindy Nakhammouane</p>
+              <p className="text-caption text-black/50 font-semibold hover:text-black/100 transition">Cindy Nakhammouane</p>
             </div>
           </div>
 

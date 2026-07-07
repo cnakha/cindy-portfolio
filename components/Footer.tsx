@@ -20,7 +20,8 @@ export default function Footer() {
       id="contact"
       className="relative mt-24 overflow-hidden bg-light-gray text-black"
     >
-      <Image
+      <div className="h-2 bg-white border border-black"/>
+      {/* <Image
         src="/footer1.svg"
         alt=""
         width={420}
@@ -34,13 +35,13 @@ export default function Footer() {
         width={420}
         height={320}
         className="block md:hidden lg:block pointer-events-none absolute z-0 w-[180px] right-2 bottom-8 md:right-0 md:top-68 md:bottom-auto md:w-[420px]"
-      />
+      /> */}
 
-      <div className="relative z-10  max-w-6xl px-2 sm:ml-8 pt-28 md:ml-54 lg:ml-58  md:pt-45">
+      <div className="relative z-10 max-w-6xl px-2 sm:ml-8 pt-14 md:ml-20  md:pt-20">
         <h2 className="hidden md:block md:ml-0 max-w-[240px] text-display font-semibold md:max-w-none">
           Let’s work together!
         </h2>
-        <h2 className="md:hidden ml-28 sm:ml-24 max-w-[240px] text-display font-semibold ">
+        <h2 className="md:hidden ml-4 sm:ml-24 max-w-[240px] text-display font-semibold ">
           Let’s work <br/> together!
         </h2>
 
@@ -65,10 +66,10 @@ export default function Footer() {
                     className="
                     absolute
                     left-0
-                    -bottom-2
+                    -bottom-3
                     h-[10px]
                     w-0
-                    bg-blue
+                    bg-black
                     transition-all
                     duration-300
                     ease-out
@@ -106,10 +107,10 @@ export default function Footer() {
                     className="
                     absolute
                     left-0
-                    -bottom-2
+                    -bottom-3
                     h-[10px]
                     w-0
-                    bg-blue
+                    bg-black
                     transition-all
                     duration-300
                     ease-out
@@ -132,10 +133,10 @@ export default function Footer() {
                     className="
                     absolute
                     left-0
-                    -bottom-2
+                    -bottom-3
                     h-[10px]
                     w-0
-                    bg-blue
+                    bg-black
                     transition-all
                     duration-300
                     ease-out
@@ -158,10 +159,10 @@ export default function Footer() {
                     className="
                     absolute
                     left-0
-                    -bottom-2
+                    -bottom-3
                     h-[10px]
                     w-0
-                    bg-blue
+                    bg-black
                     transition-all
                     duration-300
                     ease-out
@@ -172,19 +173,13 @@ export default function Footer() {
             </div>
 
             </div>
-            <p className="relative z-10 mt-8  pb-38 md:pb-18 text-left text-tiny font-semibold md:mr-10 md:mt-10 md:pb-4  md:text-caption">
+            <p className="relative z-10 mt-8 opacity-50 pb-10 md:pb-18 text-left text-body md:mr-10 md:mt-10 md:pb-4  md:text-caption">
                 Designed and Developed by Cindy Nakhammouane
             </p>
         </div>
     
       </div>
 
-      <div
-        className="relative left-1/2 h-[32px] w-screen -translate-x-1/2 bg-cover bg-center bg-repeat-x md:h-[30px]"
-        style={{
-          backgroundImage: "url('/line.svg')",
-        }}
-      />
     </footer>
   );
 }

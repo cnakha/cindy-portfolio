@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
-      <section className="flex flex-col justify-content items-center mx-auto max-w-5xl gap-4 px-8  pt-20">
+      <section className="flex flex-col justify-content items-center mx-auto max-w-6xl gap-4 px-8 pt-20">
      
         <Picture
           source="/wood.jpg"
@@ -16,7 +16,7 @@ export default function AboutPage() {
 
         <div className="">
           <section>
-            <h1 className="text-subtitle">Background</h1>
+            <h1 className="text-display">Background</h1>
 
             <p className="mt-4 text-body ">
               I'm Cindy Nakhammouane, a Fullstack Developer, UI/UX Designer and recent graduate from the 
@@ -70,6 +70,7 @@ export default function AboutPage() {
                 <li>SQL</li>
                 <li>REST API</li>
                 <li>FastAPI</li>
+                <li>Claude</li>
               </ul>
             </div>
           </div>

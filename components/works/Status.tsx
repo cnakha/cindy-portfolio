@@ -16,7 +16,7 @@ export default function Status({ message, hasLink, link, github }: Status) {
 
     const underline = (
         <span
-            className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
+            className={`pointer-events-none absolute left-0 h-[5px] bg-black transition-all duration-300 ease-out w-full ${
             active ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
             }`}
         />
@@ -24,7 +24,7 @@ export default function Status({ message, hasLink, link, github }: Status) {
 
     const underline2 = (
         <span
-            className={`pointer-events-none absolute left-0 h-[5px] bg-blue transition-all duration-300 ease-out w-full ${
+            className={`pointer-events-none absolute left-0 h-[5px] bg-black transition-all duration-300 ease-out w-full ${
             active2 ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
             }`}
         />
@@ -49,7 +49,7 @@ export default function Status({ message, hasLink, link, github }: Status) {
                 <div className="relative flex flex-col">
                     <h2 className="text-tiny font-semibold">{message}</h2>
                     <span
-                        className={`absolute left-0 -bottom-2 h-[5px] bg-blue transition-all duration-300 ease-out w-full`}
+                        className={`absolute left-0 -bottom-2 h-[5px] bg-black transition-all duration-300 ease-out w-full`}
                     />
                 </div>
             )}

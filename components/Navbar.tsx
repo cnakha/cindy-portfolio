@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type NavItemProps = {
   label: string;
@@ -14,44 +13,20 @@ type NavItemProps = {
 };
 
 function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
-  const className = mobile
-    ? `relative flex w-fit cursor-pointer items-center gap-2 text-caption transition ${
-        active ? "font-bolder opacity-100" : "opacity-60"
-      }`
-    : `group relative cursor-pointer pb-1 transition ${
-        active ? "font-bolder opacity-100" : "opacity-60 hover:opacity-100"
-      }`;
+  const base = `text-body font-semibold transition ${active ? "text-black" : "text-black opacity-50 hover:opacity-100"}`;
 
-  const underline = !mobile && (
-    <span
-      className={`absolute left-0 -bottom-1 h-[10px] bg-blue transition-all duration-300 ease-out ${
-        active ? "w-full" : "w-0 opacity-50"
-      }`}
-    />
-  );
-
-  const mobileBar = mobile && active && (
-    <span className="absolute -left-4 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-blue" />
-  );
-
-  const content = (
-    <>
-      {mobileBar}
-      {label}
-      {underline}
-    </>
-  );
+  const content = <span>{label}</span>;
 
   if (href) {
     return (
-      <Link href={href} onClick={onClick} className={className}>
+      <Link href={href} onClick={onClick} className={base}>
         {content}
       </Link>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={className}>
+    <button type="button" onClick={onClick} className={`cursor-pointer text-left ${mobile ? "w-full" : ""} ${base}`}>
       {content}
     </button>
   );
@@ -59,61 +34,68 @@ function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
+  const router   = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bgOpacity, setBgOpacity]   = useState(1);
 
-  const isHome = pathname === "/";
-  const isAbout = pathname === "/about";
+  const isHome   = pathname === "/";
+  const isWorks  = false;
   const isExtras = pathname === "/extras";
+  const isAbout  = pathname === "/about";
+  const isResume = pathname === "/resume";
+
+  // On non-home pages the bar is always opaque.
+  // On home, fade it in as user scrolls past the hero.
+  useEffect(() => {
+    if (!isHome) { setBgOpacity(1); return; }
+
+    setBgOpacity(0); // reset when navigating back to home
+
+    const onScroll = () => {
+      // start fading in after 50% of viewport height, fully opaque by 80%
+      const start    = window.innerHeight * 0.5;
+      const end      = window.innerHeight * 0.8;
+      const progress = Math.max(0, Math.min(1, (window.scrollY - start) / (end - start)));
+      setBgOpacity(progress);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // run once on mount in case page loads mid-scroll
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   const closeMobile = () => setMobileOpen(false);
 
   const goHome = () => {
     closeMobile();
-
-    if (pathname !== "/") {
-      router.push("/");
-      return;
-    }
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (pathname !== "/") { router.push("/"); return; }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToSection = (id: string) => {
     closeMobile();
-
-    const section = document.getElementById(id);
-
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      return;
-    }
-
+    const el = document.getElementById(id);
+    if (el) { el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     router.push(`/#${id}`);
   };
 
   return (
     <>
-      {/* Desktop nav */}
-      <nav className="fixed right-6 top-6 z-50 hidden rounded-full border border-mid-gray bg-light-gray px-6 py-3 text-caption text-black md:block">
-        <div className="flex gap-8">
-          <NavItem label="Home" active={isHome} onClick={goHome} />
-
-          <NavItem label="Extras" active={isExtras} href="/extras" />
-
-          <NavItem label="About" href="/about" active={isAbout} />
-
-          <NavItem
-            label="Contact"
-            active={false}
-            onClick={() => scrollToSection("contact")}
-          />
+      {/* Desktop nav — full-width bar with scroll-driven white bg */}
+      <nav
+        className="fixed top-0 left-0 right-0 z-100 hidden md:block transition-shadow duration-300"
+        style={{
+          backgroundColor: `rgba(255,255,255,${bgOpacity})`,
+          borderBottom: bgOpacity > 0.1 ? `1px solid rgba(0,0,0,${bgOpacity * 0.08})` : "none",
+        }}
+      >
+        <div className="flex items-center justify-end gap-6 px-10 py-5">
+          <NavItem label="Home"    active={isHome}   onClick={goHome} />
+          <NavItem label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
+          <NavItem label="Extras"  active={isExtras} href="/extras" />
+          <NavItem label="About"   active={isAbout}  href="/about" />
+          <NavItem label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" />
+          <NavItem label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
         </div>
       </nav>
 
@@ -128,52 +110,27 @@ export default function Navbar() {
       {/* Mobile hamburger */}
       <button
         type="button"
-        onClick={() => setMobileOpen((prev) => !prev)}
-        className="fixed right-5 top-5 z-[60] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110 md:hidden"
+        onClick={() => setMobileOpen(p => !p)}
+        className="fixed right-5 top-5 z-[60] grid size-10 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray md:hidden"
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
       >
-        <Image
-          src={mobileOpen ? "/x.svg" : "/hamburger.svg"}
-          alt=""
-          width={24}
-          height={24}
-        />
+        <span className="text-black text-lg leading-none">{mobileOpen ? "✕" : "☰"}</span>
       </button>
 
       {/* Mobile dropdown */}
       <div
-        className={`fixed left-0 top-0 z-50 w-full overflow-hidden border border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-300 ease-in md:hidden ${
-          mobileOpen
-            ? "max-h-[260px] opacity-100"
-            : "pointer-events-none max-h-0 opacity-0"
+        className={`fixed left-0 top-0 z-50 w-full overflow-hidden border-b border-mid-gray bg-light-gray text-black shadow-lg transition-all duration-500 md:hidden ${
+          mobileOpen ? "max-h-72 opacity-100" : "pointer-events-none max-h-0"
         }`}
       >
-        <div className="flex flex-col gap-5 px-10 py-5">
-          <NavItem mobile label="Home" active={isHome} onClick={goHome} />
-
-          <NavItem
-            mobile
-            label="Extras"
-            active={isExtras}
-            href="/extras"
-            onClick={closeMobile}
-          />
-
-          <NavItem
-            mobile
-            label="About"
-            href="/about"
-            active={isAbout}
-            onClick={closeMobile}
-          />
-
-          <NavItem
-            mobile
-            label="Contact"
-            active={false}
-            onClick={() => scrollToSection("contact")}
-          />
+        <div className="flex flex-col gap-5 px-10 py-6">
+          <NavItem mobile label="Home"    active={isHome}   onClick={goHome} />
+          <NavItem mobile label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
+          <NavItem mobile label="Extras"  active={isExtras} href="/extras" onClick={closeMobile} />
+          <NavItem mobile label="About"   active={isAbout}  href="/about"  onClick={closeMobile} />
+          <NavItem mobile label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" onClick={closeMobile} />
+          <NavItem mobile label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
         </div>
       </div>
     </>
