@@ -227,7 +227,7 @@ export default function FeaturedProjectsSection({
             {!showingExtra ? (
               <>
               <div className="flex justify-between mb-2 ">
-                <p className="text-display text-black">Featured Projects</p>
+                <p className="text-display text-black">Featured Works</p>
                 {/* Go to extras page button */}
                 <div className="flex">
                   <div 

@@ -61,7 +61,7 @@
     font-family: var(--font-myriad);
     font-variation-settings: "wght" 550;
 
-    @apply text-[14px] md:text-[18px] leading-[1.2];
+    @apply text-[14px] md:text-[16px] leading-[1.2];
   }
 
   .text-caption {

@@ -77,7 +77,7 @@ export default function YCGH() {
 
           <div className="mt-4"/>
           <Picture type={"third"} popup={true} useAspectRatio={true} source={"/projects/ycgh/2025_SIGGRAPH_POSTER_YCGH_Final.png"}/>
-          
+          <div className="mt-10"/>
         </div>
     </div>
   );

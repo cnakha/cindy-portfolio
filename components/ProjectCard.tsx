@@ -44,7 +44,7 @@ export default function ProjectCard({
         className="
           absolute top-5 right-5 z-10
           size-12 place-items-center
-          rounded-full border border-dark-gray bg-white
+          rounded-full border border-dark-gray bg-light-gray
           scale-0 opacity-0 origin-bottom-right
           transition-all duration-500
           ease-[cubic-bezier(0.22,1,0.36,1)]

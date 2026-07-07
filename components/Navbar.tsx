@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type NavItemProps = {
   label: string;
@@ -39,7 +40,7 @@ export default function Navbar() {
   const [bgOpacity, setBgOpacity]   = useState(1);
 
   const isHome   = pathname === "/";
-  const isWorks  = false;
+  const isWorks  = pathname.includes("/works");
   const isExtras = pathname === "/extras";
   const isAbout  = pathname === "/about";
   const isResume = pathname === "/resume";
@@ -86,7 +87,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-100 hidden md:block transition-shadow duration-300"
         style={{
           backgroundColor: `rgba(255,255,255,${bgOpacity})`,
-          borderBottom: bgOpacity > 0.1 ? `1px solid rgba(0,0,0,${bgOpacity * 0.08})` : "none",
+          borderBottom: bgOpacity > 0.1 ? `1px solid rgba(0,0,0,${bgOpacity * 1})` : "none",
         }}
       >
         <div className="flex items-center justify-end gap-6 px-10 py-5">
@@ -111,11 +112,14 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => setMobileOpen(p => !p)}
-        className="fixed right-5 top-5 z-[60] grid size-10 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray md:hidden"
+        className="fixed right-5 top-5 z-[60] p-1 grid size-10 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray md:hidden"
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
       >
-        <span className="text-black text-lg leading-none">{mobileOpen ? "✕" : "☰"}</span>
+          {mobileOpen ? 
+          <Image src="/x.svg" alt="" width={20} height={20} />
+          : <Image src="/hamburger.svg" alt="" width={20} height={20} />
+          }
       </button>
 
       {/* Mobile dropdown */}

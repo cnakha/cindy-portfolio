@@ -510,7 +510,7 @@ function PixelCanvas() {
       }
 
       // ── click bursts — black pixels radiating outward ─────────────────────
-      const BURST_SPEED    = 0.55;  // px/ms
+      const BURST_SPEED    = 0.32;  // px/ms
       const BURST_BAND     = 18;    // px wavefront width
       const BURST_MAX_R    = 200;   // px
       const now2 = performance.now();
