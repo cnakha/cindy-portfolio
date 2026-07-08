@@ -621,14 +621,14 @@ export default function HomePage() {
           >
             <motion.p
               variants={fadeUp}
-              className="text-black/50 font-semibold leading-tight text-display"
+              className="text-black/50 font-medium md:font-semibold leading-tight text-display"
             >
               Hi, I'm
             </motion.p>
 
             <motion.h1
               variants={fadeUp}
-              className="leading-[0.9] tracking-tight  text-black "
+              className="leading-[0.9] tracking-tight font-semibold md:font-medium text-black "
               style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
             >
               Cindy<br />Nakhammouane
@@ -643,7 +643,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-3 font-bold text-black leading-[1.0] text-display"
+              className="lg:hidden mt-3 font-medium md:font-bold text-black leading-[1.0] text-display"
             >
               Creative Developer <br/> &amp; Designer
             </motion.p>
