@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
-      <section className="flex flex-col justify-content items-center mx-auto max-w-6xl gap-4 px-8 pt-20">
+      <section className="flex flex-col justify-content items-center mx-auto max-w-6xl gap-4 px-8 pt-30">
      
         <Picture
           source="/wood.jpg"
@@ -19,7 +19,7 @@ export default function AboutPage() {
             <h1 className="text-display">Background</h1>
 
             <p className="mt-4 text-body ">
-              I'm Cindy Nakhammouane, a Fullstack Developer, UI/UX Designer and recent graduate from the 
+              Hi, I'm Cindy Nakhammouane a Fullstack Developer and UI/UX Designer based in Chicago, IL. I recently graduated from the 
               University of Illinois Chicago’s first ever Computer Science and Design cohort 
               combining the capabilities of modern computer programming and visual design.
             
@@ -39,7 +39,7 @@ export default function AboutPage() {
 
           <h2 className="text-subtitle mt-10">Tools I Use</h2>
 
-          <div className="mt-4 grid gap-4 md:grid-cols-2 max-w-[400px]">
+          <div className="mt-4 grid grid-cols-2 max-w-[300px]">
             <div>
               <div className="flex">
               <p className="text-tiny font-bold gray-title">Design</p>

@@ -14,8 +14,7 @@ type NavItemProps = {
 };
 
 function NavItem({ label, active, onClick, href, mobile }: NavItemProps) {
-  const base = `text-body font-semibold transition ${active ? "text-black" : "text-black opacity-50 hover:opacity-100"}`;
-
+  const base = `transition ${active ? "text-black font-semibold " : "text-black hover:opacity-100"}`;
   const content = <span>{label}</span>;
 
   if (href) {
@@ -84,19 +83,23 @@ export default function Navbar() {
     <>
       {/* Desktop nav — full-width bar with scroll-driven white bg */}
       <nav
-        className="fixed top-0 left-0 right-0 z-100 hidden md:block transition-shadow duration-300"
+        className="fixed top-0 left-0 right-0 z-100  hidden md:block transition-shadow duration-300"
+        
+      >
+        <div className="flex items-center justify-end gap-6 px-8 py-4"
         style={{
           backgroundColor: `rgba(255,255,255,${bgOpacity})`,
-          borderBottom: bgOpacity > 0.1 ? `1px solid rgba(0,0,0,${bgOpacity * 1})` : "none",
-        }}
-      >
-        <div className="flex items-center justify-end gap-6 px-10 py-5">
+          borderBottom: bgOpacity > 0.1 ? `1px solid rgba(0,0,0,${bgOpacity * 0.5})` : "none",
+        }}>
           <NavItem label="Home"    active={isHome}   onClick={goHome} />
           <NavItem label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
           <NavItem label="Extras"  active={isExtras} href="/extras" />
           <NavItem label="About"   active={isAbout}  href="/about" />
           <NavItem label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" />
-          <NavItem label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
+          {/* <NavItem label="Contact" active={false}  onClick={() => scrollToSection("contact")} /> */}
+          <button className="cursor-pointer  rounded-full border border-black px-4 py-2 text-black font-semibold transition hover:bg-black hover:text-white" onClick={() => scrollToSection("contact")}>
+            Contact
+          </button>
         </div>
       </nav>
 

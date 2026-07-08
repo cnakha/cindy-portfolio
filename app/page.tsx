@@ -628,8 +628,8 @@ export default function HomePage() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-bold leading-[1.0] tracking-tight text-black"
-              style={{ fontFamily: "Century Gothic, Arial, sans-serif", fontSize: "clamp(36px, 8vw, 120px)" }}
+              className="leading-[0.9] tracking-tight  text-black "
+              style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
             >
               Cindy<br />Nakhammouane
             </motion.h1>
@@ -677,7 +677,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="h-2 border border-black mb-20"/>
+      <div className="h-0 border border-b-black mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

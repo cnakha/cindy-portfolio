@@ -110,11 +110,5 @@ export const extras: ExtraProject[] = [
       description: "Business card concepts",
       title: "ANT PARTY Card"
     },
-    {
-      id: "paper",
-      coverImage: "/extras/paper/img1.png",
-      images: ["/extras/paper/img2.png", "/extras/paper/img3.png", "/extras/paper/img4.png"],
-      description: "Light and Shadow study, Form + Type + Image, Photography Practice",
-      title: "Paper Photography"
-    },
+   
   ];

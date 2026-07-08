@@ -18,40 +18,24 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative mt-24 overflow-hidden bg-light-gray text-black"
+      className="relative mt-24 overflow-hidden bg-light-gray border border-t-black text-black"
     >
-      <div className="h-2 bg-white border border-black"/>
-      {/* <Image
-        src="/footer1.svg"
-        alt=""
-        width={420}
-        height={420}
-        className="pointer-events-none absolute z-0 w-[200px] left-4 top-4 md:left-0 md:top-0 md:w-[420px]"
-      />
 
-      <Image
-        src="/footer2.svg"
-        alt=""
-        width={420}
-        height={320}
-        className="block md:hidden lg:block pointer-events-none absolute z-0 w-[180px] right-2 bottom-8 md:right-0 md:top-68 md:bottom-auto md:w-[420px]"
-      /> */}
-
-      <div className="relative z-10 max-w-6xl px-2 sm:ml-8 pt-14 md:ml-20  md:pt-20">
+      <div className="relative z-10 max-w-6xl px-2 pt-14 md:ml-20 md:pt-20">
         <h2 className="hidden md:block md:ml-0 max-w-[240px] text-display font-semibold md:max-w-none">
           Let’s work together!
         </h2>
-        <h2 className="md:hidden ml-4 sm:ml-24 max-w-[240px] text-display font-semibold ">
+        <h2 className="md:hidden ml-4 sm:ml-10 max-w-[240px] text-display font-semibold ">
           Let’s work <br/> together!
         </h2>
 
-        <p className="ml-4 sm:ml-24 md:ml-0 mt-12 sm:mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-tight md:mt-4 md:max-w-xl">
+        <p className="ml-4 sm:ml-10 md:ml-0 mt-4 sm:mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-tight md:mt-4 md:max-w-xl">
           I’m always interested in new opportunities and exciting projects.
           Let’s get in touch and build something amazing!
         </p>
 
-        <div className="mt-8 ml-4 sm:ml-24 md:ml-0">
-            <div className="grid max-w-3xl gap-y-8 md:mt-12 md:grid-cols-2 md:gap-x-8 md:gap-y-8">
+        <div className="mt-8 ml-4 sm:ml-10 md:ml-0">
+            <div className="grid max-w-3xl gap-y-8 md:mt-12 sm:grid-cols-2 md:gap-x-8 md:gap-y-8">
             <div>
             <p className="text-tiny font-semibold">Email</p>
 
@@ -174,7 +158,7 @@ export default function Footer() {
 
             </div>
             <p className="relative z-10 mt-8 opacity-50 pb-10 md:pb-18 text-left text-body md:mr-10 md:mt-10 md:pb-4  md:text-caption">
-                Designed and Developed by Cindy Nakhammouane
+                Designed and developed by Cindy Nakhammouane
             </p>
         </div>
     

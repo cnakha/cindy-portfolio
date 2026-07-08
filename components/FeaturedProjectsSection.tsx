@@ -125,10 +125,11 @@ export default function FeaturedProjectsSection({
     <>
       <section
         id={showingExtra ? "extra-projects" : "featured-projects"}
-        className="relative mx-auto max-w-[1440px] grid-cols-[260px_1fr] items-start gap-8 px-6 md:mt-8 md:grid md:px-8"
+        className={`relative mx-auto max-w-[1440px] ${showingExtra ? 'grid-cols-[260px_1fr]' : 'flex'} justify-center items-start gap-8 px-6 md:mt-8 md:grid md:px-8`}
       >
 
         {/* Aside and project list content here... */}
+        { showingExtra && (
         <motion.aside
           animate={{ height: asideHeight }}
           transition={{
@@ -205,6 +206,7 @@ export default function FeaturedProjectsSection({
             </AnimatePresence>
           </div>
         </motion.aside>
+        )}
 
         <div className=" flex w-full">
           <div className="flex-1" />
@@ -233,8 +235,8 @@ export default function FeaturedProjectsSection({
                   <div 
                     onClick={() => router.push("/extras")}
                     className="hidden lg:flex cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
-                    px-6 py-3 text-caption text-black flex items-center gap-2 hover:translate-x-2 transition ease-in-out">
-                    <p className="text-caption text-black/60 hover:text-black/100 font-semibold transition">View Extra Works</p>
+                    px-4 py-2 text-black flex items-center gap-2 hover:translate-x-2 transition ease-in-out">
+                    <p className="text-tiny text-black/50 hover:text-black/100 font-semibold transition">View Extra Works</p>
                     <Image src="/arrow.svg" alt="" width={24} height={24} className="" />
                   </div>
                 </div>
