@@ -40,8 +40,8 @@ export default function ProjectPage() {
 
 
   return (
-    <main className="pt-6 md:pt-32 bg-white text-black">
-      <div className="mx-4 sm:mx-6 lg:mx-8">
+    <main className="pt-6 md:pt-24 bg-white text-black">
+      <div className="mx-4 sm:mx-6  lg:mx-8">
         <motion.article
           className="sm:mx-10 lg:mx-auto max-w-6xl"
           variants={container}
@@ -56,11 +56,11 @@ export default function ProjectPage() {
               className="cursor-pointer right-6 top-6 z-50  rounded-full border border-mid-gray bg-light-gray
               px-4 py-2 text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
-              <p className="text-tiny text-black/50 font-semibold hover:text-black/100 transition">Cindy Nakhammouane</p>
+              <p className="text-tiny text-black font-semibold transition">Cindy Nakhammouane</p>
             </div>
           </motion.div>
 
-          <motion.h1 variants={item} className="mt-8 mb-2 text-display font-black">{project.title}</motion.h1>
+          <motion.h1 variants={item} className="mt-10 mb-4 text-display">{project.title}</motion.h1>
 
           {project.status &&
             <motion.div variants={item}>
@@ -73,7 +73,7 @@ export default function ProjectPage() {
             </motion.div>
           }
 
-          <motion.div variants={item} className="flex items-center gap-4 mt-8 mb-2">
+          <motion.div variants={item} className="flex items-center gap-4 mt-10 mb-2">
             <div>
               <p className="gray-title text-tiny">Overview</p>
             </div>
@@ -88,40 +88,40 @@ export default function ProjectPage() {
 
           {/* Overview Details */}
           <motion.div variants={item} className="mt-10 ">
-            <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+            <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="border border-dark-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
-                  <p className="text-body mt-2 max-w-[75%]">
+                  <p className="text-tiny mt-2 max-w-[75%]">
                     {project.context}
                   </p>
               </div>
-              <div>
+              <div className="border border-dark-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
-                <p className="text-body mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {project.role}
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              <div>
+              <div className="border border-dark-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
-                <p className="text-body mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
                 </p>
               </div>
-              <div>
+              <div className="border border-dark-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>
-                <p className="text-body mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
                 </p>
               </div>
@@ -146,7 +146,7 @@ export default function ProjectPage() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
               px-6 py-3 text-caption text-black flex items-center gap-2 hover:-translate-y-2 transition ease-in-out">
-              <p className="text-caption text-black/60 hover:text-black/100 transition">Go back to the top</p>
+              <p className="text-caption text-black transition font-semibold">Go back to the top</p>
               <Image src="/arrow.svg" alt="" width={24} height={24} className="-rotate-90" />
             </div>
           </div>

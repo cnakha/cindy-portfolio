@@ -105,8 +105,9 @@ export default function Picture({
           className={
             useAspectRatio
               ? "w-full rounded-2xl h-auto"
-              : "w-full rounded-2xl object-cover"
+              : "w-full h-full rounded-2xl object-cover"
           }
+          height={1200}
         />
         <Popup />
       </>

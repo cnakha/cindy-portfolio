@@ -223,7 +223,7 @@ export default function FeaturedProjectsSection({
                 },
               },
             }}
-            className="grid w-full max-w-6xl gap-4"
+            className="grid w-full max-w-8xl gap-4"
           >
             
             {!showingExtra ? (
@@ -231,7 +231,7 @@ export default function FeaturedProjectsSection({
               <div className="flex justify-between mb-2 ">
                 <p className="text-display text-black">Featured Works</p>
                 {/* Go to extras page button */}
-                <div className="flex">
+                {/* <div className="flex">
                   <div 
                     onClick={() => router.push("/extras")}
                     className="hidden lg:flex cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
@@ -239,7 +239,7 @@ export default function FeaturedProjectsSection({
                     <p className="text-tiny text-black/50 hover:text-black/100 font-semibold transition">View Extra Works</p>
                     <Image src="/arrow.svg" alt="" width={24} height={24} className="" />
                   </div>
-                </div>
+                </div> */}
               </div>
 
                 <div className="relative grid gap-4 lg:grid-cols-2">

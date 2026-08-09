@@ -311,6 +311,174 @@ function BlobCanvas() {
   );
 }
 
+// ── mouse-follow pixel layer ──────────────────────────────────────────────────
+const MOUSE_RADIUS = 90;   // px — how far the effect reaches from cursor
+const MOUSE_FILL   = 0.72; // fraction of clusters lit within the hotspot
+
+function MousePixelCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef  = useRef({ x: -9999, y: -9999 });
+  const gridRef   = useRef<{ clusters: Cluster[]; cols: number; rows: number }>({
+    clusters: [], cols: 0, rows: 0,
+  });
+  const rafRef    = useRef<number>(0);
+
+  // fast timing — clusters pop on/off quickly near cursor
+  const fastStep = () => 12 + Math.random() * 18;
+  const fastHold = () => 40 + Math.random() * 80;
+  const fastOff  = () => 20 + Math.random() * 60;
+
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const ctx    = canvas.getContext("2d")!;
+    const now    = () => performance.now();
+
+    function buildGrid() {
+      const cols = Math.ceil(canvas.width  / CLUSTER) + 1;
+      const rows = Math.ceil(canvas.height / CLUSTER) + 1;
+      const t    = now();
+      gridRef.current = {
+        cols, rows,
+        clusters: Array.from({ length: cols * rows }, () => ({
+          phase:        "off" as Phase,
+          shape:        "single" as ShapeKey,
+          order:        [0],
+          visibleCount: 0,
+          nextStepTime: t + Math.random() * 200,
+          proximity:    1,
+        })),
+      };
+    }
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      buildGrid();
+    }
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    const updateInterval = setInterval(() => {
+      const t  = now();
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      const { clusters, cols, rows } = gridRef.current;
+
+      for (let i = 0; i < clusters.length; i++) {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const cx  = col * CLUSTER + CLUSTER / 2;
+        const cy  = row * CLUSTER + CLUSTER / 2;
+        const dx  = cx - mx, dy = cy - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        // density falls off with a squared curve from center
+        const t01 = Math.max(0, 1 - dist / MOUSE_RADIUS);
+        const prob = MOUSE_FILL * t01 * t01;
+
+        const c = clusters[i];
+        if (t < c.nextStepTime) continue;
+
+        switch (c.phase) {
+          case "off": {
+            if (mx > -100 && Math.random() < prob) {
+              c.phase        = "appearing";
+              c.shape        = pickShape();
+              c.order        = shuffle(Array.from({ length: SHAPES[c.shape].length }, (_, k) => k));
+              c.visibleCount = 0;
+              c.nextStepTime = t + fastStep();
+            } else {
+              c.nextStepTime = t + fastOff();
+            }
+            break;
+          }
+          case "appearing": {
+            c.visibleCount++;
+            if (c.visibleCount >= SHAPES[c.shape].length) {
+              c.phase        = "holding";
+              c.nextStepTime = t + fastHold();
+            } else {
+              c.nextStepTime = t + fastStep();
+            }
+            break;
+          }
+          case "holding": {
+            // if cursor has moved away, start fading immediately
+            if (mx < -100 || dist > MOUSE_RADIUS * 1.2) {
+              c.phase        = "disappearing";
+              c.order        = shuffle(Array.from({ length: SHAPES[c.shape].length }, (_, k) => k));
+              c.nextStepTime = t + fastStep();
+            } else {
+              c.phase        = "disappearing";
+              c.order        = shuffle(Array.from({ length: SHAPES[c.shape].length }, (_, k) => k));
+              c.nextStepTime = t + fastHold();
+            }
+            break;
+          }
+          case "disappearing": {
+            c.visibleCount--;
+            if (c.visibleCount <= 0) {
+              c.phase        = "off";
+              c.visibleCount = 0;
+              c.nextStepTime = t + fastOff();
+            } else {
+              c.nextStepTime = t + fastStep();
+            }
+            break;
+          }
+        }
+      }
+    }, 16);
+
+    const OFFSET = CLUSTER / 2; // shift grid so squares don't overlap the base layer
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgb(60,60,60)";
+      const { clusters, cols, rows } = gridRef.current;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const cl = clusters[r * cols + c];
+          if (cl.visibleCount === 0) continue;
+          const ox  = c * CLUSTER + OFFSET;
+          const oy  = r * CLUSTER + OFFSET;
+          const pts = SHAPES[cl.shape];
+          for (let k = 0; k < cl.visibleCount && k < cl.order.length; k++) {
+            const [sc, sr] = pts[cl.order[k]];
+            ctx.fillRect(ox + sc * UNIT, oy + sr * UNIT, SQ, SQ);
+          }
+        }
+      }
+      rafRef.current = requestAnimationFrame(draw);
+    }
+    rafRef.current = requestAnimationFrame(draw);
+
+    const onMove  = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+    const onLeave = () => { mouseRef.current = { x: -9999, y: -9999 }; };
+    canvas.addEventListener("mousemove",  onMove);
+    canvas.addEventListener("mouseleave", onLeave);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      clearInterval(updateInterval);
+      ro.disconnect();
+      canvas.removeEventListener("mousemove",  onMove);
+      canvas.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ opacity: 0.5 }}
+    />
+  );
+}
+
 // ── ripple config ─────────────────────────────────────────────────────────────
 const RIPPLE_SPEED    = 0.18;  // px/ms — faster expansion = rings visibly separate
 const RIPPLE_BAND     = 14;    // px — thin band so each ring is crisp
@@ -607,10 +775,11 @@ export default function HomePage() {
           <img
             src="/landing-bg2.png"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover sm:relative sm:block sm:w-full h-auto md:absolute md:inset-0 sm:h-full md:object-cover sm:object-fill opacity-25"
+            className="absolute inset-0 w-full h-full object-cover sm:relative sm:block sm:w-full h-auto md:absolute md:inset-0 sm:h-full md:object-cover sm:object-fill opacity-15"
           />
 
           <PixelCanvas />
+          <MousePixelCanvas />
 
           <motion.div
             className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-[14%] pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 sm:pt-[7%] sm:pb-12"
@@ -621,14 +790,14 @@ export default function HomePage() {
           >
             <motion.p
               variants={fadeUp}
-              className="text-black/50 font-medium md:font-semibold leading-tight text-display"
+              className="text-black/50 font-semibold leading-tight text-display"
             >
               Hi, I'm
             </motion.p>
 
             <motion.h1
               variants={fadeUp}
-              className="leading-[0.9] tracking-tight font-semibold md:font-medium text-black "
+              className="leading-[0.9] tracking-tight font-semibold md:font-bold text-black "
               style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
             >
               Cindy<br />Nakhammouane
@@ -643,7 +812,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-3 font-medium md:font-bold text-black leading-[1.0] text-display"
+              className="lg:hidden mt-3 font-bold text-black leading-[1.0] text-display"
             >
               Creative Developer <br/> &amp; Designer
             </motion.p>
@@ -652,7 +821,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="hidden lg:block mt-2 text-black font-semibold text-body leading-snug max-w-[500px]"
+              className="hidden lg:block mt-6 text-black font-semibold text-body leading-snug max-w-[500px]"
             >
               Researching, designing, user testing, and coding <br/>
               cool projects with product focused thinking
@@ -660,7 +829,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-2 text-black font-semibold text-body leading-snug max-w-[360px]"
+              className="lg:hidden mt-3 text-black font-semibold text-body leading-snug max-w-[360px]"
             >
               Researching, designing, user testing,<br />
               and coding cool projects with<br />
@@ -677,7 +846,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="h-0 border border-b-black mb-20"/>
+      <div className="h-0  mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

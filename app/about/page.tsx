@@ -5,16 +5,20 @@ import Footer from "@/components/Footer";
 export default function AboutPage() {
   return (
     <main className="bg-white text-black">
-      <section className="flex flex-col justify-content items-center mx-auto max-w-6xl gap-4 px-8 pt-30">
-     
-        <Picture
-          source="/wood.jpg"
-          description="A photo of me in front of a wooden wall."
-          type="wide"
-          useAspectRatio={true}
-        />
+      <section className="mx-auto max-w-6xl px-8 pt-30">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
-        <div className="">
+          {/* Image — fills the full column height */}
+          <div className="w-full h-full">
+            <Picture
+              source="/wood.jpg"
+              description="A photo of me in front of a wooden wall."
+              type="wide"
+              useAspectRatio={false}
+            />
+          </div>
+
+          <div className="">
           <section>
             <h1 className="text-display">Background</h1>
 
@@ -75,9 +79,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+          </div>
         </div>
-
-        
       </section>
 
       <Footer />
