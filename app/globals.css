@@ -8,19 +8,11 @@
   --color-light-gray: #f2f3f4;
   --color-mid-gray: #d8d8d8;
   --color-dark-gray: #cccccc;
+  --color-gray: #8D8D8D;
   --color-light-black: #1a1a1a;
   --color-blue: #22b7ff;
   --font-century: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-myriad: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  --dodger-blue: #3996FFff;
-  --cornflower-blue: #769FFFff;
-  --baby-blue-ice: #97B5FFff;
-  --wisteria-blue: #8396FFff;
-  --soft-periwinkle: #AA9CFFff;
-  --periwinkle: #D2C8FFff;
-  --ghost-white: #F1F4FFff;
-
 }
 
 @font-face {
@@ -48,7 +40,7 @@
 
 @layer components {
   .text-display {
-    @apply text-[32px] md:text-[48px] font-bold leading-none;
+    @apply text-[24px] md:text-[48px] font-bold leading-none;
   }
 
   .text-subtitle {
@@ -87,7 +79,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled in JS only — CSS smooth causes animated scroll-restore on refresh */
 }
 
 body {

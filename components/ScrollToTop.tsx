@@ -7,14 +7,7 @@ export default function ScrollToTop() {
   const pathname = usePathname();
 
   useLayoutEffect(() => {
-    const html = document.documentElement;
-
-    html.style.scrollBehavior = "auto";
-    window.scrollTo(0, 0);
-
-    requestAnimationFrame(() => {
-      html.style.scrollBehavior = "";
-    });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
 
   return null;

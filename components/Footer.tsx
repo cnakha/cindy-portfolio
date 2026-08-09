@@ -21,20 +21,20 @@ export default function Footer() {
       className="relative mt-24 overflow-hidden bg-light-black text-white"
     >
 
-      <div className="relative z-10  px-2 pt-14 md:ml-20 md:pt-20">
+      <div className="relative z-10 px-2 pt-14 ml-4 md:ml-16 md:pt-20">
         <h2 className="hidden md:block md:ml-0 max-w-[240px] text-display font-semibold md:max-w-none">
           Let’s work together!
         </h2>
-        <h2 className="md:hidden ml-4 sm:ml-10 max-w-[240px] text-display font-semibold ">
-          Let’s work <br/> together!
+        <h2 className="md:hidden max-w-[240px] text-wrap text-display font-semibold ">
+          Let’s work together!
         </h2>
 
-        <p className="ml-4 sm:ml-10 md:ml-0 mt-4 sm:mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-tight md:max-w-xl">
+        <p className="mt-4 sm:mt-6 max-w-[330px] sm:max-w-[420px] text-body leading-relaxed md:max-w-xl">
           I’m always interested in new opportunities and exciting projects.
           <br/>Let’s get in touch and build something amazing!
         </p>
 
-        <div className="mt-6 ml-4 sm:ml-10 md:ml-0">
+        <div className="mt-6 ">
             <div className="flex flex-wrap items-end gap-x-10 gap-y-6 ">
               {/* Email */}
               <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <p className="relative z-10 mt-8 opacity-50 pb-10 md:pb-18 text-right text-tiny md:mr-20 md:mt-10 md:pb-4  md:text-caption">
+            <p className="relative z-10 mt-8 opacity-50 pb-10 md:pb-18 text-right text-tiny mr-4 md:mr-20 md:mt-10 md:pb-4  md:text-caption">
                 Designed and developed by Cindy Nakhammouane
             </p>
         </div>

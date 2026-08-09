@@ -25,7 +25,7 @@ export const extras: ExtraProject[] = [
     {
       id: "vfx",
       coverImage: "/extras/vfx/vfx.png",
-      images: ["/extras/vfx/spread1.png", "/extras/vfx/spread2.png", "/extras/vfx/tv.png", "/extras/vfx/blender.png"],
+      images: ["/extras/vfx/spread1.png", "/extras/vfx/spread2.png", "/extras/vfx/tv.png"],
       description: "Book on the social space of VFX, retro futurism style.",
       title: "VFX and the Space Between"
     },

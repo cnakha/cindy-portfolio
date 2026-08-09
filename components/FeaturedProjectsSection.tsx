@@ -117,7 +117,6 @@ export default function FeaturedProjectsSection({
 
   const handleExtraOpen = (project: ExtraProject) => {
     setActiveSlug(project.id);
-    preloadImages([project.coverImage, ...project.images]);
     setSelectedExtra(project);
   };
 
@@ -244,7 +243,10 @@ export default function FeaturedProjectsSection({
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
-                    variants={projectItemVariants}
+                    variants={projectItemLeft}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
                     id={`project-${projects[0].id}`}
                     data-project-trigger={projects[0].id}
                     className="scroll-mt-28"
@@ -253,7 +255,10 @@ export default function FeaturedProjectsSection({
                   </motion.div>
 
                   <motion.div
-                    variants={projectItemVariants}
+                    variants={projectItemRight}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
                     id={`project-${projects[1].id}`}
                     className="scroll-mt-28"
                   >
@@ -268,7 +273,10 @@ export default function FeaturedProjectsSection({
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
-                    variants={projectItemVariants}
+                    variants={projectItemLeft}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
                     id={`project-${projects[2].id}`}
                     data-project-trigger={projects[2].id}
                     className="scroll-mt-28"
@@ -277,7 +285,10 @@ export default function FeaturedProjectsSection({
                   </motion.div>
 
                   <motion.div
-                    variants={projectItemVariants}
+                    variants={projectItemRight}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
                     id={`project-${projects[3].id}`}
                     className="scroll-mt-28"
                   >
@@ -292,7 +303,10 @@ export default function FeaturedProjectsSection({
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
                   <motion.div
-                    variants={projectItemVariants}
+                    variants={projectItemLeft}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
                     id={`project-${projects[4].id}`}
                     data-project-trigger={projects[4].id}
                     className="scroll-mt-28"
@@ -303,7 +317,7 @@ export default function FeaturedProjectsSection({
               </>
             ) : (
               <div className="flex flex-col gap-4">
-              <p className="text-display text-black ">Extra Works</p>
+              <p className="text-display text-black mb-2">Extra Works</p>
               <div className="columns-2 gap-3 md:columns-3">
                 {extras.map((project, index) => (
                   <motion.button
@@ -311,7 +325,7 @@ export default function FeaturedProjectsSection({
                     key={project.id}
                     onClick={() => handleExtraOpen(project)}
                     onMouseEnter={() =>
-                      preloadImages([project.coverImage, ...project.images])
+                      preloadImages([project.coverImage])
                     }
                     className="mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-2xl border border-mid-gray bg-light-black"
                   >
@@ -349,7 +363,7 @@ export default function FeaturedProjectsSection({
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
-              className="fixed left-1/2 top-6 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-5 text-black shadow-lg"
+              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-4 text-black shadow-lg"
             >
               <div>
                 <h2 className="text-body font-bold">{selectedExtra.title}</h2>
@@ -358,7 +372,7 @@ export default function FeaturedProjectsSection({
 
               <button
                 onClick={closePopup}
-                className="grid cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray p-3 text-black transition hover:scale-105"
+                className="grid cursor-pointer transition hover:scale-105"
                 aria-label="Close project popup"
               >
                 <Image src="/x.svg" alt="" width={24} height={24} />
@@ -392,7 +406,8 @@ export default function FeaturedProjectsSection({
                       width={900}
                       height={1200}
                       sizes="(max-width: 768px) 100vw, 672px"
-                      priority={index === 0}
+                      priority={false}
+                      loading={index === 0 ? "eager" : "lazy"}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 12 }}
@@ -412,18 +427,28 @@ export default function FeaturedProjectsSection({
   );
 }
 
-const projectItemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-  },
+const projectItemLeft: Variants = {
+  hidden: { opacity: 0, y: 32 },
   show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0 },
+  },
+};
+
+const projectItemRight: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.5 },
+  },
+};
+
+// keep for extras masonry which still uses a single variant
+const projectItemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 

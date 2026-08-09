@@ -436,6 +436,7 @@ function MousePixelCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "rgb(60,60,60)";
       const { clusters, cols, rows } = gridRef.current;
+      ctx.beginPath();
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const cl = clusters[r * cols + c];
@@ -445,10 +446,12 @@ function MousePixelCanvas() {
           const pts = SHAPES[cl.shape];
           for (let k = 0; k < cl.visibleCount && k < cl.order.length; k++) {
             const [sc, sr] = pts[cl.order[k]];
-            ctx.fillRect(ox + sc * UNIT, oy + sr * UNIT, SQ, SQ);
+            ctx.moveTo(ox + sc * UNIT + SQ / 2, oy + sr * UNIT + SQ / 2);
+            ctx.arc(ox + sc * UNIT + SQ / 2, oy + sr * UNIT + SQ / 2, SQ / 2, 0, Math.PI * 2);
           }
         }
       }
+      ctx.fill();
       rafRef.current = requestAnimationFrame(draw);
     }
     rafRef.current = requestAnimationFrame(draw);
@@ -648,6 +651,13 @@ function PixelCanvas() {
               c.phase        = "off";
               c.visibleCount = 0;
               c.nextStepTime = t + offMs();
+              // gray dot finished its cycle — clear colored cells 50% of the time
+              if (Math.random() < 0.5) {
+                const ox = col * CLUSTER, oy = row * CLUSTER;
+                for (let sc = 0; sc < 3; sc++)
+                  for (let sr = 0; sr < 3; sr++)
+                    coloredCells.delete(`${ox + sc * UNIT},${oy + sr * UNIT}`);
+              }
             } else {
               c.nextStepTime = t + stepMs(p);
             }
@@ -660,9 +670,20 @@ function PixelCanvas() {
     // ── draw ──────────────────────────────────────────────────────────────────
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // ── colored landing spots from swirl (keyed by UNIT grid x,y) ──────
+      for (const [key, color] of coloredCells) {
+        const [ux, uy] = key.split(",").map(Number);
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(ux + SQ / 2, uy + SQ / 2, SQ / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       ctx.fillStyle = `rgb(${COLOR})`;
 
       const { clusters, cols, rows } = gridRef.current;
+      ctx.beginPath();
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const cl = clusters[r * cols + c];
@@ -672,19 +693,22 @@ function PixelCanvas() {
           const pts = SHAPES[cl.shape];
           for (let k = 0; k < cl.visibleCount && k < cl.order.length; k++) {
             const [sc, sr] = pts[cl.order[k]];
-            ctx.fillRect(ox + sc * UNIT, oy + sr * UNIT, SQ, SQ);
+            ctx.moveTo(ox + sc * UNIT + SQ / 2, oy + sr * UNIT + SQ / 2);
+            ctx.arc(ox + sc * UNIT + SQ / 2, oy + sr * UNIT + SQ / 2, SQ / 2, 0, Math.PI * 2);
           }
         }
       }
+      ctx.fill();
 
-      // ── click bursts — black pixels radiating outward ─────────────────────
-      const BURST_SPEED    = 0.32;  // px/ms
-      const BURST_BAND     = 18;    // px wavefront width
-      const BURST_MAX_R    = 200;   // px
+      // ── click bursts — black circles radiating outward ────────────────────
+      const BURST_SPEED    = 0.32;
+      const BURST_BAND     = 18;
+      const BURST_MAX_R    = 200;
       const now2 = performance.now();
       burstsRef.current = burstsRef.current.filter(b => (now2 - b.startTime) * BURST_SPEED < BURST_MAX_R);
       if (burstsRef.current.length > 0) {
         ctx.fillStyle = "rgb(0,0,0)";
+        ctx.beginPath();
         for (const burst of burstsRef.current) {
           const currentR  = (now2 - burst.startTime) * BURST_SPEED;
           const minR      = currentR - BURST_BAND;
@@ -701,18 +725,19 @@ function PixelCanvas() {
               const bandT = Math.abs(dist - (currentR - BURST_BAND / 2)) / (BURST_BAND / 2);
               const fade  = Math.pow(1 - Math.min(bandT, 1), 1.5) * (1 - currentR / BURST_MAX_R);
               if (Math.random() > fade * 1.4) continue;
-              // draw a small burst of single pixels scattered in this cluster
               const ox = bc * CLUSTER, oy = br * CLUSTER;
               const numPx = 1 + Math.floor(fade * 4);
               for (let p = 0; p < numPx; p++) {
-                const px = ox + Math.floor(Math.random() * (CLUSTER / SQ)) * SQ;
-                const py = oy + Math.floor(Math.random() * (CLUSTER / SQ)) * SQ;
-                ctx.fillRect(px, py, SQ, SQ);
+                const px = ox + Math.floor(Math.random() * (CLUSTER / SQ)) * SQ + SQ / 2;
+                const py = oy + Math.floor(Math.random() * (CLUSTER / SQ)) * SQ + SQ / 2;
+                ctx.moveTo(px + SQ / 2, py);
+                ctx.arc(px, py, SQ / 2, 0, Math.PI * 2);
               }
             }
           }
         }
-        ctx.fillStyle = `rgb(${COLOR})`; // restore color for next frame
+        ctx.fill();
+        ctx.fillStyle = `rgb(${COLOR})`;
       }
 
       rafRef.current = requestAnimationFrame(draw);
@@ -750,6 +775,179 @@ function PixelCanvas() {
 }
 
 
+// ── shared color landing map (col,row → color) ────────────────────────────────
+const coloredCells = new Map<string, string>();
+
+const SWIRL_PALETTE = [
+  "#52C5E8", // sky blue
+  "#F0536E", // hot pink
+  "#F5B8C4", // light pink
+  "#7ED8C0", // mint
+  "#C8B870", // tan
+  "#7290ea", // royal blue
+  "#D4E020", // yellow-green
+  "#4A9098", // teal
+];
+function pickSwirlColor() {
+  return SWIRL_PALETTE[Math.floor(Math.random() * SWIRL_PALETTE.length)];
+}
+
+// ── cursor swirl ──────────────────────────────────────────────────────────────
+// Particles hop: they freeze while visible, then teleport to next orbit position
+// when they blink off→on. This creates discrete hops instead of smooth gliding.
+type SwirlParticle = {
+  x: number; y: number;   // fixed canvas position (only updates on hop)
+  angle:    number;
+  radius:   number;
+  radiusV:  number;
+  angularV: number;
+  color:    string;
+  showing:      boolean;
+  frameCounter: number;
+  showFrames:   number;   // frames to stay visible per hop
+  hideFrames:   number;   // frames to stay hidden before next hop
+  life:  number;
+  decay: number;
+};
+
+function snapToUnitGrid(v: number) {
+  return Math.round(v / UNIT) * UNIT;
+}
+
+function CursorSwirl() {
+  const canvasRef    = useRef<HTMLCanvasElement>(null);
+  const mouseRef     = useRef({ x: -9999, y: -9999 });
+  const particlesRef = useRef<SwirlParticle[]>([]);
+  const rafRef       = useRef<number>(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const ctx    = canvas.getContext("2d")!;
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    function spawnParticles(mx: number, my: number, count: number) {
+      for (let i = 0; i < count; i++) {
+        const angle  = Math.random() * Math.PI * 2;
+        const radius = 10 + Math.random() * 24;
+        const rawX   = mx + Math.cos(angle) * radius;
+        const rawY   = my + Math.sin(angle) * radius;
+        particlesRef.current.push({
+          x:           snapToUnitGrid(rawX),
+          y:           snapToUnitGrid(rawY),
+          angle,
+          radius,
+          radiusV:     0.08 + Math.random() * 0.18,
+          angularV:    (Math.random() > 0.5 ? 1 : -1) * (0.012 + Math.random() * 0.025),
+          color:       pickSwirlColor(),
+          showing:     true,
+          frameCounter:0,
+          showFrames:  6  + Math.floor(Math.random() * 6),   // ~100–200ms visible
+          hideFrames:  10 + Math.floor(Math.random() * 10),  // ~167–333ms hidden
+          life:        1,
+          decay:       0.002 + Math.random() * 0.003,
+        });
+      }
+    }
+
+    let frameCount = 0;
+    let lastMx = -9999, lastMy = -9999;
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frameCount++;
+
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      if (mx > -100) {
+        const dx = mx - lastMx, dy = my - lastMy;
+        const spd = Math.sqrt(dx * dx + dy * dy);
+        if (frameCount % 2 === 0 || spd > 3) spawnParticles(mx, my, 3);
+        lastMx = mx; lastMy = my;
+      }
+
+      const alive: SwirlParticle[] = [];
+      for (const p of particlesRef.current) {
+        p.life -= p.decay;
+        p.frameCounter++;
+
+        if (p.showing) {
+          if (p.frameCounter >= p.showFrames) {
+            // go hidden
+            p.showing = false;
+            p.frameCounter = 0;
+          }
+          // draw at frozen position
+          if (mx > -100) {
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, SQ / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else {
+          if (p.frameCounter >= p.hideFrames) {
+            // hop: advance orbit and snap to unit grid
+            p.angle  += p.angularV * p.hideFrames;
+            p.radius += p.radiusV  * p.hideFrames;
+            const rawX = mx + Math.cos(p.angle) * p.radius;
+            const rawY = my + Math.sin(p.angle) * p.radius;
+            p.x = snapToUnitGrid(rawX);
+            p.y = snapToUnitGrid(rawY);
+            p.showing = true;
+            p.frameCounter = 0;
+          }
+        }
+
+        if (p.life <= 0 || p.radius > 200) {
+          // land on nearest UNIT grid position
+          if (p.x > 0 && p.y > 0 && p.x < canvas.width && p.y < canvas.height) {
+            coloredCells.set(`${p.x},${p.y}`, p.color);
+          }
+          continue;
+        }
+        alive.push(p);
+      }
+      particlesRef.current = alive;
+
+      rafRef.current = requestAnimationFrame(draw);
+    }
+    rafRef.current = requestAnimationFrame(draw);
+
+    const onMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        mouseRef.current = { x, y };
+      } else {
+        mouseRef.current = { x: -9999, y: -9999 };
+        lastMx = -9999; lastMy = -9999;
+      }
+    };
+    window.addEventListener("mousemove", onMove);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      ro.disconnect();
+      window.removeEventListener("mousemove", onMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-10"
+    />
+  );
+}
+
 // ── page ──────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
@@ -772,17 +970,18 @@ export default function HomePage() {
       <section className="relative w-full ">
         <div className="relative w-full overflow-hidden  min-h-[40vh] sm:min-h-[65vh] md:min-h-[100vh] sm:overflow-visible">
 
-          <img
+          {/* <img
             src="/landing-bg2.png"
             alt=""
             className="absolute inset-0 w-full h-full object-cover sm:relative sm:block sm:w-full h-auto md:absolute md:inset-0 sm:h-full md:object-cover sm:object-fill opacity-15"
-          />
+          /> */}
 
           <PixelCanvas />
           <MousePixelCanvas />
+          <CursorSwirl />
 
           <motion.div
-            className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-[14%] pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 sm:pt-[7%] sm:pb-12"
+            className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-[14%] pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 lg:pt-20 sm:pb-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
@@ -790,14 +989,14 @@ export default function HomePage() {
           >
             <motion.p
               variants={fadeUp}
-              className="text-black/50 font-semibold leading-tight text-display"
+              className="text-gray font-semibold leading-tight text-display"
             >
               Hi, I'm
             </motion.p>
 
             <motion.h1
               variants={fadeUp}
-              className="leading-[0.9] tracking-tight font-semibold md:font-bold text-black "
+              className="leading-[0.9] tracking-tight font-semibold mt-4 lg:mt-0md:font-bold text-black "
               style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
             >
               Cindy<br />Nakhammouane
@@ -805,40 +1004,40 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="hidden lg:block mt-3 font-bold text-black leading-tight text-display"
+              className="hidden lg:block mt-2 font-bold text-black leading-tight text-display"
             >
               Creative Developer &amp; Designer
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-3 font-bold text-black leading-[1.0] text-display"
+              className="lg:hidden mt-4 font-bold text-black text-wrap leading-[1.0] text-display"
             >
-              Creative Developer <br/> &amp; Designer
+              Creative Developer &amp; Designer
             </motion.p>
 
      
 
             <motion.p
               variants={fadeUp}
-              className="hidden lg:block mt-6 text-black font-semibold text-body leading-snug max-w-[500px]"
+              className="hidden lg:block mt-4 text-black  text-wrap font-semibold text-body leading-snug max-w-[500px]"
             >
-              Researching, designing, user testing, and coding <br/>
+              Researching, designing, user testing, and coding
               cool projects with product focused thinking
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-3 text-black font-semibold text-body leading-snug max-w-[360px]"
+              className="lg:hidden mt-4 text-black text-wrap font-semibold text-body leading-snug max-w-[400px] md:max-w-[520px]"
             >
-              Researching, designing, user testing,<br />
-              and coding cool projects with<br />
+              Researching, designing, user testing,
+              and coding cool projects with
               product focused thinking
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="mt-3 text-black/50 text-body font-semibold"
+              className="mt-2 lg:mt-4 text-gray text-body font-semibold"
             >
               Based in Chicago, IL
             </motion.p>
@@ -846,7 +1045,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="h-0  mb-20"/>
+      <div className="bg-light-black h-20 sm:h-40 mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

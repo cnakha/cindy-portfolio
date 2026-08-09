@@ -53,7 +53,7 @@ export default function ProjectPage() {
           <motion.div variants={item} className="flex">
             <div
               onClick={() => router.push("/")}
-              className="cursor-pointer right-6 top-6 z-50  rounded-full border border-mid-gray bg-light-gray
+              className="cursor-pointer right-6 top-6 z-30  rounded-full border border-mid-gray bg-light-gray
               px-4 py-2 text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
               <p className="text-tiny text-black font-semibold transition">Cindy Nakhammouane</p>
@@ -89,7 +89,7 @@ export default function ProjectPage() {
           {/* Overview Details */}
           <motion.div variants={item} className="mt-10 ">
             <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="border border-dark-gray p-4 rounded-2xl">
+              <div className="border border-mid-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
@@ -97,7 +97,7 @@ export default function ProjectPage() {
                     {project.context}
                   </p>
               </div>
-              <div className="border border-dark-gray p-4 rounded-2xl">
+              <div className="border border-mid-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
@@ -109,7 +109,7 @@ export default function ProjectPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              <div className="border border-dark-gray p-4 rounded-2xl">
+              <div className="border border-mid-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
@@ -117,7 +117,7 @@ export default function ProjectPage() {
                   {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
                 </p>
               </div>
-              <div className="border border-dark-gray p-4 rounded-2xl">
+              <div className="border border-mid-gray p-4 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>

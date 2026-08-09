@@ -244,11 +244,11 @@ export default function BiomedProjectsTabs() {
                 ].join(" ")}
               >
                 {label}
-                <span
-                    className={`absolute left-0 -bottom-0 h-[10px] bg-black transition-all duration-300 ease-out ${
+                {/* <span
+                    className={`absolute left-0 -bottom-1 h-[10px] bg-black transition-all duration-300 ease-out ${
                         selected ? "w-full" : "w-0  opacity-50"
                     }`}
-                />
+                /> */}
               </button>
             );
           })}
