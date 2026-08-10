@@ -124,7 +124,7 @@ export default function FeaturedProjectsSection({
     <>
       <section
         id={showingExtra ? "extra-projects" : "featured-projects"}
-        className={`relative mx-auto max-w-[1440px] ${showingExtra ? 'grid-cols-[260px_1fr]' : 'flex'} justify-center items-start gap-8 px-6 md:mt-8 md:grid md:px-8`}
+        className={`relative mx-auto max-w-[1440px] ${showingExtra ? 'grid-cols-[260px_1fr]' : 'flex'} justify-center items-start gap-8 px-4 md:mt-8 md:grid md:px-8`}
       >
 
         {/* Aside and project list content here... */}

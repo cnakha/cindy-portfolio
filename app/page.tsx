@@ -968,7 +968,7 @@ export default function HomePage() {
 
       {/* ── hero — bg + text in normal flow, no parallax ── */}
       <section className="relative w-full ">
-        <div className="relative w-full overflow-hidden  min-h-[40vh] sm:min-h-[65vh] md:min-h-[100vh] sm:overflow-visible">
+        <div className="relative w-full overflow-hidden  min-h-[70dvh] sm:min-h-[65vh] md:min-h-[100vh] sm:overflow-visible">
 
           {/* <img
             src="/landing-bg2.png"
@@ -981,7 +981,7 @@ export default function HomePage() {
           <CursorSwirl />
 
           <motion.div
-            className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-[14%] pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 lg:pt-20 sm:pb-12"
+            className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-24 pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 lg:pt-20 sm:pb-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
@@ -1045,7 +1045,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="bg-light-black h-20 sm:h-40 mb-20"/>
+      <div className="bg-light-black h-20 sm:h-40 mb-14 sm:mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

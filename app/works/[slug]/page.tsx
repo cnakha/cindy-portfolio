@@ -40,7 +40,7 @@ export default function ProjectPage() {
 
 
   return (
-    <main className="pt-6 md:pt-24 bg-white text-black">
+    <main className="pt-20 md:pt-24 bg-white text-black">
       <div className="mx-4 sm:mx-6  lg:mx-8">
         <motion.article
           className="sm:mx-10 lg:mx-auto max-w-6xl"
@@ -53,7 +53,7 @@ export default function ProjectPage() {
           <motion.div variants={item} className="flex">
             <div
               onClick={() => router.push("/")}
-              className="cursor-pointer right-6 top-6 z-30  rounded-full border border-mid-gray bg-light-gray
+              className="cursor-pointer right-6 top-6  rounded-full border border-mid-gray bg-light-gray
               px-4 py-2 text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
               <p className="text-tiny text-black font-semibold transition">Cindy Nakhammouane</p>
