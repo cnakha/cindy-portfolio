@@ -87,9 +87,9 @@ export default function ProjectPage() {
           </motion.p>
 
           {/* Overview Details */}
-          <motion.div variants={item} className="mt-10 ">
+          <motion.div variants={item} className="mt-10 border border-mid-gray p-4 rounded-2xl">
             <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="border border-mid-gray p-4 rounded-2xl">
+              <div className="bg-white">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
@@ -97,7 +97,7 @@ export default function ProjectPage() {
                     {project.context}
                   </p>
               </div>
-              <div className="border border-mid-gray p-4 rounded-2xl">
+              <div className="bg-white ">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
@@ -109,7 +109,7 @@ export default function ProjectPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              <div className="border border-mid-gray p-4 rounded-2xl">
+              <div className="bg-white">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
@@ -117,7 +117,7 @@ export default function ProjectPage() {
                   {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
                 </p>
               </div>
-              <div className="border border-mid-gray p-4 rounded-2xl">
+              <div className="bg-white">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>

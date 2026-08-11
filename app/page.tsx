@@ -9,7 +9,7 @@ import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
 const SQ   = 4;
 const UNIT = SQ + 4;        // 8px sub-unit
 const CLUSTER = UNIT * 3;   // 24px cluster cell
-const COLOR = "189,189,189";
+const COLOR = "195,195,195";
 const FILL  = 0.10;         // fraction of clusters active at rest
 
 const SHAPES: Record<string, [number,number][]> = {
@@ -83,10 +83,7 @@ function makeCluster(nowMs: number): Cluster {
 }
 
 // ── blob canvas ───────────────────────────────────────────────────────────────
-const BLOB_PALETTE = [
-  "#0c2ac1", "#2f65ed", "#96abf0",
-  "#7674ff", "#c6dcff","#59a8fd",
-];
+
 
 function hexToRgb(hex: string) {
   return [
@@ -100,216 +97,6 @@ function ha(hex: string, a: number) {
   return `rgba(${r},${g},${b},${a.toFixed(3)})`;
 }
 
-function pickBlobColor() {
-  return BLOB_PALETTE[Math.floor(Math.random() * BLOB_PALETTE.length)];
-}
-
-// Ambient blobs — always present, organically drifting
-type AmbientBlob = {
-  x: number; y: number;
-  vx: number; vy: number;
-  speed: number;        // magnitude of velocity
-  steerAngle: number;   // current heading in radians
-  steerRate: number;    // how fast heading rotates (organic curving)
-  r: number;
-  color: string;
-  phase: number;
-};
-
-// Ripple blobs — emitted from mouse
-type RippleBlob = {
-  x: number; y: number;
-  startTime: number;
-  color: string;
-  scaleX: number; scaleY: number;
-  angle: number;
-  maxR: number;
-  lifetime: number;
-};
-
-const EMIT_MS = 300; // faster emission so blobs feel responsive to mouse movement
-
-function BlobCanvas() {
-  const canvasRef      = useRef<HTMLCanvasElement>(null);
-  const mouseRef       = useRef({ x: -9999, y: -9999 });
-  const ambientRef     = useRef<AmbientBlob[]>([]);
-  const ripplesRef     = useRef<RippleBlob[]>([]);
-  const lastEmitRef    = useRef(0);
-  const rafRef         = useRef(0);
-
-  useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx    = canvas.getContext("2d")!;
-
-    function initAmbient() {
-      const w = canvas.width, h = canvas.height;
-      ambientRef.current = Array.from({ length: 6 }, () => {
-        const angle = Math.random() * Math.PI * 2;
-        const spd   = 2.2 + Math.random() * 2.0; // 2.2–4.2 px/frame ≈ 130–250 px/sec
-        return {
-          x:          Math.random() * w,
-          y:          Math.random() * h,
-          vx:         Math.cos(angle) * spd,
-          vy:         Math.sin(angle) * spd,
-          speed:      spd,
-          steerAngle: angle,
-          steerRate:  (Math.random() - 0.5) * 0.012, // gentle organic curve
-          r:          280 + Math.random() * 280,
-          color:      pickBlobColor(),
-          phase:      Math.random() * Math.PI * 2,
-        };
-      });
-    }
-
-    function resize() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      initAmbient();
-    }
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-
-    function drawBlob(
-      cx: number, cy: number,
-      rx: number, ry: number,
-      angle: number,
-      color: string,
-      alpha: number,
-    ) {
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle);
-      ctx.scale(rx, ry);
-      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
-      // solid core that holds color much longer before fading
-      grad.addColorStop(0,    ha(color, alpha));
-      grad.addColorStop(0.40, ha(color, alpha * 0.92));
-      grad.addColorStop(0.75, ha(color, alpha * 0.55));
-      grad.addColorStop(1,    ha(color, 0));
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(0, 0, 1, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function draw(t: number) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      // emit ripple blobs from mouse
-      if (mx > -100 && t - lastEmitRef.current > EMIT_MS) {
-        const count = 2 + Math.floor(Math.random() * 2);
-        for (let k = 0; k < count; k++) {
-          ripplesRef.current.push({
-            x:         mx + (Math.random() - 0.5) * 50,
-            y:         my + (Math.random() - 0.5) * 50,
-            startTime: t + k * 40,
-            color:     pickBlobColor(),
-            scaleX:    0.8 + Math.random() * 0.7,
-            scaleY:    0.55 + Math.random() * 0.55,
-            angle:     Math.random() * Math.PI,
-            maxR:      280 + Math.random() * 220, // larger ripple blobs
-            lifetime:  1200 + Math.random() * 800, // shorter life = faster turnover
-          });
-        }
-        lastEmitRef.current = t;
-      }
-
-      ripplesRef.current = ripplesRef.current.filter(b => t - b.startTime < b.lifetime);
-
-      // ── ambient layer ─────────────────────────────────────────────────────
-      ctx.save();
-      ctx.filter = "blur(40px)";
-      for (const b of ambientRef.current) {
-        // steer heading gradually for organic curving paths
-        b.steerAngle += b.steerRate;
-
-        // mouse repulsion — flee from cursor
-        const mdx = b.x - mx, mdy = b.y - my;
-        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        const REPEL_R = 380; // px radius of influence
-        let speedMult = 1;
-        if (mdist < REPEL_R && mx > -100) {
-          const t01 = 1 - mdist / REPEL_R; // 1 at center, 0 at edge
-          const repelStr = t01 * t01 * 0.35; // steer strongly away
-          const awayAngle = Math.atan2(mdy, mdx);
-          let da2 = awayAngle - b.steerAngle;
-          while (da2 > Math.PI)  da2 -= Math.PI * 2;
-          while (da2 < -Math.PI) da2 += Math.PI * 2;
-          b.steerAngle += da2 * repelStr;
-          speedMult = 1 + t01 * 8; // up to 9× faster near mouse
-        }
-
-        // nudge toward center if too far out, so blobs stay on screen
-        const cx = canvas.width / 2, cy = canvas.height / 2;
-        const dx = cx - b.x, dy = cy - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const pull = dist > Math.max(canvas.width, canvas.height) * 0.55 ? 0.004 : 0;
-        const targetAngle = Math.atan2(dy, dx);
-        let da = targetAngle - b.steerAngle;
-        while (da > Math.PI) da -= Math.PI * 2;
-        while (da < -Math.PI) da += Math.PI * 2;
-        b.steerAngle += da * pull;
-        b.vx = Math.cos(b.steerAngle) * b.speed * speedMult;
-        b.vy = Math.sin(b.steerAngle) * b.speed * speedMult;
-        b.x += b.vx; b.y += b.vy;
-        // wrap around edges so blobs re-enter from the other side
-        if (b.x < -b.r) b.x = canvas.width  + b.r;
-        if (b.x > canvas.width  + b.r) b.x = -b.r;
-        if (b.y < -b.r) b.y = canvas.height + b.r;
-        if (b.y > canvas.height + b.r) b.y = -b.r;
-        const breathe = 0.80 + 0.12 * Math.sin(t * 0.0005 + b.phase);
-        const aspect  = 0.55 + 0.25 * Math.sin(t * 0.0003 + b.phase * 1.7);
-        drawBlob(b.x, b.y, b.r, b.r * aspect, b.steerAngle, b.color, breathe * 0.88);
-      }
-      ctx.restore();
-
-      // ── ripple blobs ──────────────────────────────────────────────────────
-      ctx.save();
-      ctx.filter = "blur(28px)"; // less blur = more solid, visible color
-      for (const b of ripplesRef.current) {
-        const age      = Math.max(0, t - b.startTime);
-        const progress = age / b.lifetime;
-        const r        = (0.2 + progress * 0.8) * b.maxR; // starts bigger, feels snappier
-        const alpha    = Math.pow(Math.sin(progress * Math.PI), 0.5) * 0.92;
-        if (alpha < 0.01) continue;
-        drawBlob(b.x, b.y, r * b.scaleX, r * b.scaleY, b.angle, b.color, alpha);
-      }
-      ctx.restore();
-
-      rafRef.current = requestAnimationFrame(draw);
-    }
-
-    rafRef.current = requestAnimationFrame(draw);
-
-    const onMove  = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-    const onLeave = () => { mouseRef.current = { x: -9999, y: -9999 }; };
-    canvas.addEventListener("mousemove",  onMove);
-    canvas.addEventListener("mouseleave", onLeave);
-
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      ro.disconnect();
-      canvas.removeEventListener("mousemove",  onMove);
-      canvas.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ mixBlendMode: "normal", opacity: 0.9 }}
-    />
-  );
-}
 
 // ── mouse-follow pixel layer ──────────────────────────────────────────────────
 const MOUSE_RADIUS = 90;   // px — how far the effect reaches from cursor
@@ -434,7 +221,7 @@ function MousePixelCanvas() {
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgb(60,60,60)";
+      ctx.fillStyle = "rgb(170, 170, 170)";
       const { clusters, cols, rows } = gridRef.current;
       ctx.beginPath();
       for (let r = 0; r < rows; r++) {
@@ -780,13 +567,13 @@ const coloredCells = new Map<string, string>();
 
 const SWIRL_PALETTE = [
   "#52C5E8", // sky blue
-  "#F0536E", // hot pink
+  "#f67e92", // hot pink
   "#F5B8C4", // light pink
   "#7ED8C0", // mint
-  "#C8B870", // tan
-  "#7290ea", // royal blue
-  "#D4E020", // yellow-green
-  "#4A9098", // teal
+  "#dfd08b", // tan
+  "#a1b6f6", // royal blue
+  "#dfe94d", // yellow-green
+  "#80c8d0", // teal
 ];
 function pickSwirlColor() {
   return SWIRL_PALETTE[Math.floor(Math.random() * SWIRL_PALETTE.length)];
@@ -968,7 +755,7 @@ export default function HomePage() {
 
       {/* ── hero — bg + text in normal flow, no parallax ── */}
       <section className="relative w-full ">
-        <div className="relative w-full overflow-hidden  min-h-[70dvh] sm:min-h-[65vh] md:min-h-[100vh] sm:overflow-visible">
+        <div className="relative w-full overflow-hidden  min-h-[100dvh] sm:min-h-[80vh] md:min-h-[100vh] sm:overflow-visible">
 
           {/* <img
             src="/landing-bg2.png"
@@ -1020,7 +807,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="hidden lg:block mt-4 text-black  text-wrap font-semibold text-body leading-snug max-w-[500px]"
+              className="hidden lg:block mt-4 text-black text-wrap font-semibold text-subtitle leading-tight max-w-[700px]"
             >
               Researching, designing, user testing, and coding
               cool projects with product focused thinking
@@ -1028,7 +815,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-4 text-black text-wrap font-semibold text-body leading-snug max-w-[400px] md:max-w-[520px]"
+              className="lg:hidden mt-4 text-black text-wrap font-semibold text-subtitle leading-snug max-w-[400px] md:max-w-[520px]"
             >
               Researching, designing, user testing,
               and coding cool projects with
@@ -1045,7 +832,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="bg-light-black h-20 sm:h-40 mb-14 sm:mb-20"/>
+      <div className="bg-light-black h-20 md:h-40 mb-14 sm:mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

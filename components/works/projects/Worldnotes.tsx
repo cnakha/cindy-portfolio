@@ -49,7 +49,7 @@ export default function Worldnotes() {
         description={"Profiles show you all the notes you post, draft, repost, like, and save. The cover page is a place the user can display their favorite notes in any way they desire."}
       />
       <div className="mt-8 sm:mt-10"/>
-      <Picture type={"left"} popup={true} source={"/projects/worldnotes/post_viewer.png"}
+      <Picture type={"left"} popup={true} source={"/projects/worldnotes/note_creator.png"}
         title={"Create Notes with Fun and Easy to Use Tools"}
         description={"The note creation canvas provides custom tools and brushes. Drawing, text, pixel art, and animation are all supported along with a layers panel, color picker, and color palette creator."}
       />
