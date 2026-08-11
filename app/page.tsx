@@ -815,7 +815,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-4 text-black text-wrap font-semibold text-subtitle leading-snug max-w-[400px] md:max-w-[520px]"
+              className="lg:hidden mt-16 sm:mt-8 md:mt-4 text-black text-wrap font-semibold text-subtitle leading-snug max-w-[400px] md:max-w-[520px]"
             >
               Researching, designing, user testing,
               and coding cool projects with
