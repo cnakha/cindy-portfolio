@@ -60,7 +60,7 @@ export default function ProjectPage() {
             </div>
           </motion.div>
 
-          <motion.h1 variants={item} className="mt-10 mb-10 text-display">{project.title}</motion.h1>
+          <motion.h1 variants={item} className="mt-4 mb-10 text-display">{project.title}</motion.h1>
 
           {project.status &&
             <motion.div variants={item}>
@@ -93,7 +93,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
-                  <p className="text-tiny mt-2 max-w-[75%]">
+                  <p className="pl-4 text-tiny mt-2 max-w-[75%]">
                     {project.context}
                   </p>
               </div>
@@ -101,7 +101,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
+                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
                   {project.role}
                 </p>
               </div>
@@ -113,7 +113,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
+                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
                 </p>
               </div>
@@ -121,7 +121,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
+                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function ProjectPage() {
             return (
               <div className="mt-16">
                 {/* mobile: thumbs side by side, button below */}
-                <div className="flex flex-col items-center gap-6 sm:hidden">
+                <div className="flex flex-col items-center gap-20 sm:hidden">
                   <div className="flex w-full justify-between">
                     <NavThumb project={prev} direction="left" />
                     <NavThumb project={next} direction="right" />

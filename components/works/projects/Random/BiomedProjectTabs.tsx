@@ -270,7 +270,7 @@ export default function BiomedProjectsTabs() {
               className="origin-top"
             >
               <div className="flex flex-col gap-10">
-                <h3 className="mt-3 text-subtitle font-black leading-tight">
+                <h3 className="mt-3 text-subtitle leading-tight">
                   {activeProject.title}
                 </h3>
 

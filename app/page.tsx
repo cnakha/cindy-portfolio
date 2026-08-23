@@ -772,7 +772,7 @@ export default function HomePage() {
 
       {/* ── hero — bg + text in normal flow, no parallax ── */}
       <section className="relative w-full ">
-        <div className="relative w-full overflow-hidden  min-h-[100dvh] sm:min-h-[80vh] md:min-h-[100vh] sm:overflow-visible">
+        <div className="relative w-full overflow-hidden  min-h-[100svh] sm:min-h-[80svh] md:min-h-[100svh] sm:overflow-visible">
 
 
           <CursorSwirl />
@@ -803,7 +803,7 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-16 sm:mt-8 md:mt-4 text-black text-wrap  text-body leading-snug max-w-[400px] md:max-w-[520px]"
+              className="lg:hidden mt-8 sm:mt-8 md:mt-4 text-black text-wrap  text-body leading-snug max-w-[400px] md:max-w-[520px]"
             >
               A multifaceted Developer and Designer curating tech solutions through research, designing, user testing, developing, and product focused thinking.
             </motion.p>
