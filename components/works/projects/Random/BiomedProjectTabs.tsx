@@ -199,7 +199,7 @@ export default function BiomedProjectsTabs() {
           aria-label="Previous project"
           className="cursor-pointer grid size-11 shrink-0 place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:-translate-x-1"
         >
-          <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
+          <Image src="/arrow.svg" alt="" width={20} height={20} className="rotate-180" />
         </button>
 
         <div className="min-w-0 flex-1 p-2 text-center">
@@ -214,7 +214,7 @@ export default function BiomedProjectsTabs() {
           aria-label="Next project"
           className="cursor-pointer grid size-11 shrink-0 place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:translate-x-1"
         >
-          <Image src="/arrow.svg" alt="" width={24} height={24} />
+          <Image src="/arrow.svg" alt="" width={20} height={20} />
         </button>
       </div>
 

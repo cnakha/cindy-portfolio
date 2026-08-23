@@ -124,88 +124,8 @@ export default function FeaturedProjectsSection({
     <>
       <section
         id={showingExtra ? "extra-projects" : "featured-projects"}
-        className={`relative mx-auto max-w-[1440px] ${showingExtra ? 'grid-cols-[260px_1fr]' : 'flex'} justify-center items-start gap-8 px-4 md:mt-8 md:grid md:px-8`}
+        className={`relative mx-auto max-w-[1100px] flex justify-center items-start gap-8 px-4 md:mt-8 md:grid md:px-8`}
       >
-
-        {/* Aside and project list content here... */}
-        { showingExtra && (
-        <motion.aside
-          animate={{ height: asideHeight }}
-          transition={{
-            height: {
-              duration: 0.55,
-              ease: [0.16, 1, 0.3, 1],
-            },
-          }}
-          className="sticky hidden overflow-hidden rounded-3xl border border-light-black bg-black text-light-black md:top-18 md:block"
-        >
-          <div ref={asideContentRef} className="p-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={showingExtra ? "extra" : "featured"}
-                layout
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                variants={asideContainerVariants}
-              >
-
-                <motion.ul
-                  variants={asideListVariants}
-                  className="space-y-3 text-body"
-                >
-                  {listItems.map((item) => {
-                    const active = activeSlug === item.id;
-
-                    return (
-                      <motion.li key={item.id} variants={asideItemVariants}>
-                        {showingExtra ? (
-                          <button
-                            onClick={() => handleExtraOpen(item as ExtraProject)}
-                            className={`group relative block cursor-pointer pl-4 text-left text-white transition ${
-                              active
-                                ? "opacity-100"
-                                : "opacity-60 hover:opacity-100"
-                            }`}
-                          >
-                            <span
-                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-white transition-all duration-200 ${
-                                active
-                                  ? "scale-y-100 opacity-100"
-                                  : "scale-y-0 opacity-0"
-                              }`}
-                            />
-                            {item.title}
-                          </button>
-                        ) : (
-                          <a
-                            href={`#project-${item.id}`}
-                            onClick={() => handleProjectClick(item.id)}
-                            className={`group relative block pl-4 transition text-white ${
-                              active
-                                ? "opacity-100"
-                                : "opacity-60 hover:opacity-100"
-                            }`}
-                          >
-                            <span
-                              className={`absolute left-0 top-1/2 h-[18px] w-[8px] -translate-y-1/2 bg-white transition-all duration-200 ${
-                                active
-                                  ? "scale-y-100 opacity-100"
-                                  : "scale-y-0 opacity-0"
-                              }`}
-                            />
-                            {item.title}
-                          </a>
-                        )}
-                      </motion.li>
-                    );
-                  })}
-                </motion.ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </motion.aside>
-        )}
 
         <div className=" flex w-full">
           <div className="flex-1" />
@@ -229,16 +149,6 @@ export default function FeaturedProjectsSection({
               <>
               <div className="flex justify-between mb-2 ">
                 <p className="text-display text-black">Featured Works</p>
-                {/* Go to extras page button */}
-                {/* <div className="flex">
-                  <div 
-                    onClick={() => router.push("/extras")}
-                    className="hidden lg:flex cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
-                    px-4 py-2 text-black flex items-center gap-2 hover:translate-x-2 transition ease-in-out">
-                    <p className="text-tiny text-black/50 hover:text-black/100 font-semibold transition">View Extra Works</p>
-                    <Image src="/arrow.svg" alt="" width={24} height={24} className="" />
-                  </div>
-                </div> */}
               </div>
 
                 <div className="relative grid gap-4 lg:grid-cols-2">
@@ -317,8 +227,8 @@ export default function FeaturedProjectsSection({
               </>
             ) : (
               <div className="flex flex-col gap-4">
-              <p className="text-display text-black mb-2">Extra Works</p>
-              <div className="columns-2 gap-3 md:columns-3">
+              <p className="text-display text-black mb-2">More Design</p>
+              <div className="columns-2 gap-4 md:columns-3">
                 {extras.map((project, index) => (
                   <motion.button
                     variants={projectItemVariants}
@@ -327,7 +237,7 @@ export default function FeaturedProjectsSection({
                     onMouseEnter={() =>
                       preloadImages([project.coverImage])
                     }
-                    className="mb-3 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-2xl border border-mid-gray bg-light-black"
+                    className="mb-4 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-2xl border border-light-black bg-light-black"
                   >
                     <Image
                       src={project.coverImage}
@@ -348,6 +258,7 @@ export default function FeaturedProjectsSection({
       </section>
 
       <AnimatePresence>
+        {/* Drop shadow and background overlay for the popup modal */}
         {selectedExtra && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -363,11 +274,11 @@ export default function FeaturedProjectsSection({
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
-              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 items-center justify-between rounded-xl bg-white px-8 py-4 text-black shadow-lg"
+              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 justify-between rounded-xl bg-white px-6 py-4 text-black shadow-md"
             >
               <div>
-                <h2 className="text-body font-bold">{selectedExtra.title}</h2>
-                <p className="mt-1 text-tiny">{selectedExtra.description}</p>
+                <h2 className="text-subtitle">{selectedExtra.title}</h2>
+                <p className="mt-2 text-tiny">{selectedExtra.description}</p>
               </div>
 
               <button
@@ -375,7 +286,7 @@ export default function FeaturedProjectsSection({
                 className="grid cursor-pointer transition hover:scale-105"
                 aria-label="Close project popup"
               >
-                <Image src="/x.svg" alt="" width={24} height={24} />
+                <Image src="/x.svg" alt="" width={20} height={20} />
               </button>
             </motion.div>
 

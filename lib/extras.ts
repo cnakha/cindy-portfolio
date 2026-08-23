@@ -41,7 +41,7 @@ export const extras: ExtraProject[] = [
       coverImage: "/extras/Lollapalooza.jpg",
       images: [],
       description: "Typography + Shapes + Images study.",
-      title: "Lollapalooza Calendar"
+      title: "Lollapalooza Event Poster"
     },
     {
       id: "memento",

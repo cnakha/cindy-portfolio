@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
+import { useRouter } from "next/navigation";
 
 // ── pixel constants ───────────────────────────────────────────────────────────
 const SQ   = 4;
@@ -81,8 +82,6 @@ function makeCluster(nowMs: number): Cluster {
     proximity:    1,
   };
 }
-
-// ── blob canvas ───────────────────────────────────────────────────────────────
 
 
 function hexToRgb(hex: string) {
@@ -315,7 +314,6 @@ function PixelCanvas() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    // ── update interval ───────────────────────────────────────────────────────
     const updateInterval = setInterval(() => {
       const t  = now();
       const { clusters, cols } = gridRef.current;
@@ -454,7 +452,6 @@ function PixelCanvas() {
       }
     }, 30);
 
-    // ── draw ──────────────────────────────────────────────────────────────────
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -487,7 +484,6 @@ function PixelCanvas() {
       }
       ctx.fill();
 
-      // ── click bursts — black circles radiating outward ────────────────────
       const BURST_SPEED    = 0.32;
       const BURST_BAND     = 18;
       const BURST_MAX_R    = 200;
@@ -562,28 +558,26 @@ function PixelCanvas() {
 }
 
 
-// ── shared color landing map (col,row → color) ────────────────────────────────
 const coloredCells = new Map<string, string>();
 
 const SWIRL_PALETTE = [
-  "#52C5E8", // sky blue
-  "#f67e92", // hot pink
-  "#F5B8C4", // light pink
-  "#7ED8C0", // mint
-  "#dfd08b", // tan
-  "#a1b6f6", // royal blue
+  "#b8e7fc", // sky blue
+  "#ff66cf", // hot pink
+  "#fc7540", // light pink
+  "#68b93c", // mint
+  "#61b7f9", // tan
+  "#9500ff", // royal blue
   "#dfe94d", // yellow-green
-  "#80c8d0", // teal
+  "#81eccf", // teal
 ];
 function pickSwirlColor() {
   return SWIRL_PALETTE[Math.floor(Math.random() * SWIRL_PALETTE.length)];
 }
 
-// ── cursor swirl ──────────────────────────────────────────────────────────────
 // Particles hop: they freeze while visible, then teleport to next orbit position
 // when they blink off→on. This creates discrete hops instead of smooth gliding.
 type SwirlParticle = {
-  x: number; y: number;   // fixed canvas position (only updates on hop)
+  x: number; y: number;
   angle:    number;
   radius:   number;
   radiusV:  number;
@@ -591,10 +585,12 @@ type SwirlParticle = {
   color:    string;
   showing:      boolean;
   frameCounter: number;
-  showFrames:   number;   // frames to stay visible per hop
-  hideFrames:   number;   // frames to stay hidden before next hop
+  showFrames:   number;
+  hideFrames:   number;
   life:  number;
   decay: number;
+  displayAlpha:  number;  // lerped 0→1 on show, 1→0 on hide
+  displayRadius: number;  // lerped 0→SQ/2 on show, back to 0 on hide
 };
 
 function snapToUnitGrid(v: number) {
@@ -619,10 +615,12 @@ function CursorSwirl() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    function spawnParticles(mx: number, my: number, count: number) {
+    function spawnParticles(mx: number, my: number, count: number, spd = 0) {
+      const speedBoost = Math.min(spd / 5, 1); // 0 at rest, 1 at speed≥5px/frame
+      const maxR = 16 + speedBoost * 140;       // 16px idle → 156px fast
       for (let i = 0; i < count; i++) {
         const angle  = Math.random() * Math.PI * 2;
-        const radius = 10 + Math.random() * 24;
+        const radius = 10 + Math.random() * maxR;
         const rawX   = mx + Math.cos(angle) * radius;
         const rawY   = my + Math.sin(angle) * radius;
         particlesRef.current.push({
@@ -635,16 +633,19 @@ function CursorSwirl() {
           color:       pickSwirlColor(),
           showing:     true,
           frameCounter:0,
-          showFrames:  6  + Math.floor(Math.random() * 6),   // ~100–200ms visible
-          hideFrames:  10 + Math.floor(Math.random() * 10),  // ~167–333ms hidden
+          showFrames:  6  + Math.floor(Math.random() * 6),
+          hideFrames:  10 + Math.floor(Math.random() * 10),
           life:        1,
           decay:       0.002 + Math.random() * 0.003,
+          displayAlpha:  0,
+          displayRadius: 0,
         });
       }
     }
 
     let frameCount = 0;
     let lastMx = -9999, lastMy = -9999;
+    let smoothSpd = 0; // exponential moving average of speed
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -656,31 +657,33 @@ function CursorSwirl() {
       if (mx > -100) {
         const dx = mx - lastMx, dy = my - lastMy;
         const spd = Math.sqrt(dx * dx + dy * dy);
-        if (frameCount % 2 === 0 || spd > 3) spawnParticles(mx, my, 3);
+        smoothSpd = smoothSpd * 0.8 + spd * 0.2;
+        if (frameCount % 2 === 0 || spd > 3) spawnParticles(mx, my, 3, smoothSpd);
         lastMx = mx; lastMy = my;
+      } else {
+        smoothSpd *= 0.9;
       }
+
+      const LERP = 0.1; // transition speed per frame
+      const TARGET_R = SQ * 1.5;
 
       const alive: SwirlParticle[] = [];
       for (const p of particlesRef.current) {
         p.life -= p.decay;
         p.frameCounter++;
 
+        const targetAlpha  = p.showing ? 1 : 0;
+        const targetRadius = p.showing ? TARGET_R : 0;
+        p.displayAlpha  += (targetAlpha  - p.displayAlpha)  * LERP;
+        p.displayRadius += (targetRadius - p.displayRadius) * LERP;
+
         if (p.showing) {
           if (p.frameCounter >= p.showFrames) {
-            // go hidden
             p.showing = false;
             p.frameCounter = 0;
           }
-          // draw at frozen position
-          if (mx > -100) {
-            ctx.fillStyle = p.color;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, SQ / 2, 0, Math.PI * 2);
-            ctx.fill();
-          }
         } else {
           if (p.frameCounter >= p.hideFrames) {
-            // hop: advance orbit and snap to unit grid
             p.angle  += p.angularV * p.hideFrames;
             p.radius += p.radiusV  * p.hideFrames;
             const rawX = mx + Math.cos(p.angle) * p.radius;
@@ -692,8 +695,17 @@ function CursorSwirl() {
           }
         }
 
+        // draw if visible enough and cursor is active
+        if (mx > -100 && p.displayAlpha > 0.01 && p.displayRadius > 0.1) {
+          ctx.globalAlpha = p.displayAlpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.displayRadius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+
         if (p.life <= 0 || p.radius > 200) {
-          // land on nearest UNIT grid position
           if (p.x > 0 && p.y > 0 && p.x < canvas.width && p.y < canvas.height) {
             coloredCells.set(`${p.x},${p.y}`, p.color);
           }
@@ -735,10 +747,15 @@ function CursorSwirl() {
   );
 }
 
-// ── page ──────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
+  const router = useRouter();
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) { el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    router.push(`/#${id}`);
+  };
 
 
   const stagger = {
@@ -757,14 +774,7 @@ export default function HomePage() {
       <section className="relative w-full ">
         <div className="relative w-full overflow-hidden  min-h-[100dvh] sm:min-h-[80vh] md:min-h-[100vh] sm:overflow-visible">
 
-          {/* <img
-            src="/landing-bg2.png"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover sm:relative sm:block sm:w-full h-auto md:absolute md:inset-0 sm:h-full md:object-cover sm:object-fill opacity-15"
-          /> */}
 
-          <PixelCanvas />
-          <MousePixelCanvas />
           <CursorSwirl />
 
           <motion.div
@@ -774,69 +784,51 @@ export default function HomePage() {
             viewport={{ once: false, amount: 0.2 }}
             variants={stagger}
           >
-            <motion.p
-              variants={fadeUp}
-              className="text-gray font-semibold leading-tight text-display"
-            >
-              Hi, I'm
-            </motion.p>
+         
 
             <motion.h1
               variants={fadeUp}
-              className="leading-[0.9] tracking-tight font-semibold mt-4 lg:mt-0md:font-bold text-black "
+              className="leading-[0.9] tracking-tight mt-20 text-black "
               style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
             >
-              Cindy<br />Nakhammouane
+              Hi! I'm Cindy
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="hidden lg:block mt-2 font-bold text-black leading-tight text-display"
+              className="hidden lg:block mt-8 text-black text-wrap text-body leading-tight max-w-[700px]"
             >
-              Creative Developer &amp; Designer
+              A multifaceted <b>Developer</b> and <b>Designer</b> curating tech solutions through research, designing, user testing, developing, and product focused thinking.
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-4 font-bold text-black text-wrap leading-[1.0] text-display"
+              className="lg:hidden mt-16 sm:mt-8 md:mt-4 text-black text-wrap  text-body leading-snug max-w-[400px] md:max-w-[520px]"
             >
-              Creative Developer &amp; Designer
-            </motion.p>
-
-     
-
-            <motion.p
-              variants={fadeUp}
-              className="hidden lg:block mt-4 text-black text-wrap font-semibold text-subtitle leading-tight max-w-[700px]"
-            >
-              Researching, designing, user testing, and coding
-              cool projects with product focused thinking
+              A multifaceted Developer and Designer curating tech solutions through research, designing, user testing, developing, and product focused thinking.
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-16 sm:mt-8 md:mt-4 text-black text-wrap font-semibold text-subtitle leading-snug max-w-[400px] md:max-w-[520px]"
+              className="mt-4 lg:mt-8 flex pointer-events-auto "
             >
-              Researching, designing, user testing,
-              and coding cool projects with
-              product focused thinking
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              className="mt-2 lg:mt-4 text-gray text-body font-semibold"
-            >
-              Based in Chicago, IL
+              <span 
+              onClick={() => scrollToSection("contact")}
+              className="black-button hover:scale-[1.05] cursor-pointer transition-transform duration-300 ease-in-out ">Let's get in touch</span>
             </motion.p>
           </motion.div>
 
         </div>
       </section>
-      <div className="bg-light-black h-20 md:h-40 mb-14 sm:mb-20"/>
+      <div className="border border-light-black mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">
         <div id="works"><FeaturedProjectsSection /></div>
+      </div>
+
+      <div className="mt-20 mx-auto w-full max-w-[1440px]">
+        <FeaturedProjectsSection showExtras/>
       </div>
       
       <Footer />

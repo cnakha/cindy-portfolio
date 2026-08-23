@@ -40,11 +40,11 @@
 
 @layer components {
   .text-display {
-    @apply text-[24px] md:text-[48px] font-bold leading-none;
+    @apply text-[24px] md:text-[48px]  leading-none;
   }
 
   .text-subtitle {
-    @apply text-[20px] md:text-[28px] font-semibold leading-[1.1];
+    @apply text-[20px] md:text-[28px] leading-[1.1];
   }
 
   .text-body {
@@ -68,7 +68,11 @@
   }
 
   .gray-title {
-    @apply rounded-full bg-light-gray px-4 py-2 border border-mid-gray font-semibold;
+    @apply rounded-full bg-light-gray px-4 py-2 border border-mid-gray;
+  }
+
+  .black-button {
+    @apply rounded-full bg-light-black px-6 py-2 text-white ;
   }
 }
 

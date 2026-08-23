@@ -43,7 +43,7 @@ export default function ProjectPage() {
     <main className="pt-20 md:pt-24 bg-white text-black">
       <div className="mx-4 sm:mx-6  lg:mx-8">
         <motion.article
-          className="sm:mx-10 lg:mx-auto max-w-6xl"
+          className="sm:mx-10 lg:mx-auto max-w-5xl"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -53,14 +53,14 @@ export default function ProjectPage() {
           <motion.div variants={item} className="flex">
             <div
               onClick={() => router.push("/")}
-              className="cursor-pointer right-6 top-6  rounded-full border border-mid-gray bg-light-gray
-              px-4 py-2 text-black flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
-              <Image src="/arrow.svg" alt="" width={24} height={24} className="rotate-180" />
-              <p className="text-tiny text-black font-semibold transition">Cindy Nakhammouane</p>
+              className="cursor-pointer right-6 top-6 black-button
+              px-4 py-2 flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
+              <Image src="/arrow.svg" alt="" width={20} height={20} className="rotate-180 invert" />
+              <p className="pointer-events-none text-tiny text-white">Back</p>
             </div>
           </motion.div>
 
-          <motion.h1 variants={item} className="mt-10 mb-4 text-display">{project.title}</motion.h1>
+          <motion.h1 variants={item} className="mt-10 mb-10 text-display">{project.title}</motion.h1>
 
           {project.status &&
             <motion.div variants={item}>
@@ -73,7 +73,7 @@ export default function ProjectPage() {
             </motion.div>
           }
 
-          <motion.div variants={item} className="flex items-center gap-4 mt-10 mb-2">
+          <motion.div variants={item} className="flex items-center gap-4 mt-8 mb-2">
             <div>
               <p className="gray-title text-tiny">Overview</p>
             </div>
@@ -140,16 +140,70 @@ export default function ProjectPage() {
           {slug === "graffgraff" && <Graffgraff />}
           {slug === "worldnotes" && <Worldnotes />}
 
-          {/* Return to top button */}
-          <div className="flex justify-end">
-            <div 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="cursor-pointer right-6 top-6 z-50 rounded-full border border-mid-gray bg-light-gray 
-              px-6 py-3 text-caption text-black flex items-center gap-2 hover:-translate-y-2 transition ease-in-out">
-              <p className="text-caption text-black transition font-semibold">Go back to the top</p>
-              <Image src="/arrow.svg" alt="" width={24} height={24} className="-rotate-90" />
-            </div>
-          </div>
+          {/* Bottom nav: prev / scroll-to-top / next */}
+          {(() => {
+            const idx  = projects.findIndex(p => p.id === slug);
+            const prev = projects[(idx - 1 + projects.length) % projects.length];
+            const next = projects[(idx + 1) % projects.length];
+
+            const NavThumb = ({ project: p, direction }: { project: typeof projects[0]; direction: "left" | "right" }) => (
+              <a
+                href={`/works/${p.id}`}
+                className="group relative flex flex-col items-center gap-2 w-32 sm:w-40"
+              >
+
+                {/* thumbnail */}
+                <div className={`relative w-full aspect-[3/2] border border-black overflow-hidden rounded-xl bg-neutral-200 transition-all duration-500 ${
+                  direction === "right" ? "group-hover:rounded-tr-[100px]" : "group-hover:rounded-tl-[100px]"
+                }`}>
+                  <img
+                    src={`/${p.imageUrl}`}
+                    alt={p.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className={`flex w-full px-2 ${direction === "right" ? "justify-end" : ""}`}>
+                  <p className={`text-tiny text-nowrap  opacity-100 group-hover:opacity-50 transition ${direction === "right" ? "text-right" : "text-left"} leading-snug`}>{p.title}</p>
+                </div>
+              </a>
+            );
+
+            return (
+              <div className="mt-16">
+                {/* mobile: thumbs side by side, button below */}
+                <div className="flex flex-col items-center gap-6 sm:hidden">
+                  <div className="flex w-full justify-between">
+                    <NavThumb project={prev} direction="left" />
+                    <NavThumb project={next} direction="right" />
+                  </div>
+                  <div
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="cursor-pointer black-button px-6 py-3 flex items-center gap-2 hover:-translate-y-1 transition ease-in-out"
+                  >
+                    <p className="text-tiny text-white">Go back to the top</p>
+                    <Image src="/arrow.svg" alt="" width={18} height={18} className="-rotate-90 invert" />
+                  </div>
+                </div>
+
+                {/* desktop: prev | button | next */}
+                <div className="hidden sm:flex items-center justify-between gap-4">
+                  <div className="flex-1 flex justify-start">
+                    <NavThumb project={prev} direction="left" />
+                  </div>
+                  <div
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="cursor-pointer black-button px-6 py-3 flex items-center gap-2 hover:-translate-y-1 transition ease-in-out duration-900 shrink-0"
+                  >
+                    <p className="text-tiny text-white">Go back to the top</p>
+                    <Image src="/arrow.svg" alt="" width={18} height={18} className="-rotate-90 invert" />
+                  </div>
+                  <div className="flex-1 flex justify-end">
+                    <NavThumb project={next} direction="right" />
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
         </motion.article>
       </div>

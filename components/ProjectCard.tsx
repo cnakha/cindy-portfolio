@@ -11,16 +11,30 @@ export default function ProjectCard({
   project,
   wide = false,
 }: ProjectCardProps) {
-  
   return (
     <Link
       scroll={true}
       href={`/works/${project.id}`}
-      className="group relative block h-full rounded-3xl bg-light-black transition-ease-all duration-700 shadow-sm "
+      className="group relative block h-full rounded-2xl transition-all duration-700"
     >
+      {/* Arrow — sits outside the image in the top-right corner space */}
       <div
-        className={`overflow-hidden rounded-t-2xl bg-neutral-700 aspect-[16/8]`}
+        className="
+          absolute top-6 right-6 z-10
+          size-10 rounded-2xl 
+          flex items-center justify-center
+          rounded-full bg-black
+          scale-0 opacity-0 origin-top-right
+          transition-all duration-900
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          group-hover:scale-100 group-hover:opacity-100
+        "
       >
+        <Image src="/arrow.svg" alt="" width={18} height={18} className="invert rotate-[-45deg]" />
+      </div>
+
+      {/* Image — top-right corner transitions to rounded on hover */}
+      <div className="overflow-hidden rounded-t-2xl border border-black border-b-0 bg-neutral-700 aspect-[12/8] transition-all duration-500 group-hover:rounded-tr-[250px]">
         <img
           src={project.imageUrl}
           alt={project.title}
@@ -28,33 +42,12 @@ export default function ProjectCard({
         />
       </div>
 
-      <div className="">
-        <div className="text-black text-white p-4 sm:p-8 pb-6">
-          <h3 className="text-subtitle font-bold">{project.title}</h3>
-          <p className="mt-2 text-tiny font-semibold leading-relaxed">{project.context}</p>
-          <p className="mt-2 text-tiny opacity-50 leading-relaxed">
-            {project.description}
-          </p>
+      <div className="text-black rounded-b-2xl bg-light-gray border border-black p-2 sm:p-8 pb-4">
+        <h3 className="text-subtitle text-black">{project.title}</h3>
+        <p className="mt-2 text-tiny leading-relaxed text-black">{project.description}</p>
+        <div className="flex">
+          <p className="mt-4 bg-light-black text-white py-2 px-4 rounded-lg text-tiny leading-relaxed">{project.context}</p>
         </div>
-      </div>
-
-      <div
-        className="
-          absolute top-4 right-4 z-10
-          place-items-center p-2 px-4 gap-2
-          rounded-full  bg-light-gray
-          border border-mid-gray
-          scale-0 opacity-0 origin-top-right
-          transition-all duration-500
-          ease-[cubic-bezier(0.22,1,0.36,1)]
-          group-hover:scale-100 group-hover:opacity-100
-          flex flex-row font-semibold
-        "
-      >
-        <p className="text-tiny text-nowrap text-black ">
-          Read More
-        </p>
-        <Image src="/arrow.svg" alt="" width={24} height={24} />
       </div>
     </Link>
   );

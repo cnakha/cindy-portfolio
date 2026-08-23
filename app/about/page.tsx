@@ -9,20 +9,31 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
           {/* Image — fills the full column height */}
-          <div className="w-full h-full">
-            <Picture
-              source="/wood.jpg"
-              description="A photo of me in front of a wooden wall."
-              type="wide"
-              useAspectRatio={false}
-            />
+          <div className="flex flex-col gap-4 items-start">
+            <div className="w-full h-full">
+              <Picture
+                source="/wood.jpg"
+                description="A photo of me in front of a wooden wall."
+                type="wide"
+                useAspectRatio={false}
+              />
+            </div>
+
+            <div className="w-full h-full">
+              <Picture
+                source="/grad_pic.png"
+                description="A photo of me in front of a wooden wall."
+                type="wide"
+                useAspectRatio={false}
+              />
+            </div>
           </div>
 
           <div className="">
           <section>
             <h1 className="text-display">Background</h1>
 
-            <p className="mt-4 text-body ">
+            <p className="mt-8 text-body ">
               Hi, I'm Cindy Nakhammouane a Fullstack Developer and UI/UX Designer based in Chicago, IL. I recently graduated from the 
               University of Illinois Chicago’s first ever Computer Science and Design cohort 
               combining the capabilities of modern computer programming and visual design.
@@ -43,7 +54,7 @@ export default function AboutPage() {
 
           <h2 className="text-subtitle mt-10">Tools I Use</h2>
 
-          <div className="mt-4 grid grid-cols-2 max-w-[300px]">
+          <div className="mt-8 grid gap-4 md:gap-20 grid-cols-2 max-w-[300px]">
             <div>
               <div className="flex">
               <p className="text-tiny font-bold gray-title">Design</p>

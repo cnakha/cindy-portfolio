@@ -15,7 +15,7 @@ type NavItemProps = {
 };
 
 function NavItem({ label, active, onClick, href, mobile, light }: NavItemProps) {
-  const color = light ? "text-white hover:opacity-70" : "text-black hover:opacity-60";
+  const color = "text-black hover:opacity-60";
   const base = `transition font-medium ${color}`;
   const content = <span>{label}</span>;
 
@@ -85,35 +85,29 @@ export default function Navbar() {
           ? "rgba(0,0,0,1)"
           : `rgba(255,255,255,1)`;
         return (
-          <nav className="fixed top-2 right-2 z-100 hidden md:block">
-            <div
-              className="flex items-center gap-6 pl-4 pr-2 py-2 rounded-full transition-all duration-300"
-              style={{ backgroundColor: bg }}
+          <nav className="z-100 bg-white hidden md:block">
+
+            {/* CN Logo */}
+            <button
+              type="button"
+              onClick={goHome}
+              aria-label="Home"
+              className="fixed left-8 top-2 z-101 place-items-center pt-2 cursor-pointer text-black transition hover:scale-[1.05] hidden md:block"
             >
-              <button
-                type="button"
-                onClick={goHome}
-                aria-label="Home"
-                className={`cursor-pointer transition hover:opacity-60 ${isDark ? "text-white" : "text-black"}`}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="currentColor">
-                  <path d="M54.68,1.37h-.46c-1.23,0-2.3.83-2.59,2.03-.66,2.69-1.71,5.74-2.97,9-.2.52-.4,1.04-.61,1.54-1.05,2.61-4.9,2.03-5.14-.77-.06-.76-.14-1.46-.22-2.08-.41-3.12-1.15-5.8-1.92-7.96-.38-1.06-1.39-1.76-2.51-1.76h-3.34c-1.29,0-2.4.93-2.63,2.2-.5,2.83-1.44,6.36-3.28,10.13-1.58,3.24-3.4,5.78-4.98,7.67-.03.04-.06.07-.1.1-1.55,1.54-2.98,2.6-4.28,3.18-1.31.59-2.76.89-4.35.89-1.86,0-3.55-.42-5.07-1.27-1.52-.85-2.7-2.01-3.53-3.5-.83-1.49-1.25-3.19-1.25-5.1,0-2.75.94-5.06,2.82-6.94,1.88-1.88,4.64-2.8,7.36-2.39,2.55.39,3.47,1.55,5.53,3.14,1.53,1.18,3.23.85,4.52-.87,1.12-1.48,1.92-3.17,1.06-4.56-.73-1.18-2.38-2.18-3.67-2.76C20.89.31,17.9-.05,15.3,0c-2.78.06-5.38,1-7.8,2.35-2.41,1.35-4.27,3.46-5.56,5.69s-1.94,4.77-1.94,7.63c0,4.42,1.42,8.05,4.26,10.88,2.84,2.83,6.5,4.25,10.96,4.25,2.42,0,4.57-.4,6.46-1.2,1.87-.79,3.85-2.2,5.94-4.24.05-.04.09-.09.13-.14,1.56-1.99,3.28-4.51,4.88-7.57.13-.24.25-.49.37-.73,1.27-2.57,5.16-1.64,5.07,1.23,0,.04,0,.09,0,.13-.12,3.33-.49,6.27-.89,8.69-.27,1.63.98,3.11,2.63,3.11h4.99c.96,0,1.84-.51,2.32-1.34,2.26-3.96,4.58-8.59,6.69-13.89,1.41-3.54,2.53-6.92,3.44-10.08.49-1.7-.79-3.4-2.57-3.4Z"/>
-                </svg>
-              </button>
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="black">
+                <path d="M54.68,1.37h-.46c-1.23,0-2.3.83-2.59,2.03-.66,2.69-1.71,5.74-2.97,9-.2.52-.4,1.04-.61,1.54-1.05,2.61-4.9,2.03-5.14-.77-.06-.76-.14-1.46-.22-2.08-.41-3.12-1.15-5.8-1.92-7.96-.38-1.06-1.39-1.76-2.51-1.76h-3.34c-1.29,0-2.4.93-2.63,2.2-.5,2.83-1.44,6.36-3.28,10.13-1.58,3.24-3.4,5.78-4.98,7.67-.03.04-.06.07-.1.1-1.55,1.54-2.98,2.6-4.28,3.18-1.31.59-2.76.89-4.35.89-1.86,0-3.55-.42-5.07-1.27-1.52-.85-2.7-2.01-3.53-3.5-.83-1.49-1.25-3.19-1.25-5.1,0-2.75.94-5.06,2.82-6.94,1.88-1.88,4.64-2.8,7.36-2.39,2.55.39,3.47,1.55,5.53,3.14,1.53,1.18,3.23.85,4.52-.87,1.12-1.48,1.92-3.17,1.06-4.56-.73-1.18-2.38-2.18-3.67-2.76C20.89.31,17.9-.05,15.3,0c-2.78.06-5.38,1-7.8,2.35-2.41,1.35-4.27,3.46-5.56,5.69s-1.94,4.77-1.94,7.63c0,4.42,1.42,8.05,4.26,10.88,2.84,2.83,6.5,4.25,10.96,4.25,2.42,0,4.57-.4,6.46-1.2,1.87-.79,3.85-2.2,5.94-4.24.05-.04.09-.09.13-.14,1.56-1.99,3.28-4.51,4.88-7.57.13-.24.25-.49.37-.73,1.27-2.57,5.16-1.64,5.07,1.23,0,.04,0,.09,0,.13-.12,3.33-.49,6.27-.89,8.69-.27,1.63.98,3.11,2.63,3.11h4.99c.96,0,1.84-.51,2.32-1.34,2.26-3.96,4.58-8.59,6.69-13.89,1.41-3.54,2.53-6.92,3.44-10.08.49-1.7-.79-3.4-2.57-3.4Z"/>
+              </svg>
+            </button>
+
+            <div
+              className="z-100 pointer-events-auto fixed flex w-full justify-end items-center gap-6 pr-8 py-4 bg-white transition-all duration-300"
+            >
               <NavItem light={isDark} label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
-              <NavItem light={isDark} label="Extras"  active={isExtras} href="/extras" />
+              {/* <NavItem light={isDark} label="Extras"  active={isExtras} href="/extras" /> */}
               <NavItem light={isDark} label="About"   active={isAbout}  href="/about" />
               <NavItem light={isDark} label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" />
-              <button
-                onClick={() => scrollToSection("contact")}
-                className={`cursor-pointer rounded-full border px-4 py-1 hover:scale-[1.05] transition ${
-                  isDark
-                    ? "border-white bg-white text-black "
-                    : "border-black bg-black text-white "
-                }`}
-              >
-                Contact
-              </button>
+              <NavItem light={isDark} label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
+
             </div>
           </nav>
         );
@@ -127,14 +121,14 @@ export default function Navbar() {
         }`}
       />
 
-      {/* Mobile logo — always visible top-right */}
+      {/* Mobile CN logo — always visible top-left */}
       <button
         type="button"
         onClick={goHome}
         aria-label="Home"
-        className="fixed left-4 top-4 z-[30] place-items-center bg-light-gray border border-dark-gray rounded-full p-2 cursor-pointer text-black transition hover:scale-[1.05] md:hidden"
+        className="fixed left-4 top-4 z-[30] place-items-center black-button p-2 cursor-pointer text-black transition hover:scale-[1.05] md:hidden"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="white">
           <path d="M54.68,1.37h-.46c-1.23,0-2.3.83-2.59,2.03-.66,2.69-1.71,5.74-2.97,9-.2.52-.4,1.04-.61,1.54-1.05,2.61-4.9,2.03-5.14-.77-.06-.76-.14-1.46-.22-2.08-.41-3.12-1.15-5.8-1.92-7.96-.38-1.06-1.39-1.76-2.51-1.76h-3.34c-1.29,0-2.4.93-2.63,2.2-.5,2.83-1.44,6.36-3.28,10.13-1.58,3.24-3.4,5.78-4.98,7.67-.03.04-.06.07-.1.1-1.55,1.54-2.98,2.6-4.28,3.18-1.31.59-2.76.89-4.35.89-1.86,0-3.55-.42-5.07-1.27-1.52-.85-2.7-2.01-3.53-3.5-.83-1.49-1.25-3.19-1.25-5.1,0-2.75.94-5.06,2.82-6.94,1.88-1.88,4.64-2.8,7.36-2.39,2.55.39,3.47,1.55,5.53,3.14,1.53,1.18,3.23.85,4.52-.87,1.12-1.48,1.92-3.17,1.06-4.56-.73-1.18-2.38-2.18-3.67-2.76C20.89.31,17.9-.05,15.3,0c-2.78.06-5.38,1-7.8,2.35-2.41,1.35-4.27,3.46-5.56,5.69s-1.94,4.77-1.94,7.63c0,4.42,1.42,8.05,4.26,10.88,2.84,2.83,6.5,4.25,10.96,4.25,2.42,0,4.57-.4,6.46-1.2,1.87-.79,3.85-2.2,5.94-4.24.05-.04.09-.09.13-.14,1.56-1.99,3.28-4.51,4.88-7.57.13-.24.25-.49.37-.73,1.27-2.57,5.16-1.64,5.07,1.23,0,.04,0,.09,0,.13-.12,3.33-.49,6.27-.89,8.69-.27,1.63.98,3.11,2.63,3.11h4.99c.96,0,1.84-.51,2.32-1.34,2.26-3.96,4.58-8.59,6.69-13.89,1.41-3.54,2.53-6.92,3.44-10.08.49-1.7-.79-3.4-2.57-3.4Z"/>
         </svg>
       </button>
@@ -143,13 +137,13 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => setMobileOpen(p => !p)}
-        className="fixed right-4 top-4 z-[60] place-items-center bg-light-gray border border-dark-gray rounded-full p-2 grid size-10 cursor-pointer hover:scale-[1.05] md:hidden"
+        className={`fixed right-4 top-4 z-[60] place-items-center ${mobileOpen ? "" : "black-button"} p-2 grid size-10 cursor-pointer hover:scale-[1.05] md:hidden`}
         aria-label="Toggle menu"
         aria-expanded={mobileOpen}
       >
           {mobileOpen ? 
-          <Image src="/x.svg" alt="" width={24} height={24} />
-          : <Image src="/hamburger.svg" alt="" width={30} height={30} />
+          <Image src="/x.svg" alt="" width={20} height={20} />
+          : <Image src="/hamburger.svg" alt="" width={30} height={30} className="invert" />
           }
       </button>
 
@@ -159,14 +153,14 @@ export default function Navbar() {
           mobileOpen ? "max-h-72 opacity-100" : "pointer-events-none max-h-0"
         }`}
       >
-        <div className="flex flex-col gap-4 px-6 py-6">
-          <button type="button" onClick={goHome} aria-label="Home" className="cursor-pointer text-black transition hover:opacity-60">
+        <div className="flex flex-col gap-4 px-4 py-6">
+          <button type="button" onClick={goHome} aria-label="Home" className="pb-4 cursor-pointer text-black transition hover:opacity-60">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="currentColor">
               <path d="M54.68,1.37h-.46c-1.23,0-2.3.83-2.59,2.03-.66,2.69-1.71,5.74-2.97,9-.2.52-.4,1.04-.61,1.54-1.05,2.61-4.9,2.03-5.14-.77-.06-.76-.14-1.46-.22-2.08-.41-3.12-1.15-5.8-1.92-7.96-.38-1.06-1.39-1.76-2.51-1.76h-3.34c-1.29,0-2.4.93-2.63,2.2-.5,2.83-1.44,6.36-3.28,10.13-1.58,3.24-3.4,5.78-4.98,7.67-.03.04-.06.07-.1.1-1.55,1.54-2.98,2.6-4.28,3.18-1.31.59-2.76.89-4.35.89-1.86,0-3.55-.42-5.07-1.27-1.52-.85-2.7-2.01-3.53-3.5-.83-1.49-1.25-3.19-1.25-5.1,0-2.75.94-5.06,2.82-6.94,1.88-1.88,4.64-2.8,7.36-2.39,2.55.39,3.47,1.55,5.53,3.14,1.53,1.18,3.23.85,4.52-.87,1.12-1.48,1.92-3.17,1.06-4.56-.73-1.18-2.38-2.18-3.67-2.76C20.89.31,17.9-.05,15.3,0c-2.78.06-5.38,1-7.8,2.35-2.41,1.35-4.27,3.46-5.56,5.69s-1.94,4.77-1.94,7.63c0,4.42,1.42,8.05,4.26,10.88,2.84,2.83,6.5,4.25,10.96,4.25,2.42,0,4.57-.4,6.46-1.2,1.87-.79,3.85-2.2,5.94-4.24.05-.04.09-.09.13-.14,1.56-1.99,3.28-4.51,4.88-7.57.13-.24.25-.49.37-.73,1.27-2.57,5.16-1.64,5.07,1.23,0,.04,0,.09,0,.13-.12,3.33-.49,6.27-.89,8.69-.27,1.63.98,3.11,2.63,3.11h4.99c.96,0,1.84-.51,2.32-1.34,2.26-3.96,4.58-8.59,6.69-13.89,1.41-3.54,2.53-6.92,3.44-10.08.49-1.7-.79-3.4-2.57-3.4Z"/>
             </svg>
           </button>
           <NavItem mobile label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
-          <NavItem mobile label="Extras"  active={isExtras} href="/extras" onClick={closeMobile} />
+          {/* <NavItem mobile label="Extras"  active={isExtras} href="/extras" onClick={closeMobile} /> */}
           <NavItem mobile label="About"   active={isAbout}  href="/about"  onClick={closeMobile} />
           <NavItem mobile label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" onClick={closeMobile} />
           <NavItem mobile label="Contact" active={false}    onClick={() => scrollToSection("contact")} />

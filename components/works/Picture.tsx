@@ -46,7 +46,7 @@ export default function Picture({
           className="fixed right-5 top-5 z-[10000] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110"
           aria-label="Close image popup"
         >
-          <Image src="/x.svg" alt="" width={24} height={24} />
+          <Image src="/x.svg" alt="" width={20} height={20} />
         </button>
 
         <Image
