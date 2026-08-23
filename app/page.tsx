@@ -98,7 +98,7 @@ function ha(hex: string, a: number) {
 
 
 // ── mouse-follow pixel layer ──────────────────────────────────────────────────
-const MOUSE_RADIUS = 90;   // px — how far the effect reaches from cursor
+const MOUSE_RADIUS = 70;   // px — how far the effect reaches from cursor
 const MOUSE_FILL   = 0.72; // fraction of clusters lit within the hotspot
 
 function MousePixelCanvas() {
@@ -564,7 +564,7 @@ const SWIRL_PALETTE = [
   "#b8e7fc", // sky blue
   "#ff66cf", // hot pink
   "#fc7540", // light pink
-  "#68b93c", // mint
+  "#79d746", // mint
   "#61b7f9", // tan
   "#9500ff", // royal blue
   "#dfe94d", // yellow-green
