@@ -789,7 +789,7 @@ export default function HomePage() {
             <motion.h1
               variants={fadeUp}
               className="leading-[0.9] tracking-tight mt-20 text-black "
-              style={{ fontFamily: "Century Gothic", fontSize: "clamp(36px, 10vw, 160px)" }}
+              style={{ fontFamily: "Century Gothic", fontSize: "clamp(46px, 10vw, 160px)" }}
             >
               Hi! I'm Cindy
             </motion.h1>
@@ -803,14 +803,14 @@ export default function HomePage() {
 
             <motion.p
               variants={fadeUp}
-              className="lg:hidden mt-8 sm:mt-8 md:mt-4 text-black text-wrap  text-body leading-snug max-w-[400px] md:max-w-[520px]"
+              className="lg:hidden mt-4 text-black text-wrap  text-body leading-snug max-w-[400px] md:max-w-[520px]"
             >
-              A multifaceted Developer and Designer curating tech solutions through research, designing, user testing, developing, and product focused thinking.
+              A multifaceted <b>Developer</b> and <b>Designer</b> curating tech solutions through research, designing, user testing, developing, and product focused thinking.
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="mt-4 lg:mt-8 flex pointer-events-auto "
+              className="mt-8 flex pointer-events-auto "
             >
               <span 
               onClick={() => scrollToSection("contact")}
@@ -820,7 +820,7 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className="border border-light-black mb-20"/>
+      <div className="border border-b-light-black mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

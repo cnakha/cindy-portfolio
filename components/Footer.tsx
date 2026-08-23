@@ -32,7 +32,7 @@ export default function Footer() {
       className="relative mt-20 py-10 md:py-20 overflow-hidden border border-t-black text-black"
     >
       <motion.div
-        className="relative z-10 px-2 ml-4 md:ml-10"
+        className="relative z-10 px-2 ml-2 md:ml-10"
         variants={stagger}
         initial="hidden"
         whileInView="show"
@@ -51,7 +51,7 @@ export default function Footer() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="flex md:justify-between items-end mt-4">
-          <div className="flex flex-wrap items-end gap-x-8 gap-y-6">
+          <div className="flex flex-wrap items-end gap-x-4 gap-y-6">
             {/* Email */}
             <div className="flex items-center gap-3">
               <a
@@ -94,7 +94,7 @@ export default function Footer() {
           </p>
         </motion.div>
 
-        <p className="md:hidden relative z-10 mt-10 opacity-50 text-tiny text-right mr-4">
+        <p className="md:hidden relative z-10 mt-10 opacity-50 text-tiny text-right mr-2">
           Designed and developed by Cindy Nakhammouane
         </p>
       </motion.div>

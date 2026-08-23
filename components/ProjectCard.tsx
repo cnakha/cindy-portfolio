@@ -25,7 +25,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
           setInView(entry.isIntersecting);
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.8 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -69,7 +69,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
         <img
           src={project.imageUrl}
           alt={project.title}
-          className={`h-full w-full object-cover transition duration-500 ${active ? "scale-[1.03]" : "group-hover:scale-[1.03]"}`}
+          className={`h-full w-full object-cover transition duration-900 ${active ? "scale-[1.03]" : "group-hover:scale-[1.03]"}`}
         />
       </div>
 
