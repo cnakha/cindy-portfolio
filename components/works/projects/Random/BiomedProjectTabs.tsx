@@ -203,7 +203,7 @@ export default function BiomedProjectsTabs() {
         </button>
 
         <div className="min-w-0 flex-1 p-2 text-center">
-          <p className="text-caption text-black/50 font-semibold">
+          <p className="text-caption text-black font-semibold">
             {activeProject.label}
           </p>
         </div>
@@ -244,11 +244,6 @@ export default function BiomedProjectsTabs() {
                 ].join(" ")}
               >
                 {label}
-                {/* <span
-                    className={`absolute left-0 -bottom-1 h-[10px] bg-black transition-all duration-300 ease-out ${
-                        selected ? "w-full" : "w-0  opacity-50"
-                    }`}
-                /> */}
               </button>
             );
           })}

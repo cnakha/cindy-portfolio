@@ -29,7 +29,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative mt-20 py-10 md:py-20 overflow-hidden border border-t-black text-black"
+      className="relative mt-20 py-10 md:py-20 overflow-hidden border border-t-black border-x-0 border-b-0 text-black"
     >
       <motion.div
         className="relative z-10 px-2 ml-2 md:ml-10"
