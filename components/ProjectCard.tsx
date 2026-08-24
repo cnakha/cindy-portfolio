@@ -25,7 +25,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
           setInView(entry.isIntersecting);
         }
       },
-      { threshold: 0.9 }
+      { threshold: 1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -75,7 +75,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
 
       <div className="text-black rounded-b-2xl bg-light-gray border border-black p-4 sm:p-8 pb-4">
         <h3 className="text-subtitle text-black">{project.title}</h3>
-        <p className="mt-2 text-tiny leading-relaxed text-black">{project.description}</p>
+        {project.description && <p className="mt-2 text-tiny leading-relaxed text-black">{project.description}</p>}
         <div className="flex">
           <p className="mt-4 bg-light-black text-white py-2 px-4 rounded-lg text-tiny leading-relaxed">{project.context}</p>
         </div>

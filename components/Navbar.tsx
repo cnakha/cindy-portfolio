@@ -141,7 +141,7 @@ export default function Navbar() {
       >
           {mobileOpen ? 
           <Image src="/x.svg" alt="" width={20} height={20} />
-          : <Image src="/hamburger.svg" alt="" width={25} height={25} className="" />
+          : <Image src="/hamburger.svg" alt="" width={28} height={28} className="" />
           }
       </button>
 

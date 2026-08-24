@@ -56,7 +56,9 @@ export default function ProjectPage() {
               className="cursor-pointer right-6 top-6 black-button
               px-4 py-2 flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={20} height={20} className="rotate-180 invert" />
-              <p className="pointer-events-none text-tiny text-white">Home</p>
+              <p 
+              style={{ WebkitTouchCallout: "none" } as object}
+              className="pointer-events-none text-tiny text-white">Home</p>
             </div>
           </motion.div>
 
@@ -95,7 +97,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
-                  <p className="pl-4 text-tiny mt-2 max-w-[75%]">
+                  <p className="text-tiny mt-2 max-w-[75%]">
                     {project.context}
                   </p>
               </div>
@@ -103,7 +105,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
-                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {project.role}
                 </p>
               </div>
@@ -115,7 +117,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
-                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
                 </p>
               </div>
@@ -123,7 +125,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>
-                <p className="pl-4 text-tiny mt-2 max-w-[75%]">
+                <p className="text-tiny mt-2 max-w-[75%]">
                   {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
                 </p>
               </div>
@@ -196,7 +198,9 @@ export default function ProjectPage() {
                     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     className="cursor-pointer black-button px-6 py-3 flex items-center gap-2 hover:-translate-y-1 transition ease-in-out duration-900 shrink-0"
                   >
-                    <p className="text-tiny text-white pointer-events-none">Go back to the top</p>
+                    <p 
+                    style={{ WebkitTouchCallout: "none" } as object}
+                    className="text-tiny text-white pointer-events-none">Go back to the top</p>
                     <Image src="/arrow.svg" alt="" width={18} height={18} className="-rotate-90 invert" />
                   </div>
                   <div className="flex-1 flex justify-end">

@@ -274,11 +274,11 @@ export default function FeaturedProjectsSection({
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
-              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 justify-between rounded-xl bg-white px-6 py-4 text-black shadow-md"
+              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 justify-between rounded-xl bg-white px-4 py-2 md:px-6 md:py-3 text-black shadow-md"
             >
               <div>
-                <h2 className="text-subtitle">{selectedExtra.title}</h2>
-                <p className="mt-2 text-tiny">{selectedExtra.description}</p>
+                <h2 className="text-body">{selectedExtra.title}</h2>
+                <p className="text-tiny">{selectedExtra.description}</p>
               </div>
 
               <button
@@ -290,7 +290,7 @@ export default function FeaturedProjectsSection({
               </button>
             </motion.div>
 
-            <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-36">
+            <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-24">
               <div
                 onClick={(e) => e.stopPropagation()}
                 className="mx-auto grid max-w-2xl gap-6"

@@ -17,7 +17,7 @@ export default function AboutPage() {
   return (
     <main className="bg-white text-black">
       <motion.section
-        className="mx-auto max-w-6xl px-8 pt-30"
+        className="mx-auto max-w-6xl px-8 pt-20 md:pt-30"
         variants={stagger}
         initial="hidden"
         animate="show"
@@ -49,7 +49,7 @@ export default function AboutPage() {
             <motion.section variants={stagger} initial="hidden" animate="show">
               <motion.h1 variants={fadeUp} className="text-display">Background</motion.h1>
 
-              <motion.p variants={fadeUp} className="mt-8 text-body">
+              <motion.p variants={fadeUp} className="mt-4 text-body">
                 Hi, I'm Cindy Nakhammouane a <b>Fullstack Developer</b> and <b>UI/UX Designer</b> based in Chicago, IL. I recently graduated from the
                 University of Illinois Chicago's first ever Computer Science and Design cohort
                 combining the capabilities of modern computer programming and visual design.
@@ -72,7 +72,7 @@ export default function AboutPage() {
             >
               <motion.h2 variants={fadeUp} className="text-subtitle mt-10">Tools I Use</motion.h2>
 
-              <motion.div variants={fadeUp} className="mt-8 grid gap-4 md:gap-20 grid-cols-2 max-w-[300px]">
+              <motion.div variants={fadeUp} className="mt-4 grid gap-4 md:gap-20 grid-cols-2 max-w-[300px]">
                 <div>
                   <div className="flex">
                     <p className="text-tiny  gray-title">Design</p>

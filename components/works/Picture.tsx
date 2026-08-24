@@ -43,7 +43,7 @@ export default function Picture({
             e.stopPropagation();
             setPopupImage(null);
           }}
-          className="fixed right-5 top-5 z-[10000] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110"
+          className="fixed right-4 top-4 z-[10000] grid size-11 cursor-pointer place-items-center rounded-full border border-mid-gray bg-light-gray transition hover:scale-110"
           aria-label="Close image popup"
         >
           <Image src="/x.svg" alt="" width={20} height={20} />
@@ -90,7 +90,7 @@ export default function Picture({
     />
 
     {popup && (
-      <div className="pointer-events-none absolute bottom-4 right-4 z-10 hidden size-12 shrink-0 origin-bottom-right scale-0 place-items-center rounded-full border border-dark-gray bg-light-gray opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-100 group-hover:opacity-100 sm:grid">
+      <div className="pointer-events-none absolute bottom-4 right-4 z-10 size-12 shrink-0 origin-bottom-right scale-0 place-items-center rounded-full border border-dark-gray bg-light-gray opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-100 group-hover:opacity-100 grid">
         <Image src="/zoom.svg" alt="" width={24} height={24} />
       </div>
     )}
