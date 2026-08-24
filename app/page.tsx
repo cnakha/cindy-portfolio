@@ -58,7 +58,7 @@ type SwirlParticle = {
 
 const HERO_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2FHero.mp4?alt=media&token=44a88620-8569-4faa-95d6-f51483167ce1";
 
-const FLOWER_PATH1 = "M25,577.71c95.25,137.87,249.66,121.36,312.55,74.6,159.22-118.38,93.37-183.04,46.39-188.28-91.67-10.23-167.91,76.6-78.84,104.34,66.02,20.56,105.69,7.87,146.2,9.17,95.6,3.06,239.74,62.55,201.7,99.06-51.25,49.19-252.09,47.81-104.73-104.68,74.02-76.6,185.91-16.85,258.94-83.23,28.42-25.83,13.07-75.01-48-88.85-60.23-13.65-123.13,11.46-106.72,62.3,26.04,80.68,366.13,229.3,492.22,134.65,109.76-82.39,5.18-206.96-42.59-251.68";
+const FLOWER_PATH1 = "M25,577.71c95.25,137.87,249.66,121.36,312.55,74.6,159.22-118.38,93.37-183.04,46.39-188.28-91.67-10.23-167.91,76.6-78.84,104.34,66.02,20.56,105.69,7.87,146.2,9.17,95.6,3.06,239.74,62.55,201.7,99.06-51.25,49.19-252.09,47.81-104.73-104.68,74.02-76.6,185.91-16.85,258.94-83.23,28.42-25.83,13.07-75.01-48-88.85-60.23-13.65-123.13,11.46-106.72,62.3,26.04,80.68,366.13,229.3,492.22,134.65,109.76-82.39,4.07-211.9-30.06-269.57";
 const FLOWER_PATH2 = "M1114.65,327.22c28.41-11.45,122.52,105.42,165.93,111.1,83.57,10.94,109.1-164.89,59.35-200.68-45.93-33.05-176.76,47.95-189.95,25.28-13.39-23.03,84.28-66.62,78.65-137.09-4.7-58.92-86.06-114.84-122.44-97.69-55.23,26.04-6.18,220.21-31.79,225.92-24.84,5.54-56.76-180.21-121.64-184.03-57.71-3.4-134.85,137.56-97.78,193.51,35.73,53.93,184.21,19.47,190.45,46.76,5.91,25.83-130.1,49.92-131.81,101.03-1.58,47.38,100.05,109.83,152.45,83.1,64.03-32.65,12.88-152.84,48.57-167.22Z";
 
 function HeroFlower() {
@@ -66,12 +66,23 @@ function HeroFlower() {
   const pl2 = useMotionValue(0);
   const op1 = useMotionValue(0); // hide paths when length=0 to kill cap dots
   const op2 = useMotionValue(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     let cancelled = false;
     const ease = [0.4, 0, 0.2, 1] as [number, number, number, number];
 
     const loop = async () => {
+      // wait for video to be ready before drawing so it doesn't pop in mid-stroke
+      const video = videoRef.current;
+      if (video && video.readyState < 3) {
+        await new Promise<void>(resolve => {
+          const handler = () => resolve();
+          video.addEventListener("canplay", handler, { once: true });
+        });
+      }
+      if (cancelled) return;
+
       while (!cancelled) {
         // start fully hidden
         pl1.set(0); pl2.set(0); op1.set(0); op2.set(0);
@@ -127,10 +138,10 @@ function HeroFlower() {
   const sharedCaps = { strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none" style={{ clipPath: "inset(0)" }}>
       {/* scale down on small screens, anchored top-right */}
-      <div className="absolute right-[-5%] md:right-[-8%] lg:right-[-5%] top-[50%] sm:top-[30%] md:top-[14%] lg:top-0 
-      h-full origin-top-right scale-[0.42] sm:scale-[0.65] md:scale-[0.8] lg:scale-[0.95]">
+      <div className="absolute right-[-5%] md:right-[-8%] lg:right-[-5%] top-[54%] sm:top-[30%] md:top-[14%] lg:top-[4%] 
+      h-full origin-top-right scale-[0.42] sm:scale-[0.65] md:scale-[0.8] lg:scale-[0.90]">
         <svg
           viewBox="0 0 1390.25 730.38"
           preserveAspectRatio="xMidYMid meet"
@@ -139,7 +150,7 @@ function HeroFlower() {
         >
           <defs>
             <mask id={maskId}>
-              <rect x="-120" y="-60" width="1630" height="880" fill="black" />
+              <rect x="-120" y="0" width="1630" height="810" fill="black" />
               <motion.path d={FLOWER_PATH1} stroke="white" strokeWidth={54} fill="none"
                 {...sharedCaps} style={{ pathLength: pl1, opacity: op1 }} />
               <motion.path d={FLOWER_PATH2} stroke="white" strokeWidth={54} fill="none"
@@ -162,11 +173,12 @@ function HeroFlower() {
             {...sharedCaps} style={{ pathLength: pl2, opacity: op2 }} />
 
           {/* Video revealed through mask — topmost, oversized so it fills stroke edges */}
-          <foreignObject x="-120" y="-60" width="1630" height="880" mask={`url(#${maskId})`}>
+          <foreignObject x="-120" y="0" width="1630" height="810" mask={`url(#${maskId})`}>
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
+              ref={videoRef}
               src={HERO_VID}
-              autoPlay muted loop playsInline preload="metadata"
+              autoPlay muted loop playsInline preload="auto"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </foreignObject>
@@ -202,7 +214,7 @@ export default function HomePage() {
 
       {/* hero flower bg + text */}
       <section className="relative w-full ">
-        <div className="relative w-full overflow-hidden  min-h-[100svh] sm:min-h-[80svh] md:min-h-[100svh] sm:overflow-visible">
+        <div className="relative w-full overflow-hidden min-h-[100svh] sm:min-h-[80svh] md:min-h-[100svh]">
 
           <HeroFlower />
 
@@ -241,9 +253,10 @@ export default function HomePage() {
               variants={fadeUp}
               className="mt-8 flex pointer-events-auto "
             >
-              <span 
+              <span
               onClick={() => scrollToSection("contact")}
-              className="black-button hover:scale-[1.05] cursor-pointer transition-transform duration-300 ease-in-out ">Let's get in touch</span>
+              className="black-button hover:scale-[1.05] cursor-pointer transition-transform duration-300 ease-in-out select-none"
+              style={{ WebkitTouchCallout: "none" } as object}>Let's get in touch</span>
             </motion.p>
           </motion.div>
 

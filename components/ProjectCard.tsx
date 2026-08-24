@@ -47,7 +47,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
           size-10 flex items-center justify-center
           rounded-full bg-black
           origin-top-right
-          transition-all duration-500
+          transition-all duration-700
           ease-[cubic-bezier(0.22,1,0.36,1)]
           ${active
             ? "scale-100 opacity-100"
