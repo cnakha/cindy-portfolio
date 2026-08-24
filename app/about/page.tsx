@@ -50,7 +50,7 @@ export default function AboutPage() {
               <motion.h1 variants={fadeUp} className="text-display">Background</motion.h1>
 
               <motion.p variants={fadeUp} className="mt-8 text-body">
-                Hi, I'm Cindy Nakhammouane a Fullstack Developer and UI/UX Designer based in Chicago, IL. I recently graduated from the
+                Hi, I'm Cindy Nakhammouane a <b>Fullstack Developer</b> and <b>UI/UX Designer</b> based in Chicago, IL. I recently graduated from the
                 University of Illinois Chicago's first ever Computer Science and Design cohort
                 combining the capabilities of modern computer programming and visual design.
                 <br /><br />
@@ -99,6 +99,8 @@ export default function AboutPage() {
                     <li>Tailwind</li>
                     <li>Python</li>
                     <li>C/C++</li>
+                    <li>HTML5</li>
+                    <li>WordPress</li>
                     <li>Firebase</li>
                     <li>SQL</li>
                     <li>REST API</li>

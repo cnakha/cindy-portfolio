@@ -25,7 +25,7 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
           setInView(entry.isIntersecting);
         }
       },
-      { threshold: 0.8 }
+      { threshold: 0.9 }
     );
     obs.observe(el);
     return () => obs.disconnect();

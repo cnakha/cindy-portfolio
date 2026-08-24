@@ -56,11 +56,13 @@ export default function ProjectPage() {
               className="cursor-pointer right-6 top-6 black-button
               px-4 py-2 flex items-center gap-2 hover:-translate-x-2 transition ease-in-out">
               <Image src="/arrow.svg" alt="" width={20} height={20} className="rotate-180 invert" />
-              <p className="pointer-events-none text-tiny text-white">Back</p>
+              <p className="pointer-events-none text-tiny text-white">Home</p>
             </div>
           </motion.div>
 
-          <motion.h1 variants={item} className="mt-4 mb-10 text-display">{project.title}</motion.h1>
+          <motion.h1 variants={item} className="mt-4 mb-8 leading-tight" style={{ fontFamily: "Century Gothic", fontSize: "clamp(46px, 10vw, 160px)"}}>
+            {project.title}
+            </motion.h1>
 
           {project.status &&
             <motion.div variants={item}>
@@ -73,7 +75,7 @@ export default function ProjectPage() {
             </motion.div>
           }
 
-          <motion.div variants={item} className="flex items-center gap-4 mt-8 mb-2">
+          <motion.div variants={item} className="flex items-end gap-4 mt-8 mb-2">
             <div>
               <p className="gray-title text-tiny">Overview</p>
             </div>
@@ -82,7 +84,7 @@ export default function ProjectPage() {
             </div>
           </motion.div>
 
-          <motion.p variants={item} className="max-w-5xl text-subtitle font-medium mt-2 opacity-60">
+          <motion.p variants={item} className="max-w-5xl text-subtitle mt-2 opacity-60">
             {project.fullDescription}
           </motion.p>
 
@@ -129,7 +131,7 @@ export default function ProjectPage() {
           </motion.div>
 
 
-          <div className="mt-20"/>
+          <div className="mt-10"/>
           {/* <div className="h-px bg-mid-gray my-10"></div> */}
 
           {/* Project Details */}
@@ -171,7 +173,7 @@ export default function ProjectPage() {
             return (
               <div className="mt-16">
                 {/* mobile: thumbs side by side, button below */}
-                <div className="flex flex-col items-center gap-20 sm:hidden">
+                <div className="flex flex-col items-center gap-10 sm:hidden">
                   <div className="flex w-full justify-between">
                     <NavThumb project={prev} direction="left" />
                     <NavThumb project={next} direction="right" />
@@ -194,7 +196,7 @@ export default function ProjectPage() {
                     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     className="cursor-pointer black-button px-6 py-3 flex items-center gap-2 hover:-translate-y-1 transition ease-in-out duration-900 shrink-0"
                   >
-                    <p className="text-tiny text-white">Go back to the top</p>
+                    <p className="text-tiny text-white pointer-events-none">Go back to the top</p>
                     <Image src="/arrow.svg" alt="" width={18} height={18} className="-rotate-90 invert" />
                   </div>
                   <div className="flex-1 flex justify-end">

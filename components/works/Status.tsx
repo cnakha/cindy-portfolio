@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import Image from "next/image";
 
 type Status = {
     link?: string;
@@ -41,7 +41,10 @@ export default function Status({ message, hasLink, link, github }: Status) {
                     onMouseEnter={() => setActive(true)}
                     onMouseLeave={() => setActive(false)}
                 >
-                    <h2 className="text-tiny font-semibold">{message}</h2>
+                    <div className="flex gap-1">
+                        <h2 className="text-tiny font-semibold">{message}</h2>
+                        <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
+                    </div>
                     {underline}
                     
                 </a>
@@ -62,9 +65,11 @@ export default function Status({ message, hasLink, link, github }: Status) {
                     onMouseEnter={() => setActive2(true)}
                     onMouseLeave={() => setActive2(false)}
                 >
-                    <h2 className="text-tiny font-semibold">Github</h2>
+                    <div className="flex gap-1">
+                        <h2 className="text-tiny font-semibold">Github</h2>
+                        <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
+                    </div>
                     {underline2}
-                    
                 </a>
             )}
         </div>

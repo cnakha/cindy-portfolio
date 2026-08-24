@@ -31,8 +31,8 @@ export const projects: Project[] = [
   id: "worldnotes",
   title: "WorldNotes",
   timeline: "June 2025 — Present",
-  description: "Blurring the line between social platform and digital graffiti, explore the world through 3D notes and doodles left behind by others on a street map view.",
-  context: "Solo Fullstack Web App Development and UI/UX Design",
+  description: "Blurring the line between social platform and digital graffiti, explore the world through 3D notes and doodles left behind by others on a street map view",
+  context: "Fullstack Web App Development, UI/UX Design",
   fullDescription:
     "WorldNotes is a spatial web experiment blending maps, art, and 3D spaces. Users create notes by sharing thoughts and drawing doodles then posting and anchoring them to a globally shared street view map. Designed for casual web strolling, this web app fuels the creative spirit and builds a global community centering authentic creative expression.",
   role: "Project Manager, Lead Fullstack Developer and UI/UX Designer. I built this app end-to-end from ideation to launch",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     id: "folio",
     title: "FolioFolds",
     description: "Assemble and share interactive 3D mockups of books, cards, zines, origamis, and fliers with support of complex folds, bindings, cutouts, and AR viewing",
-    context: "Product and UI/UX Design",
+    context: "Product Design, UI/UX Design",
     fullDescription: "From birthday cards to origami, FolioFolds is a web application I designed for designing, assembling, and sharing interactive 3D mockups of unique printed forms. The platform supports complex folds, bindings, cutouts, and offers AR viewing capabilities.",
     features: [
       "Supports PDF, PNG, and JPEG imports to create 3D models",
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     status: "View the live site here!",
     link: "https://graffgraff.com",
     githubUrl: "https://github.com/cnakha/GraffGraff",
-    description: "Website and community gallery hosting online multiplayer nonsensical art games made to empower and inspire being more creative in daily life.",
+    description: "Website and community gallery hosting online multiplayer nonsensical art games made to empower and inspire creativity in daily life",
     context: "Fullstack Development, UI/UX Design",
     fullDescription: "GRAFFGRAFF is a web experience and digital community gallery that empowers creativity through physical and online nonsensical creativity games. Graffiti, also known as “Graff”, is the practice of unapologetic self expression, socialization, commentary, and art. The user experience is a direct reflection of this concept providing several modes of play that stray from strictly online interactions as well as provide an unfiltered shared art collective in celebration of carefree creative expression and freedom. My work was exhibited at UIC YES! 2026.",
     tools: ["React", "Node.js","Typescript" , "Tailwind", "Firebase", "Vercel", "Figma", "Illustrator", "Photoshop"],
@@ -124,8 +124,8 @@ export const projects: Project[] = [
   {
     id: "ycgh",
     title: "You Can Grow Here",
-    description: "Therapeutic VR journey for anxiety management, published research on adapting anxiety relief wellness techniques in VR (SIGGRAPH 2025, HCI 2026).",
-    context: "VR Experience, Research Paper (SIGGRAPH 2025, HCII International 2026)",
+    description: "Therapeutic VR journey for anxiety management, published research on adapting anxiety relief wellness techniques in VR (SIGGRAPH 2025, HCI 2026)",
+    context: "VR Experience, Research Paper",
     fullDescription: "You Can Grow Here is an immersive VR experience developed for and exhibited at the CAVE2™ environment in the Electronic Visualization Laboratory at the University of Illinois Chicago, aligning with the United Nation's Sustainable Development Goal of Good Health and Well-Being. In response to the mental health challenges intensified by the COVID-19 pandemic, the project explores how interactive storytelling, ambient sound, and 3D typography can support emotional reflection, explore modes of group therapy, and teach anxiety coping strategies. Built in Unity with custom assets from Blender and Maya, the experience differs from most clinical VR programs, allowing users to independently explore emotions, manage anxiety, and practice evidence-based calming techniques within a safe, narrative-driven space that builds emotional resilience.",
     features: [
       "Interactive 3D Typography",
@@ -164,7 +164,7 @@ export const projects: Project[] = [
     id: "biomed",
     title: "Sensing Through Life",
     description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
-    context: "Fullstack Development, Hardware Assembly, UI/UX Design",
+    context: "IoT Development, Hardware Assembly, UI/UX Design",
     fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
