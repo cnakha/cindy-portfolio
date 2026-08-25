@@ -27,7 +27,7 @@ export default function YCGH() {
       <div className="mt-10"/>
 
       <Picture type={"third"} popup={true} source={"/projects/ycgh/island_view.png"} source2={"/projects/ycgh/interaction1.jpg"} source3={"/projects/ycgh/thumbnail.png"}/>
-      <div className="mt-10"/>
+      <div className="mt-4"/>
       <Picture type={"third"} popup={true} source={"/projects/ycgh/interaction3.jpg"} source2={"/projects/ycgh/interaction4.jpeg"} source3={"/projects/ycgh/interaction2.jpeg"}/>
       <div className="mt-10"/>
 

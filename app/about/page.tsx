@@ -56,11 +56,10 @@ export default function AboutPage() {
                 <br /><br />
                 Creating is my favorite freedom. Since forever, I've always been drawn
                 toward expressing myself through various creative avenues, but I also
-                enjoyed problem solving and engineering. Naturally I grew a curiosity
+                enjoyed problem solving, engineering, and tech. Naturally, I grew a curiosity
                 towards finding ways to blend the worlds of technology and art together.
-                What I love about creative technology is that the medium is constantly
-                evolving and full of refreshing projects and potential I would love
-                to contribute to.
+                What I love most about creative technology is that the medium constantly
+                evolves to accessibly bring people new imaginative experiences, visuals, and stories.
               </motion.p>
             </motion.section>
 

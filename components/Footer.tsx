@@ -1,8 +1,133 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
+
+const HEART_PATH = "M112.47,656.85C342.09,501.23,558.87,96.84,432.19,35c-121.73-59.42-164.68,165.45-164.68,165.45,0,0-205.18-128.74-238.85-12.26-49.3,170.54,410.26,227.28,743.62,181.63";
+const HERO_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2Fbeach2.mp4?alt=media&token=ead83c7b-bc5f-4c21-8086-d878756ea8ee";
+
+function HeartDoodle() {
+  const pl = useMotionValue(0);
+  const op = useMotionValue(0);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const cancelledRef = useRef(false);
+  const loopRunningRef = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+
+  useEffect(() => {
+    const ease = [0.4, 0, 0.2, 1] as [number, number, number, number];
+
+    const runLoop = async () => {
+      if (loopRunningRef.current) return;
+      loopRunningRef.current = true;
+      cancelledRef.current = false;
+
+      while (!cancelledRef.current) {
+        pl.set(0); op.set(0);
+        await new Promise<void>(r => setTimeout(r, 400));
+        if (cancelledRef.current) break;
+
+        // draw
+        let revealed = false;
+        await animate(pl, 1, {
+          duration: 2.5, ease,
+          onUpdate: (v) => {
+            if (!revealed && v > 0.015) {
+              revealed = true;
+              animate(op, 1, { duration: 0.4, ease: "easeOut" });
+            }
+          },
+        });
+        if (cancelledRef.current) break;
+
+        await new Promise<void>(r => setTimeout(r, 2000));
+        if (cancelledRef.current) break;
+
+        // undraw
+        animate(op, 0, { duration: 0.4, delay: 1.6, ease: "easeIn" });
+        await animate(pl, 0, { duration: 2, ease: "easeInOut" });
+        if (cancelledRef.current) break;
+        op.set(0); pl.set(0);
+
+        await new Promise<void>(r => setTimeout(r, 400));
+      }
+      loopRunningRef.current = false;
+    };
+
+    const stopLoop = () => {
+      cancelledRef.current = true;
+      loopRunningRef.current = false;
+      pl.set(0); op.set(0);
+    };
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          runLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const el = footerRef.current;
+    if (el) obs.observe(el);
+    return () => {
+      obs.disconnect();
+      stopLoop();
+    };
+  }, []);
+
+  const maskId = "heart-mask";
+  const caps = { strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+
+  return (
+    <div ref={footerRef} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute right-[-40%] top-[15%] sm:right-[-28%] sm:top-[8%] md:right-[-30%] md:top-[8%] lg:right-[-20%] lg:top-[-0%] h-full w-full 
+      scale-[0.42] sm:scale-[0.65] md:scale-[0.7] lg:scale-[0.90]">
+      
+
+        <svg
+          viewBox="0 0 797.28 681.85"
+          className="absolute right-0 top-0 h-[120%] w-auto"
+          style={{ overflow: "visible" }}
+        >
+
+          <defs>
+            <mask id={maskId}>
+              <rect x="-20" y="-20" width="1440" height="800" fill="none" />
+              <motion.path d={HEART_PATH} stroke="white" strokeWidth={50} fill="none"
+              {...caps} style={{ pathLength: pl, opacity: op }} />
+            </mask>
+          </defs>
+
+          {/* Blue shadow */}
+          <g transform="translate(12, 14)">
+            <motion.path d={HEART_PATH} stroke="#29abe2" strokeWidth={50} fill="none"
+              {...caps} style={{ pathLength: pl, opacity: op }} />
+          </g>
+          {/* Black border */}
+          <motion.path d={HEART_PATH} stroke="black" strokeWidth={53} fill="none"
+            {...caps} style={{ pathLength: pl, opacity: op }} />
+          
+     
+            {/* Video revealed through mask */}
+          <foreignObject x="0" y="0" width="1390.25" height="750" mask={`url(#${maskId})`}>
+            <video
+              ref={videoRef}
+              src={HERO_VID}
+              autoPlay muted loop playsInline preload="auto"
+              style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(1.3)" }}
+            />
+          </foreignObject>
+        </svg>
+      </div>
+    </div>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -29,34 +154,39 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative mt-20 pt-10 pb-5 md:pb-10 md:pt-20 overflow-hidden border border-t-black border-x-0 border-b-0 text-black"
+      className=" relative mt-20 pt-10 md:pt-20 overflow-hidden bg-light-gray  border-t-black border-x-0 border-b-0 text-black"
     >
+      <HeartDoodle />
+
       <motion.div
-        className="relative z-10 px-2 ml-2 md:ml-10"
+        className="relative z-10 px-2 ml-2 md:ml-8"
         variants={stagger}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
       >
-        <motion.h2 variants={fadeUp} className="hidden md:block md:ml-0 max-w-[240px] text-display md:max-w-none">
-          Let's work together!
-        </motion.h2>
-        <motion.h2 variants={fadeUp} className="md:hidden max-w-[240px] text-wrap text-display">
-          Let's work together!
-        </motion.h2>
+        <motion.div variants={fadeUp} className=" max-w-[380px] sm:max-w-[420px] text-body md:max-w-[520px]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="22" viewBox="0 0 57.35 30.8" fill="black">
+            <path d="M54.68,1.37h-.46c-1.23,0-2.3.83-2.59,2.03-.66,2.69-1.71,5.74-2.97,9-.2.52-.4,1.04-.61,1.54-1.05,2.61-4.9,2.03-5.14-.77-.06-.76-.14-1.46-.22-2.08-.41-3.12-1.15-5.8-1.92-7.96-.38-1.06-1.39-1.76-2.51-1.76h-3.34c-1.29,0-2.4.93-2.63,2.2-.5,2.83-1.44,6.36-3.28,10.13-1.58,3.24-3.4,5.78-4.98,7.67-.03.04-.06.07-.1.1-1.55,1.54-2.98,2.6-4.28,3.18-1.31.59-2.76.89-4.35.89-1.86,0-3.55-.42-5.07-1.27-1.52-.85-2.7-2.01-3.53-3.5-.83-1.49-1.25-3.19-1.25-5.1,0-2.75.94-5.06,2.82-6.94,1.88-1.88,4.64-2.8,7.36-2.39,2.55.39,3.47,1.55,5.53,3.14,1.53,1.18,3.23.85,4.52-.87,1.12-1.48,1.92-3.17,1.06-4.56-.73-1.18-2.38-2.18-3.67-2.76C20.89.31,17.9-.05,15.3,0c-2.78.06-5.38,1-7.8,2.35-2.41,1.35-4.27,3.46-5.56,5.69s-1.94,4.77-1.94,7.63c0,4.42,1.42,8.05,4.26,10.88,2.84,2.83,6.5,4.25,10.96,4.25,2.42,0,4.57-.4,6.46-1.2,1.87-.79,3.85-2.2,5.94-4.24.05-.04.09-.09.13-.14,1.56-1.99,3.28-4.51,4.88-7.57.13-.24.25-.49.37-.73,1.27-2.57,5.16-1.64,5.07,1.23,0,.04,0,.09,0,.13-.12,3.33-.49,6.27-.89,8.69-.27,1.63.98,3.11,2.63,3.11h4.99c.96,0,1.84-.51,2.32-1.34,2.26-3.96,4.58-8.59,6.69-13.89,1.41-3.54,2.53-6.92,3.44-10.08.49-1.7-.79-3.4-2.57-3.4Z"/>
+          </svg>
+        </motion.div>
 
-        <motion.p variants={fadeUp} className="mt-4 sm:mt-6 max-w-[380px] sm:max-w-[420px] text-body md:max-w-[520px]">
+        <motion.p variants={fadeUp} className="mt-4 max-w-[380px] sm:max-w-[420px] text-body md:max-w-[520px]">
           I'm always interested in new opportunities and exciting projects.
           Let's get in touch and build something amazing!
         </motion.p>
 
-        <motion.div variants={fadeUp} className="flex md:justify-between items-end mt-4">
+        <motion.p variants={fadeUp} className="-mb-2 md:-mb-1 mt-8 font-semibold sm:max-w-[420px] text-body">
+          Contact
+        </motion.p>
+
+        <motion.div variants={fadeUp} className="pb-30 sm:pb-10 flex md:justify-between items-end ">
           <div className="flex flex-wrap items-end gap-x-4 gap-y-6">
             {/* Email */}
             <div className="flex items-center gap-3">
               <a
                 href="mailto:cindynakh@gmail.com"
-                className="group relative inline-flex items-center gap-2 w-fit text-body"
+                className="group relative inline-flex items-center gap-2 w-fit text-tiny"
               >
                 cindynakh@gmail.com
                 <span className="absolute left-0 -bottom-3 h-[10px] w-0 bg-black rounded-full transition-all duration-300 ease-out group-hover:w-full" />
@@ -89,15 +219,21 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <p className="hidden md:block relative z-10 opacity-50 text-tiny text-right mr-10">
-            Built by Cindy Nakhammouane
-          </p>
         </motion.div>
 
-        <p className="md:hidden relative z-10 mt-4 md:mt-10 opacity-50 text-tiny text-right mr-2">
+        <motion.h2 variants={fadeUp}
+            className="leading-[0.95] tracking-tight mt-10 lg:mt-20 text-black "
+            style={{ fontFamily: "Century Gothic", fontSize: "clamp(46px, 10vw, 160px)" }}>
+          Let's work <b>together</b>
+        </motion.h2>
+
+
+      </motion.div>
+      <div className="relative z-10 mt-8 flex items-center justify-end bg-light-black w-full p-4 md:p-6 px-4 md:px-10">
+        <p className="relative text-light-gray text-tiny text-right ">
           Designed and developed by Cindy Nakhammouane
         </p>
-      </motion.div>
+        </div>
     </footer>
   );
 }

@@ -56,7 +56,7 @@ export const extras: ExtraProject[] = [
       coverImage: "/extras/photography/bus_stop.jpg",
       images: ["/extras/photography/garden.jpg", "/extras/photography/glasses.jpg", "/extras/photography/ships.jpg",
               "/extras/photography/boots.jpg", "/extras/photography/plants.jpg"],
-      description: "",
+      description: "Miscellaneous photographs from my collection, mostly analog film. Some digital.",
       title: "Photography Collage"
     },
     {

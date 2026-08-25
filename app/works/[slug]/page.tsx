@@ -62,7 +62,8 @@ export default function ProjectPage() {
             </div>
           </motion.div>
 
-          <motion.h1 variants={item} className="mt-4 mb-8 leading-tight" style={{ fontFamily: "Century Gothic", fontSize: "clamp(46px, 10vw, 160px)"}}>
+          <motion.h1 variants={item} className="mt-4 mb-8 leading-[0.95]" 
+          style={{ fontFamily: "Century Gothic", fontSize: "clamp(46px, 10vw, 160px)"}}>
             {project.title}
             </motion.h1>
 
@@ -77,7 +78,7 @@ export default function ProjectPage() {
             </motion.div>
           }
 
-          <motion.div variants={item} className="flex items-end gap-4 mt-8 mb-2">
+          <motion.div variants={item} className="flex items-end justify-between gap-4 mt-8 mb-2">
             <div>
               <p className="gray-title text-tiny">Overview</p>
             </div>
@@ -117,17 +118,21 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Skills</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
-                  {Array.isArray(project.skills) ? project.skills.join(', ') : project.skills}
-                </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {(Array.isArray(project.skills) ? project.skills : [project.skills]).map((s) => (
+                    <span key={s} className="text-tiny text-gray border bg-light-gray border-mid-gray rounded-lg px-3 py-1">{s}</span>
+                  ))}
+                </div>
               </div>
               <div className="bg-white">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Tools</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
-                  {Array.isArray(project.tools) ? project.tools.join(', ') : project.tools}
-                </p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {(Array.isArray(project.tools) ? project.tools : [project.tools]).map((t) => (
+                    <span key={t} className="text-tiny text-gray bg-light-gray border border-mid-gray rounded-lg px-3 py-1">{t}</span>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -166,8 +171,12 @@ export default function ProjectPage() {
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
-                <div className={`flex w-full px-2 ${direction === "right" ? "justify-end" : ""}`}>
-                  <p className={`text-tiny text-nowrap  opacity-100 group-hover:opacity-50 transition ${direction === "right" ? "text-right" : "text-left"} leading-snug`}>{p.title}</p>
+                <div className={`flex w-full px-1 ${direction === "right" ? "justify-end" : ""}`}>
+                  <div className={` flex gap-2 text-tiny text-nowrap opacity-100 group-hover:opacity-50 transition ${direction === "right" ? "text-right" : "text-left"} leading-snug`}>
+                    <Image src="/arrow.svg" alt="" width={10} height={10} className={`${direction === "right" ? "hidden" : ""} rotate-180`} />
+                    {p.title}
+                    <Image src="/arrow.svg" alt="" width={10} height={10} className={`${direction === "right" ? "" : "hidden"}`} />
+                  </div>
                 </div>
               </a>
             );

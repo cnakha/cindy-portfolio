@@ -49,11 +49,11 @@ export default function Status({ message, hasLink, link, github }: Status) {
                     
                 </a>
             ) : (
-                <div className="relative flex flex-col">
-                    <h2 className="text-tiny font-semibold">{message}</h2>
-                    <span
+                <div className="relative flex flex-col bg-light-black text-white py-2 px-4 rounded-lg">
+                    <h2 className="text-white text-tiny ">{message}</h2>
+                    {/* <span
                         className={`rounded-full absolute left-0 -bottom-2 h-[5px] bg-black transition-all duration-300 ease-out w-full`}
-                    />
+                    /> */}
                 </div>
             )}
             {github && (

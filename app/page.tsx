@@ -149,11 +149,8 @@ function HeroFlower() {
           style={{ minWidth: "55vw", overflow: "visible" }}
         >
           <defs>
-            <clipPath id="flower-video-clip">
-              <rect x="0" y="0" width="1390.25" height="730.38" />
-            </clipPath>
             <mask id={maskId}>
-              <rect x="-120" y="0" width="1630" height="740" fill="black" />
+              <rect x="-20" y="-20" width="1440" height="800" fill="black" />
               <motion.path d={FLOWER_PATH1} stroke="white" strokeWidth={54} fill="none"
                 {...sharedCaps} style={{ pathLength: pl1, opacity: op1 }} />
               <motion.path d={FLOWER_PATH2} stroke="white" strokeWidth={54} fill="none"
@@ -169,24 +166,22 @@ function HeroFlower() {
               {...sharedCaps} style={{ pathLength: pl2, opacity: op2 }} />
           </g>
 
-          {/* Black border sits between shadow and video mask */}
+          {/* Black border */}
           <motion.path d={FLOWER_PATH1} stroke="black" strokeWidth={57} fill="none"
             {...sharedCaps} style={{ pathLength: pl1, opacity: op1 }} />
           <motion.path d={FLOWER_PATH2} stroke="black" strokeWidth={57} fill="none"
             {...sharedCaps} style={{ pathLength: pl2, opacity: op2 }} />
 
-          {/* Video revealed through mask — clipped to viewBox so it can't bleed outside */}
-          <g clipPath="url(#flower-video-clip)">
-            <foreignObject x="-120" y="0" width="1630" height="740" mask={`url(#${maskId})`}>
-              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-              <video
-                ref={videoRef}
-                src={HERO_VID}
-                autoPlay muted loop playsInline preload="auto"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </foreignObject>
-          </g>
+          {/* Video revealed through mask */}
+          <foreignObject x="0" y="0" width="1390.25" height="750" mask={`url(#${maskId})`}>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video
+              ref={videoRef}
+              src={HERO_VID}
+              autoPlay muted loop playsInline preload="auto"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </foreignObject>
         </svg>
       </div>
     </div>

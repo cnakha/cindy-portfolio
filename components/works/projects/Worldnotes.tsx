@@ -31,7 +31,7 @@ export default function Worldnotes() {
     <div className="flex flex-col mt-8 text-black">
 
       <Picture type={"wide"} source={"/projects/worldnotes/thumbnail.png"}/>
-      <div className="mt-10"/>
+      <div className="mt-4"/>
       <Picture type={"wide"} source={"/projects/worldnotes/welcomeScreen.png"}/>
       <div className="mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/worldnotes/traversal.png"}

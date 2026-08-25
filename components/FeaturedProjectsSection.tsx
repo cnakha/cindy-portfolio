@@ -266,28 +266,27 @@ export default function FeaturedProjectsSection({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={closePopup}
-            className="fixed inset-0 z-[100] bg-black/70"
+            className="fixed inset-0 z-[102] bg-black/70"
           >
+            <button
+                onClick={closePopup}
+                className="z-[103] absolute right-4 top-4 bg-white rounded-full p-2 cursor-pointer transition hover:scale-105"
+                aria-label="Close project popup"
+              >
+                <Image src="/x.svg" alt="" width={20} height={20} />
+              </button>
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
-              className="fixed left-1/2 top-4 z-[110] flex w-[calc(100%-48px)] max-w-3xl -translate-x-1/2 justify-between rounded-xl bg-white px-4 py-2 md:px-6 md:py-3 text-black shadow-md"
+              className="fixed left-1/2 top-4 flex min-w-[350px] max-w-[400px] sm:min-w-[500px] sm:max-w-[700px] md:min-w-[700px] -translate-x-1/2 rounded-xl bg-white px-4 py-2 md:px-6 md:py-3 text-black shadow-md"
             >
               <div>
                 <h2 className="text-body">{selectedExtra.title}</h2>
-                <p className="text-tiny">{selectedExtra.description}</p>
+                <p className="md:mt-1 text-tiny">{selectedExtra.description}</p>
               </div>
-
-              <button
-                onClick={closePopup}
-                className="grid cursor-pointer transition hover:scale-105"
-                aria-label="Close project popup"
-              >
-                <Image src="/x.svg" alt="" width={20} height={20} />
-              </button>
             </motion.div>
 
             <div className="hide-scrollbar h-full overflow-y-auto px-6 pb-16 pt-24">
@@ -363,79 +362,3 @@ const projectItemVariants: Variants = {
   },
 };
 
-const asideContainerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
-    },
-  },
-  exit: {
-    transition: {
-      staggerChildren: 0.04,
-      staggerDirection: -1,
-    },
-  },
-};
-
-const asideFadeVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 8,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.25,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -6,
-    transition: {
-      duration: 0.18,
-      ease: "easeIn",
-    },
-  },
-};
-
-const asideListVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.07,
-    },
-  },
-  exit: {
-    transition: {
-      staggerChildren: 0.035,
-      staggerDirection: -1,
-    },
-  },
-};
-
-const asideItemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    x: -12,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.28,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-  exit: {
-    opacity: 0,
-    x: -8,
-    transition: {
-      duration: 0.16,
-      ease: "easeIn",
-    },
-  },
-};
