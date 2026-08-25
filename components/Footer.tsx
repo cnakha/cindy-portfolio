@@ -86,7 +86,7 @@ function HeartDoodle() {
 
   return (
     <div ref={footerRef} className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div className="absolute right-[-40%] top-[15%] sm:right-[-28%] sm:top-[8%] md:right-[-30%] md:top-[8%] lg:right-[-20%] lg:top-[-0%] h-full w-full 
+      <div className="absolute right-[-45%] top-[15%] sm:right-[-28%] sm:top-[8%] md:right-[-30%] md:top-[8%] lg:right-[-20%] lg:top-[-0%] h-full w-full 
       scale-[0.42] sm:scale-[0.65] md:scale-[0.7] lg:scale-[0.90]">
       
 

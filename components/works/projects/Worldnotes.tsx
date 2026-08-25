@@ -38,17 +38,17 @@ export default function Worldnotes() {
         title={"Discover Art and Stories From Around the World"}
         description={"Start your adventure by landing at a random location scattered with 3D notes left behind by others. Exploration is spontaneous and feels natural: click-to-move in Street View, use the overview or mini map, or search specific places. The navigation bar allows quick refreshes of nearby notes, filtering, and stepping through notes."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/worldnotes/post_viewer.png"}
         title={"See the Full Picture and React with Your Community"}
         description={"A post viewer will be shown if you click on a note, here we can see information about the note’s title, creator, location, description, and community reactions."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/worldnotes/profile.png"}
         title={"Show Off Your Notes the Way You Want"}
         description={"Profiles show you all the notes you post, draft, repost, like, and save. The cover page is a place the user can display their favorite notes in any way they desire."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/worldnotes/note_creator.png"}
         title={"Create Notes with Fun and Easy to Use Tools"}
         description={"The note creation canvas provides custom tools and brushes. Drawing, text, pixel art, and animation are all supported along with a layers panel, color picker, and color palette creator."}
@@ -77,7 +77,7 @@ export default function Worldnotes() {
       <div className="flex flex-col gap-4 max-w-4xl">
         <p className="text-display">Creating the MVP</p>
         <p className="text-subtitle mt-10">Inspiration and Discovery</p>
-        <p className="text-body leading-relaxed">WorldNote's creative direction embraces geo-located hand-drawn pictorial posts over the standard text-based or video/photo uploaded content to offer a quirky nuance and emotional depth in social interactions that is under explored today. <br/>The challenge then became:</p>
+        <p className="text-body leading-relaxed">WorldNote's creative direction embraces geo-located hand-drawn pictorial posts over the standard text-based or video/photo based content to offer a quirky nuance and emotional depth in social interactions that is under explored today. <br/>The challenge then became:</p>
         <p className="text-body italic leading-relaxed">How can we design a social platform that inspires creativity?</p>
         <p className="text-body leading-relaxed">WorldNotes is deeply informed by a blend of <span className="font-semibold">internet culture</span>, mapping tools, and communal creativity platforms such as the Unsent Project, GeoGuesser, Reddit's r/Place, and Gartic Phone.</p>
       </div>

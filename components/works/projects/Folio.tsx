@@ -49,22 +49,22 @@ export default function Folio() {
         title={"Import Images and PDFs, Select a Template, Then Start!"}
         description={"Users can import images, PDFs, select from a variety of templates, and customize their designs with intuitive tools."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/folio/folding.png"}
         title={"Dynamically Fold your Pages Digitally"}
         description={"Handle paper folding with ease using intuitive gestures like pinch-to-fold and drag-to-unfold."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/folio/Spine_UI.png"}
         title={"Create Unique Layouts and Binds"}
         description={"Move and resize elements freely to create unique layouts. Choose from various binding and page styles like spiral binds, stitched binds, textured paper, to glossy paper."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/folio/cutting.png"}
         title={"Cut Pages with Ease and Precision"}
         description={"Users can easily create cutouts and custom shapes on their pages using cutting tools inspired by paper cutter sliders."}
       />
-      <div className="mt-8 sm:mt-10"/>
+      <div className="mt-20 sm:mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/folio/share.png"}
         title={"Share & Publish Your Creations with the World"}
         description={"Creators can generate a share link or embed, allowing publications to live online like interactive artifacts — not static images or PDFs."}

@@ -215,7 +215,7 @@ export default function Picture({
       <div className="flex h-full justify-center items-center">
         <div className="flex flex-col justify-center">
           {title && <h3 className="text-subtitle max-w-md">{title}</h3>}
-          {description && <p className="mt-4 text-body opacity-60 max-w-md">{description}</p>}
+          {description && <p className="mt-2 md:mt-4 text-body opacity-60 max-w-md">{description}</p>}
         </div>
       </div>
     );

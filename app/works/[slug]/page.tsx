@@ -92,13 +92,13 @@ export default function ProjectPage() {
           </motion.p>
 
           {/* Overview Details */}
-          <motion.div variants={item} className="mt-10 border border-mid-gray p-4 rounded-2xl">
+          <motion.div variants={item} className="flex flex-col md:gap-4 mt-10 border border-mid-gray p-4 rounded-2xl">
             <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-white">
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Context</p>
                 </div>
-                  <p className="text-tiny mt-2 max-w-[75%]">
+                  <p className="text-body mt-2 max-w-[75%]">
                     {project.context}
                   </p>
               </div>
@@ -106,7 +106,7 @@ export default function ProjectPage() {
                 <div className="flex items-center gap-2">
                   <p className="text-tiny gray-title">Role(s)</p>
                 </div>
-                <p className="text-tiny mt-2 max-w-[75%]">
+                <p className="text-body mt-2 max-w-[75%]">
                   {project.role}
                 </p>
               </div>
@@ -120,7 +120,7 @@ export default function ProjectPage() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {(Array.isArray(project.skills) ? project.skills : [project.skills]).map((s) => (
-                    <span key={s} className="text-tiny text-gray border bg-light-gray border-mid-gray rounded-lg px-3 py-1">{s}</span>
+                    <span key={s} className="text-body text-black bg-light-gray rounded-lg px-3 py-1">{s}</span>
                   ))}
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function ProjectPage() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {(Array.isArray(project.tools) ? project.tools : [project.tools]).map((t) => (
-                    <span key={t} className="text-tiny text-gray bg-light-gray border border-mid-gray rounded-lg px-3 py-1">{t}</span>
+                    <span key={t} className="text-body text-black bg-light-gray rounded-lg px-3 py-1">{t}</span>
                   ))}
                 </div>
               </div>
