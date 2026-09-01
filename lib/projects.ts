@@ -18,6 +18,7 @@ export interface Project {
   vid?: string;
   liveUrl?: string;
   githubUrl?: string;
+  figmaUrl?: string;
   problem: string;
   subProblem?: string;
   keyProblems?: string[];
@@ -99,6 +100,7 @@ export const projects: Project[] = [
       "Physically prototyping folds, bindings, cutouts, and page structures often requires multiple physical mockups",
       "Traditional digital documentations (flat scans, photos, or videos) struggle to capture the dimensionality, tactility, and interactive discovery of physical publications.",
     ],
+    figmaUrl:"https://www.figma.com/design/gH8VFoigiVvyOALyGDnCVV/FolioFolds?node-id=0-1&t=4ZzWwV5auuHz5cLz-1",
     // status: "FolioFolds is finalizing its design and beginning development... Stay tuned for updates!",
     },
    {
@@ -107,6 +109,7 @@ export const projects: Project[] = [
     status: "View the live site here!",
     link: "https://graffgraff.com",
     githubUrl: "https://github.com/cnakha/GraffGraff",
+    figmaUrl:"https://www.figma.com/design/hj5qKMlEUOWC0I57eXzPLn/WorldNotes?node-id=0-1&t=fdKi1oxuDcgmyw0t-1",
     description: "Website and community gallery hosting online multiplayer nonsensical art games made to empower and inspire creativity in daily life",
     context: "Fullstack Development, UI/UX Design",
     fullDescription: "GRAFFGRAFF is a web experience and digital community gallery that empowers creativity through physical and online nonsensical creativity games. Graffiti, also known as “Graff”, is the practice of unapologetic self expression, socialization, commentary, and art. The user experience is a direct reflection of this concept providing several modes of play that stray from strictly online interactions as well as provide an unfiltered shared art collective in celebration of carefree creative expression and freedom. My work was exhibited at UIC YES! 2026.",
@@ -163,7 +166,7 @@ export const projects: Project[] = [
    {
     id: "biomed",
     title: "Sensing Through Life",
-    description: "Five wearable IoT devices and UI projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
+    description: "Five wearable IoT health tracking devices and web app projects from my time at the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago",
     context: "IoT, Hardware Assembly, UI/UX Design",
     fullDescription: "Projects from working in the Wearables and Nearables Technology Laboratory at the University of Illinois Chicago. I collaborated in an interdisciplinary group of biomedical engineering and computer science students, gaining hands-on experience assembling and designing various wearable devices and UIs. I acquisitioned, processed, and analyzed a diverse set of sensor data, created IoT systems, and worked with various Arduino sensors. Each project was developed in under two weeks and presented through a series of live demos and critques.",
     tools: ["React", "Node.js", "Processing", "Python", "C#", "Arduino", "Figma", "Illustrator", "Photoshop"],

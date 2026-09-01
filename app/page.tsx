@@ -140,8 +140,8 @@ function HeroFlower() {
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ clipPath: "inset(0)" }}>
       {/* scale down on small screens, anchored top-right */}
-      <div className="absolute right-[-5%] md:right-[-8%] lg:right-[-5%] top-[54%] sm:top-[30%] md:top-[18%] lg:top-[5%] 
-      h-full origin-top-right scale-[0.42] sm:scale-[0.65] md:scale-[0.7] lg:scale-[0.90]">
+      <div className="absolute right-[-5%] md:right-[-8%] lg:right-[-7%] top-[54%] sm:top-[30%] md:top-[18%] lg:top-[3%]
+      h-full origin-top-right scale-[0.42] sm:scale-[0.65] md:scale-[0.7] lg:scale-[0.80]">
         <svg
           viewBox="0 0 1390.25 730.38"
           preserveAspectRatio="xMidYMid meet"
@@ -214,7 +214,7 @@ export default function HomePage() {
 
       {/* hero flower bg + text */}
       <section className="relative w-full">
-        <div className="relative w-full overflow-hidden min-h-[100svh] sm:min-h-[80svh] md:min-h-[100svh]" style={{ clipPath: "inset(0)" }}>
+        <div className="relative w-full overflow-hidden min-h-[100svh] sm:min-h-[80svh] md:min-h-[750px] lg:min-h-[800px]" style={{ clipPath: "inset(0)" }}>
 
           <HeroFlower />
 

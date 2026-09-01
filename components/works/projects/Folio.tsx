@@ -43,7 +43,7 @@ export default function Folio() {
   return (
     <div className="flex flex-col mt-8 text-black">
     
-      <Picture type={"wide"} source={"/projects/folio/thumbnail.png"}/>
+      <Picture type={"wide"} popup={true} source={"/projects/folio/thumbnail.png"}/>
       <div className="mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/folio/landing.png"}
         title={"Import Images and PDFs, Select a Template, Then Start!"}
@@ -59,6 +59,9 @@ export default function Folio() {
         title={"Create Unique Layouts and Binds"}
         description={"Move and resize elements freely to create unique layouts. Choose from various binding and page styles like spiral binds, stitched binds, textured paper, to glossy paper."}
       />
+      <div className="mt-10"/>
+      <Picture type={"half"} popup={true} useAspectRatio source={"/projects/folio/edges.png"} source2={"/projects/folio/children.png"}/>
+      
       <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/folio/cutting.png"}
         title={"Cut Pages with Ease and Precision"}
@@ -69,6 +72,9 @@ export default function Folio() {
         title={"Share & Publish Your Creations with the World"}
         description={"Creators can generate a share link or embed, allowing publications to live online like interactive artifacts — not static images or PDFs."}
       />
+      <div className="mt-10"/>
+       <Picture type={"half"} popup={true} useAspectRatio source={"/projects/folio/discover.png"} source2={"/projects/folio/example.png"}/>
+      
       <div className="mt-10"/>
       <div className="mt-30"/>
       <div className="relative flex flex-col">

@@ -8,9 +8,10 @@ type Status = {
     message: string;
     hasLink: boolean;
     github?: string;
+    figma?: string;
 }
 
-export default function Status({ message, hasLink, link, github }: Status) {
+export default function Status({ message, hasLink, link, github, figma }: Status) {
     const [active, setActive] = useState(false);
     const [active2, setActive2] = useState(false);
 
@@ -67,6 +68,22 @@ export default function Status({ message, hasLink, link, github }: Status) {
                 >
                     <div className="flex gap-1">
                         <h2 className="text-tiny font-semibold">Github</h2>
+                        <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
+                    </div>
+                    {underline2}
+                </a>
+            )}
+            {figma && (
+                <a
+                    href={figma}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-block cursor-pointer ml-2"
+                    onMouseEnter={() => setActive2(true)}
+                    onMouseLeave={() => setActive2(false)}
+                >
+                    <div className="flex gap-1">
+                        <h2 className="text-tiny font-semibold">Figma</h2>
                         <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
                     </div>
                     {underline2}

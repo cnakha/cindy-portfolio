@@ -231,7 +231,7 @@ export default function Footer() {
       </motion.div>
       <div className="relative z-10 mt-8 flex items-center justify-end bg-light-black w-full p-4 md:p-6 px-4 md:px-10">
         <p className="relative text-light-gray text-tiny text-right ">
-          Designed and developed by Cindy Nakhammouane
+          © 2026 Cindy Nakhammouane. All rights reserved.
         </p>
         </div>
     </footer>

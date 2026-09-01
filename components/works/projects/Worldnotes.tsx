@@ -30,14 +30,16 @@ export default function Worldnotes() {
   return (
     <div className="flex flex-col mt-8 text-black">
 
-      <Picture type={"wide"} source={"/projects/worldnotes/thumbnail.png"}/>
+      <Picture type={"wide"} source={"/projects/worldnotes/thumbnail_wide.png"}/>
       <div className="mt-4"/>
-      <Picture type={"wide"} source={"/projects/worldnotes/welcomeScreen.png"}/>
+      <Picture type={"half"} popup={true} source={"/projects/worldnotes/spread.png"} source2={"/projects/worldnotes/welcome.png"}/>
       <div className="mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/worldnotes/traversal.png"}
         title={"Discover Art and Stories From Around the World"}
         description={"Start your adventure by landing at a random location scattered with 3D notes left behind by others. Exploration is spontaneous and feels natural: click-to-move in Street View, use the overview or mini map, or search specific places. The navigation bar allows quick refreshes of nearby notes, filtering, and stepping through notes."}
       />
+      <div className="mt-10"/>
+      <Picture type={"half"} popup={true} source={"/projects/worldnotes/search.png"} source2={"/projects/worldnotes/search2.png"}/>
       <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/worldnotes/post_viewer.png"}
         title={"See the Full Picture and React with Your Community"}
@@ -48,8 +50,10 @@ export default function Worldnotes() {
         title={"Show Off Your Notes the Way You Want"}
         description={"Profiles show you all the notes you post, draft, repost, like, and save. The cover page is a place the user can display their favorite notes in any way they desire."}
       />
+      <div className="mt-10 sm:mt-10"/>
+      <Picture type={"half"} popup={true} source={"/projects/worldnotes/viewing_profile.png"} source2={"/projects/worldnotes/editing_profile.png"}/>
       <div className="mt-20 sm:mt-10"/>
-      <Picture type={"left"} popup={true} source={"/projects/worldnotes/note_creator.png"}
+      <Picture type={"left"} popup={true} source={"/projects/worldnotes/creator.png"}
         title={"Create Notes with Fun and Easy to Use Tools"}
         description={"The note creation canvas provides custom tools and brushes. Drawing, text, pixel art, and animation are all supported along with a layers panel, color picker, and color palette creator."}
       />
@@ -113,7 +117,8 @@ export default function Worldnotes() {
       <div className="mt-10"/>
     
       <Picture type={"captioned"} popup={true} source={"/projects/worldnotes/UI_Design.png"} description={"Mockup Deigns of User Profile and Community Page"} />
-
+      <div className="mt-20"/>
+      <Picture type={"captioned"} popup={true} source={"/projects/worldnotes/figma.png"} description={"Organization in Figma"} />
       <div className="mt-20"/>
 
       <div className="flex flex-col gap-4 max-w-4xl">

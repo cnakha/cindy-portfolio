@@ -47,7 +47,7 @@ export default function Biomed() {
   return (
     <div className="flex flex-col mt-8 text-black">
     
-      <Picture type={"wide"} source={"/projects/biomed/thumbnail.png"}/>
+      <Picture type={"wide"} source={"/projects/biomed/thumbnail_wide.png"}/>
 
       <BiomedProjectsTabs />
 
