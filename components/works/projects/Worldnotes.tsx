@@ -39,12 +39,14 @@ export default function Worldnotes() {
         description={"Start your adventure by landing at a random location scattered with 3D notes left behind by others. Exploration is spontaneous and feels natural: click-to-move in Street View, use the overview or mini map, or search specific places. The navigation bar allows quick refreshes of nearby notes, filtering, and stepping through notes."}
       />
       <div className="mt-10"/>
-      <Picture type={"half"} popup={true} source={"/projects/worldnotes/search.png"} source2={"/projects/worldnotes/search2.png"}/>
+      <Picture type={"half"} useAspectRatio popup={true} source={"/projects/worldnotes/search.png"} source2={"/projects/worldnotes/community.png"}/>
       <div className="mt-20 sm:mt-10"/>
       <Picture type={"left"} popup={true} source={"/projects/worldnotes/post_viewer.png"}
         title={"See the Full Picture and React with Your Community"}
         description={"A post viewer will be shown if you click on a note, here we can see information about the note’s title, creator, location, description, and community reactions."}
       />
+      <div className="mt-10"/>
+      <Picture type={"half"} useAspectRatio popup={true} source={"/projects/worldnotes/post_viewer2.png"} source2={"/projects/worldnotes/post_viewer3.png"}/>
       <div className="mt-20 sm:mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/worldnotes/profile.png"}
         title={"Show Off Your Notes the Way You Want"}
@@ -57,6 +59,8 @@ export default function Worldnotes() {
         title={"Create Notes with Fun and Easy to Use Tools"}
         description={"The note creation canvas provides custom tools and brushes. Drawing, text, pixel art, and animation are all supported along with a layers panel, color picker, and color palette creator."}
       />
+      <div className="mt-10"/>
+      <Picture type={"half"} useAspectRatio popup={true} source={"/projects/worldnotes/note_details.png"} source2={"/projects/worldnotes/location_picker.png"}/>
 
       <div className="mt-30"/>
       <div className="relative flex flex-col">

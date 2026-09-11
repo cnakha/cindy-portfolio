@@ -223,7 +223,7 @@ export default function Picture({
     const imageBlock = (
       <ImageWithPopup
         src={source}
-        className={`${imageClass} aspect-[4/3]`}
+        className={`${imageClass} aspect-[6/4]`}
       />
     );
 

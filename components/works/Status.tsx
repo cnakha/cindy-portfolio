@@ -14,6 +14,7 @@ type Status = {
 export default function Status({ message, hasLink, link, github, figma }: Status) {
     const [active, setActive] = useState(false);
     const [active2, setActive2] = useState(false);
+    const [active3, setActive3] = useState(false);
 
     const underline = (
         <span
@@ -30,6 +31,15 @@ export default function Status({ message, hasLink, link, github, figma }: Status
             }`}
         />
     );
+
+      const underline3 = (
+        <span
+            className={`rounded-full pointer-events-none absolute left-0 h-[5px] bg-black transition-all duration-300 ease-out w-full ${
+            active3 ? "h-[10px] -bottom-3.5" : "h-[5px] -bottom-2"
+            }`}
+        />
+    );
+
 
     return (
         <div className="flex">
@@ -52,9 +62,6 @@ export default function Status({ message, hasLink, link, github, figma }: Status
             ) : (
                 <div className="relative flex flex-col bg-light-black text-white py-2 px-4 rounded-lg">
                     <h2 className="text-white text-tiny ">{message}</h2>
-                    {/* <span
-                        className={`rounded-full absolute left-0 -bottom-2 h-[5px] bg-black transition-all duration-300 ease-out w-full`}
-                    /> */}
                 </div>
             )}
             {github && (
@@ -79,14 +86,14 @@ export default function Status({ message, hasLink, link, github, figma }: Status
                     target="_blank"
                     rel="noopener noreferrer"
                     className="relative inline-block cursor-pointer ml-2"
-                    onMouseEnter={() => setActive2(true)}
-                    onMouseLeave={() => setActive2(false)}
+                    onMouseEnter={() => setActive3(true)}
+                    onMouseLeave={() => setActive3(false)}
                 >
                     <div className="flex gap-1">
                         <h2 className="text-tiny font-semibold">Figma</h2>
                         <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
                     </div>
-                    {underline2}
+                    {underline3}
                 </a>
             )}
         </div>

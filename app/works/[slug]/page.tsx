@@ -74,6 +74,7 @@ export default function ProjectPage() {
                 hasLink={project.link !== undefined || project.githubUrl !== undefined}
                 link={project.link}
                 github={project.githubUrl ? project.githubUrl : undefined}
+                figma={project.figmaUrl ? project.figmaUrl : undefined}
               />
             </motion.div>
           }
