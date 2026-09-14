@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 
 const HEART_PATH = "M112.47,656.85C342.09,501.23,558.87,96.84,432.19,35c-121.73-59.42-164.68,165.45-164.68,165.45,0,0-205.18-128.74-238.85-12.26-49.3,170.54,410.26,227.28,743.62,181.63";
-const HERO_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2Fbeach2.mp4?alt=media&token=ead83c7b-bc5f-4c21-8086-d878756ea8ee";
+const FOOTER_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2FBeach2a.mp4?alt=media&token=4d09089a-72dc-4311-8bd9-a50828cec0e9";
 
 function HeartDoodle() {
   const pl = useMotionValue(0);
@@ -118,8 +118,8 @@ function HeartDoodle() {
           <foreignObject x="0" y="0" width="1390.25" height="750" mask={`url(#${maskId})`}>
             <video
               ref={videoRef}
-              src={HERO_VID}
-              autoPlay muted loop playsInline preload="auto"
+              src={FOOTER_VID}
+              autoPlay muted loop playsInline preload="none" poster="/placeholder.png"
               style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(1.3)" }}
             />
           </foreignObject>

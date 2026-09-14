@@ -69,6 +69,8 @@ export default function ProjectCard({ project, wide = false }: ProjectCardProps)
         <img
           src={project.imageUrl}
           alt={project.title}
+          width={1000}
+          height={660}
           className={`h-full w-full object-cover transition duration-900 ${active ? "scale-[1.03]" : "group-hover:scale-[1.03]"}`}
         />
       </div>

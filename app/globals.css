@@ -25,16 +25,18 @@
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("/fonts/century-gothic.ttf") format("truetype");
+  src: url("/fonts/GOTHIC.TTF") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Century Gothic";
-  src: url("/fonts/century-gothic-bold.ttf") format("truetype");
+  src: url("/fonts/GOTHICB.TTF") format("truetype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 

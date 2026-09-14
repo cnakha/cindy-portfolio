@@ -56,7 +56,7 @@ type SwirlParticle = {
   displayRadius: number;  // lerped 0→SQ/2 on show, back to 0 on hide
 };
 
-const HERO_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2FHero.mp4?alt=media&token=44a88620-8569-4faa-95d6-f51483167ce1";
+const HERO_VID = "https://firebasestorage.googleapis.com/v0/b/portfolio-website-6baaf.firebasestorage.app/o/portfolio_videos%2FHero2a.mp4?alt=media&token=6ab80c66-72f3-4fc8-b1de-87ac416b9303";
 
 const FLOWER_PATH1 = "M25,577.71c95.25,137.87,249.66,121.36,312.55,74.6,159.22-118.38,93.37-183.04,46.39-188.28-91.67-10.23-167.91,76.6-78.84,104.34,66.02,20.56,105.69,7.87,146.2,9.17,95.6,3.06,239.74,62.55,201.7,99.06-51.25,49.19-252.09,47.81-104.73-104.68,74.02-76.6,185.91-16.85,258.94-83.23,28.42-25.83,13.07-75.01-48-88.85-60.23-13.65-123.13,11.46-106.72,62.3,26.04,80.68,366.13,229.3,492.22,134.65,109.76-82.39,4.07-211.9-30.06-269.57";
 const FLOWER_PATH2 = "M1114.65,327.22c28.41-11.45,122.52,105.42,165.93,111.1,83.57,10.94,109.1-164.89,59.35-200.68-45.93-33.05-176.76,47.95-189.95,25.28-13.39-23.03,84.28-66.62,78.65-137.09-4.7-58.92-86.06-114.84-122.44-97.69-55.23,26.04-6.18,220.21-31.79,225.92-24.84,5.54-56.76-180.21-121.64-184.03-57.71-3.4-134.85,137.56-97.78,193.51,35.73,53.93,184.21,19.47,190.45,46.76,5.91,25.83-130.1,49.92-131.81,101.03-1.58,47.38,100.05,109.83,152.45,83.1,64.03-32.65,12.88-152.84,48.57-167.22Z";
@@ -178,7 +178,7 @@ function HeroFlower() {
             <video
               ref={videoRef}
               src={HERO_VID}
-              autoPlay muted loop playsInline preload="auto"
+              autoPlay muted loop playsInline preload="none" poster="/placeholder.png"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </foreignObject>
