@@ -67,10 +67,10 @@ export default function ProjectPage() {
             {project.title}
             </motion.h1>
 
-          {project.status &&
+          {(project.status || project.figmaUrl || project.githubUrl) &&
             <motion.div variants={item}>
               <Status
-                message={project.status}
+                status={project.status ? project.status : undefined}
                 hasLink={project.link !== undefined || project.githubUrl !== undefined}
                 link={project.link}
                 github={project.githubUrl ? project.githubUrl : undefined}

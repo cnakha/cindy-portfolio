@@ -76,18 +76,18 @@ export const extras: ExtraProject[] = [
       description: "10 second countdown Photoshop animation, collaborated with Hope Jo",
       title: "Bug Countdown"
     },
-    {
-      id: "goblet",
-      coverImage: "/extras/goblet/img1.png",
-      images: ["/extras/goblet/img2.png", "/extras/goblet/img3.png", "/extras/goblet/img4.png",
-                "/extras/goblet/img5.png", "/extras/goblet/collage1.png", "/extras/goblet/collage2.png",
-                "/extras/goblet/grid_art.png", "/extras/goblet/color1.png", "/extras/goblet/color2.png",
-                "/extras/goblet/color3.png", "/extras/goblet/color4.png", "/extras/goblet/color5.png",
-                "/extras/goblet/b1.png", "/extras/goblet/b2.png"
-      ],
-      description: "Typography, printing, and book binding",
-      title: "The Crystal Goblet"
-    },
+    // {
+    //   id: "goblet",
+    //   coverImage: "/extras/goblet/img1.png",
+    //   images: ["/extras/goblet/img2.png", "/extras/goblet/img3.png", "/extras/goblet/img4.png",
+    //             "/extras/goblet/img5.png", "/extras/goblet/collage1.png", "/extras/goblet/collage2.png",
+    //             "/extras/goblet/grid_art.png", "/extras/goblet/color1.png", "/extras/goblet/color2.png",
+    //             "/extras/goblet/color3.png", "/extras/goblet/color4.png", "/extras/goblet/color5.png",
+    //             "/extras/goblet/b1.png", "/extras/goblet/b2.png"
+    //   ],
+    //   description: "Typography, printing, and book binding",
+    //   title: "The Crystal Goblet"
+    // },
     
     {
       id: "trippy",

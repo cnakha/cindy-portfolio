@@ -5,13 +5,13 @@ import Image from "next/image";
 
 type Status = {
     link?: string;
-    message: string;
+    status?: string;
     hasLink: boolean;
     github?: string;
     figma?: string;
 }
 
-export default function Status({ message, hasLink, link, github, figma }: Status) {
+export default function Status({ status, hasLink, link, github, figma }: Status) {
     const [active, setActive] = useState(false);
     const [active2, setActive2] = useState(false);
     const [active3, setActive3] = useState(false);
@@ -42,34 +42,29 @@ export default function Status({ message, hasLink, link, github, figma }: Status
 
 
     return (
-        <div className="flex">
-            {hasLink ? (
+        <div className="flex gap-2">
+            {status && (
                 <a
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative inline-block cursor-pointer"
+                    className="relative inline-block cursor-pointer pl-1"
                     onMouseEnter={() => setActive(true)}
                     onMouseLeave={() => setActive(false)}
                 >
                     <div className="flex gap-1">
-                        <h2 className="text-tiny font-semibold">{message}</h2>
+                        <h2 className="text-tiny font-semibold">{status}</h2>
                         <Image src="/arrow.svg" alt="" width={10} height={10} className="-rotate-45" />
                     </div>
                     {underline}
-                    
                 </a>
-            ) : (
-                <div className="relative flex flex-col bg-light-black text-white py-2 px-4 rounded-lg">
-                    <h2 className="text-white text-tiny ">{message}</h2>
-                </div>
             )}
             {github && (
                 <a
                     href={github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative inline-block cursor-pointer ml-2"
+                    className="relative inline-block cursor-pointer pl-1"
                     onMouseEnter={() => setActive2(true)}
                     onMouseLeave={() => setActive2(false)}
                 >
@@ -85,7 +80,7 @@ export default function Status({ message, hasLink, link, github, figma }: Status
                     href={figma}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative inline-block cursor-pointer ml-2"
+                    className="relative inline-block cursor-pointer pl-1"
                     onMouseEnter={() => setActive3(true)}
                     onMouseLeave={() => setActive3(false)}
                 >

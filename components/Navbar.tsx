@@ -103,7 +103,7 @@ export default function Navbar() {
               <NavItem light={isDark} label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
               {/* <NavItem light={isDark} label="Extras"  active={isExtras} href="/extras" /> */}
               <NavItem light={isDark} label="About"   active={isAbout}  href="/about" />
-              <NavItem light={isDark} label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" />
+              <NavItem light={isDark} label="Resume"  active={isResume} href="/Resume_2026_Cindy_Nakhammouane.pdf" />
               <NavItem light={isDark} label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
 
             </div>
