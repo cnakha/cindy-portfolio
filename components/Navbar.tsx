@@ -160,7 +160,7 @@ export default function Navbar() {
           <NavItem mobile label="Works"   active={isWorks}  onClick={() => scrollToSection("works")} />
           {/* <NavItem mobile label="Extras"  active={isExtras} href="/extras" onClick={closeMobile} /> */}
           <NavItem mobile label="About"   active={isAbout}  href="/about"  onClick={closeMobile} />
-          <NavItem mobile label="Resume"  active={isResume} href="/2026_CindyNakhammouane_Resume .pdf" onClick={closeMobile} />
+          <NavItem mobile label="Resume"  active={isResume} href="/Resume_2026_Cindy_Nakhammouane.pdf" onClick={closeMobile} />
           <NavItem mobile label="Contact" active={false}    onClick={() => scrollToSection("contact")} />
         </div>
       </div>
