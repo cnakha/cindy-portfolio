@@ -112,7 +112,7 @@ export const projects: Project[] = [
     description: "Website and community gallery hosting online multiplayer nonsensical art games made to empower and inspire creativity in daily life",
     context: "Fullstack Development, UI/UX Design",
     fullDescription: "GRAFFGRAFF is a web experience and digital community gallery that empowers creativity through physical and online nonsensical creativity games. Graffiti, also known as “Graff”, is the practice of unapologetic self expression, socialization, commentary, and art. The user experience is a direct reflection of this concept providing several modes of play that stray from strictly online interactions as well as provide an unfiltered shared art collective in celebration of carefree creative expression and freedom. My work was exhibited at UIC YES! 2026.",
-    tools: ["React", "Node.js","Typescript" , "Tailwind", "Firebase", "Vercel", "Figma", "Illustrator", "Photoshop"],
+    tools: ["React", "Node.js","Typescript" , "Tailwind", "Firebase", "Vercel", "Figma", "Illustrator", "Photoshop", "Claude Code"],
     challenges: "Creating an intuitive interface that could handle complex project hierarchies while remaining accessible to users of all technical levels.",
     outcome: "Successfully developed 5 different wearable biomedical devices that monitor various health metrics, each successfully tested and validated in real-world scenarios.",
     imageUrl: "projects/graffgraff/thumbnail.png",

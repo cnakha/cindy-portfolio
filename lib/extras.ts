@@ -88,7 +88,13 @@ export const extras: ExtraProject[] = [
     //   description: "Typography, printing, and book binding",
     //   title: "The Crystal Goblet"
     // },
-    
+    {
+      id: "ai",
+      coverImage: "/extras/ai/DXC_chatbot.png",
+      images: ["/extras/ai/big1.png", "/extras/ai/lap1.png", "/extras/ai/big2.png", "/extras/ai/lap2.png", "/extras/ai/banner.png", ],
+      description: "AI-related user interfaces: RAG DXC chatbot, assisted automation in Gradebook LMS, and predictive model data visualization (https://cs412-machine-learning-project.vercel.app/).",
+      title: "AI Exploration"
+    },
     {
       id: "trippy",
       coverImage: "/extras/trippy2.gif",
