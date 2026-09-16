@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, type Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/lib/projects";
@@ -29,6 +29,12 @@ export default function FeaturedProjectsSection({
   const clickedSlugRef = useRef<string | null>(null);
   const unlockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const asideContentRef = useRef<HTMLDivElement | null>(null);
+
+  const [hoveredExtra, setHoveredExtra] = useState<string | null>(null);
+  const rawX = useMotionValue(-200);
+  const rawY = useMotionValue(-200);
+  const springX = useSpring(rawX, { stiffness: 120, damping: 18, mass: 0.6 });
+  const springY = useSpring(rawY, { stiffness: 120, damping: 18, mass: 0.6 });
 
   const listItems = showingExtra ? extras : projects;
 
@@ -228,15 +234,17 @@ export default function FeaturedProjectsSection({
             ) : (
               <div className="flex flex-col gap-4">
               <p className="text-display text-black mb-2">More Design</p>
-              <div className="columns-2 gap-4 md:columns-3">
+              <div
+                className="columns-2 gap-4 md:columns-3"
+                onMouseMove={(e) => { rawX.set(e.clientX + 16); rawY.set(e.clientY + 16); }}
+              >
                 {extras.map((project, index) => (
                   <motion.button
                     variants={projectItemVariants}
                     key={project.id}
                     onClick={() => handleExtraOpen(project)}
-                    onMouseEnter={() =>
-                      preloadImages([project.coverImage])
-                    }
+                    onMouseEnter={(e) => { preloadImages([project.coverImage]); springX.jump(e.clientX + 16); springY.jump(e.clientY + 16); setHoveredExtra(project.id); }}
+                    onMouseLeave={() => setHoveredExtra(null)}
                     className="mb-4 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-2xl border border-light-black bg-light-black"
                   >
                     <Image
@@ -256,6 +264,22 @@ export default function FeaturedProjectsSection({
           </motion.div>
         </div>
       </section>
+
+      {/* Floating cursor tooltip for More Design thumbnails */}
+      <AnimatePresence>
+        {hoveredExtra && (
+          <motion.div
+            className="pointer-events-none fixed z-[200] rounded-full bg-light-black px-4 py-2 text-white text-tiny whitespace-nowrap"
+            style={{ left: springX, top: springY, x: "-10%", y: "-100%" }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{ duration: 0.15 }}
+          >
+            {extras.find(e => e.id === hoveredExtra)?.title}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {/* Drop shadow and background overlay for the popup modal */}
