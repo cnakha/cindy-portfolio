@@ -21,12 +21,10 @@ export default function Graffgraff() {
       <div className="mt-10"/>
       <Picture type={"half"} popup={true} useAspectRatio source={"/projects/graffgraff/Nakhammouane1.png"} source2={"/projects/graffgraff/Nakhammouane2.png"}/>
       <div className="mt-10"/>
+      <Picture type={"wide"} popup={true} useAspectRatio source={"/projects/graffgraff/design_system.png"}/>
+      <div className="mt-10"/>
       <Picture type={"third"} popup={true} source={"/projects/graffgraff/people1.jpg"} source2={"/projects/graffgraff/Indeximage.gif"} source3={"/projects/graffgraff/people4.jpg"}/>
-      {/* <div className="mt-10"/> */}
-      {/* <Picture type={"third"} popup={true} source={"/projects/graffgraff/people5.jpg"} 
-      source2={"/projects/graffgraff/people2.jpg"} source3={"/projects/graffgraff/people3.jpg"}/>
-      
-   */}
+  
       <div className="mt-10"/>
       <Picture type={"half"} popup={true} useAspectRatio source={"/projects/graffgraff/spread.png"} source2={"/projects/graffgraff/characters.png"}/>
 
