@@ -36,7 +36,7 @@ export const projects: Project[] = [
   context: "Fullstack Web App Development, UI/UX Design",
   fullDescription:
     "WorldNotes is a spatial web experiment blending maps, art, and 3D spaces. Users create notes by sharing thoughts and drawing doodles then posting and anchoring them to a globally shared street view map. Designed for casual web strolling, this web app fuels the creative spirit and builds a global community centering authentic creative expression.",
-  role: "Project Manager, Lead Fullstack Developer and UI/UX Designer. I built this app end-to-end from ideation to launch",
+  role: "Project Manager, Lead Fullstack Developer and Designer. I built this app end-to-end from ideation to launch",
   skills: ["UI/UX Design", "Fullstack Web App Development", "Wireframing", "SEO"],
   tools: ["React", "Next.js", "TypeScript", "Three.js", "NoSQL"],
   challenges: "The main challenge was implementing real-time collaboration while maintaining performance with hundreds of concurrent users. I solved this by implementing efficient data structures and optimized WebSocket connections.",
