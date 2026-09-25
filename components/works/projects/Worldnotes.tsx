@@ -32,11 +32,15 @@ export default function Worldnotes() {
 
       <Picture type={"wide"} source={"/projects/worldnotes/thumbnail_wide.png"}/>
       <div className="mt-4"/>
+      <Picture type={"wide"} popup={true} source={"/projects/worldnotes/Together.png"}/>
+      <div className="mt-4"/>
+      <Picture type={"wide"} popup={true} source={"/projects/worldnotes/Design_Systems.png"}/>
+      <div className="mt-4"/>
       <Picture type={"half"} popup={true} source={"/projects/worldnotes/spread.png"} source2={"/projects/worldnotes/welcome.png"}/>
       <div className="mt-10"/>
       <Picture type={"right"} popup={true} source={"/projects/worldnotes/traversal.png"}
         title={"Discover Art and Stories From Around the World"}
-        description={"Start your adventure by landing at a random location scattered with 3D notes left behind by others. Exploration is spontaneous and feels natural: click-to-move in Street View, use the overview or mini map, or search specific places. The navigation bar allows quick refreshes of nearby notes, filtering, and stepping through notes."}
+        description={"Start your adventure by landing at a random location scattered with 3D notes left behind by others. Exploration is spontaneous and feels natural: click-to-move in Street View, use the overview or mini map, or search specific places."}
       />
       <div className="mt-10"/>
       <Picture type={"half"} useAspectRatio popup={true} source={"/projects/worldnotes/search.png"} source2={"/projects/worldnotes/community.png"}/>
