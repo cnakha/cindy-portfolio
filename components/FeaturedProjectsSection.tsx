@@ -175,14 +175,14 @@ export default function FeaturedProjectsSection({
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.15 }}
-                    id={`project-${projects[1].id}`}
+                    id={`project-${projects[5].id}`}
                     className="scroll-mt-28"
                   >
-                    <ProjectCard project={projects[1]} />
+                    <ProjectCard project={projects[5]} />
                   </motion.div>
 
                   <div
-                    data-project-trigger={projects[1].id}
+                    data-project-trigger={projects[5].id}
                     className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
                   />
                 </div>
@@ -205,14 +205,14 @@ export default function FeaturedProjectsSection({
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.15 }}
-                    id={`project-${projects[3].id}`}
+                    id={`project-${projects[1].id}`}
                     className="scroll-mt-28"
                   >
-                    <ProjectCard project={projects[3]} />
+                    <ProjectCard project={projects[1]} />
                   </motion.div>
 
                   <div
-                    data-project-trigger={projects[3].id}
+                    data-project-trigger={projects[1].id}
                     className="pointer-events-none absolute left-0 top-1/2 h-px w-px"
                   />
                 </div>
@@ -228,6 +228,16 @@ export default function FeaturedProjectsSection({
                     className="scroll-mt-28"
                   >
                     <ProjectCard project={projects[4]} />
+                  </motion.div>
+                  <motion.div
+                    variants={projectItemRight}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: false, amount: 0.15 }}
+                    id={`project-${projects[3].id}`}
+                    className="scroll-mt-28"
+                  >
+                    <ProjectCard project={projects[3]} />
                   </motion.div>
                 </div>
               </>

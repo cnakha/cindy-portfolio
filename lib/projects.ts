@@ -126,7 +126,7 @@ export const projects: Project[] = [
   {
     id: "ycgh",
     title: "You Can Grow Here",
-    description: "VR journey for anxiety management, published research on adapting anxiety relief wellness techniques in VR (SIGGRAPH 2025, HCI 2026)",
+    description: "Anxiety management VR experience, published research on adapting anxiety relief wellness techniques in VR (SIGGRAPH 2025, HCI 2026)",
     context: "VR Experience, Research Paper",
     fullDescription: "You Can Grow Here is an immersive VR experience developed for and exhibited at the CAVE2™ environment in the Electronic Visualization Laboratory at the University of Illinois Chicago, aligning with the United Nation's Sustainable Development Goal of Good Health and Well-Being. In response to the mental health challenges intensified by the COVID-19 pandemic, the project explores how interactive storytelling, ambient sound, and 3D typography can support emotional reflection, explore modes of group therapy, and teach anxiety coping strategies. Built in Unity with custom assets from Blender and Maya, the experience differs from most clinical VR programs, allowing users to independently explore emotions, manage anxiety, and practice evidence-based calming techniques within a safe, narrative-driven space that builds emotional resilience.",
     features: [
@@ -196,33 +196,32 @@ export const projects: Project[] = [
   {
     id: "chilove",
     title: "Chicago Love",
-    description: "",
-    context: "",
-    fullDescription: "",
-    tools: ["Figma", "Illustrator", "Photoshop", "WordPress", "JavaScript", "HTML/CSS"],
-    challenges: "e to users of all technical levels.",
-    outcome: "Successfully developed 5 different wearable biomedical devices that monitor various health metrics, each successfully tested and validated in real-world scenarios.",
-    imageUrl: "projects/biomed/thumbnail.png",
-    imageUrl2: "projects/biomed/thumbnail.png",
-    timeline: "Jan 2025 — May 2025",
-    status:"View the live site here!",
-    link: "ryanlessamart.com",
-    figmaUrl:"https://www.figma.com/design/SoG1dFJlOOid0PTMHEnAnM/Chicago-Love?t=YUVSrNZPiDQtYrzq-1",
-    role: "Lead Web Designer, Web Dev Manager, Web Developer",
-    skills: ["Web Design", "WordPress", "Brand Design", "User Testing"],
-    problem: "Wearable technology has the potential to revolutionize personal health tracking, yet many devices fail due to not meeting consumer needs.",
-    subProblem: "After researching users and wearable assistive health tech, listed are key problems we identified in the wearable health tech space:",
-    solution: "My team developed five wearable bluetooth devices that monitor biometrics such as heart rate, oxygen levels, stress, and activity patterns. The devices feature ergonomic designs, wireless communication, and intuitive UIs that provide real-time data visualization and alerts, helping users track their personal health and receive timely notifications on health anomalies.",
-    keyProblems:[
-      "Lack of Accessible Health Monitoring",
-      "Poor Integration into Daily Life",
-      "Need for Real-Time, Continuous Monitoring"
+    description: "Redesigned and built 5+ pages for a Chicago anti-violence lifestyle brand and non-profit, improving SEO and mobile UX and reducing bounce rate",
+    context: "Web Design, Web Development, Brand Design",
+    fullDescription: "Chicago Love™ is a Chicago-inspired lifestyle brand and non-profit creating apparel, bracelets, and a coffee-table keepsake featuring fun facts, stories, images, and Chi-Quest, a scavenger-hunt game inspiring people to explore Chicago. Their website struggled with navigation, messaging, branding, and overall structure. I came in as Assistant Managing Director of Web Design to rebuild it from the ground up and bring credibility, modernization, and professionalism to the movement's home.",
+    tools: ["WordPress", "Figma", "JavaScript", "HTML/CSS", "Illustrator", "Photoshop"],
+    challenges: "The site had no footer, a cluttered nav, and was missing pages critical to the brand’s mission like a community hub and e-commerce flow. The pages that did exist were visually inconsistent and didn’t reflect the energy or credibility the brand needed.",
+    outcome: "Used Lighthouse audits to improve SEO, mobile UX, and page load performance by 20% and reduce bounce rate by 30%. The new design brings credibility to the movement and makes CTAs and ways to support the brand very clear. The website is currently in the process of being updated.",
+    imageUrl: "projects/chilove/thumbnail.png",
+    imageUrl2: "projects/chilove/thumbnail.png",
+    timeline: "August 2026 — Present",
+    status: "Website currently being updated, view the live site here!",
+    link: "https://ryanlessamart.com/chicago-love-movement/",
+    figmaUrl: "https://www.figma.com/design/SoG1dFJlOOid0PTMHEnAnM/Chicago-Love?node-id=0-1&t=6wiugc9XgoLgPjqp-1",
+    role: "Assistant Managing Director of Web Design. I managed a team of 4 in website design and development, established the company design system and brand guidelines, and organized pitch decks and site plugins.",
+    skills: ["Web Design", "WordPress Development", "Brand & Design Systems", "SEO", "Mobile UX", "E-Commerce", "Team Management"],
+    problem: "Chicago Love’s website didn’t reflect the credibility or energy of the movement. Poor navigation, inconsistent branding, and missing pages made it hard for visitors to understand the brand or take action.",
+    subProblem: "After auditing the site and talking with the team, these were the core issues holding the brand back:",
+    solution: "I redesigned the site with a clear design system and brand guidelines, created the Chicago Love Movement page and Community page from scratch, built out e-commerce and community forum functionality including a review and moderation system, overhauled the navigation to be more concise and organized, and built a footer that didn’t exist before. Lighthouse audits were used throughout to track improvements in SEO, mobile UX, and page load performance.",
+    keyProblems: [
+      "No Brand Consistency or Design System",
+      "Missing Critical Pages and Functionality",
+      "Weak Navigation and No Footer",
     ],
-    keyProblemDescriptions:[
-      "Many existing health monitoring devices are unaffordable or too complex for everyday users.",
-      "There is a gap in designing devices that seamlessly blend into users' routines while maintaining comfort, aesthetics, and continuous operation without disruption.",
-      "Current solutions don’t consistently offer real-time, continuous data streams that are accurate and intuitive enough to provide meaningful feedback or alerts."
-      ],
-    
+    keyProblemDescriptions: [
+      "The site looked unprofessional and inconsistent across pages, which undermined trust in a brand built around community and giving back.",
+      "There was no community page, no e-commerce flow, and no forum. Key touchpoints for driving donations and engagement were completely absent.",
+      "The navigation was cluttered and confusing and there was no footer, leaving visitors without clear paths to learn more, shop, or support the cause.",
+    ],
   },
 ];

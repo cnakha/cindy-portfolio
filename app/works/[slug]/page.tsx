@@ -13,6 +13,7 @@ import Folio from "@/components/works/projects/Folio";
 import YCGH from "@/components/works/projects/YCGH";
 import Graffgraff from "@/components/works/projects/Graffgraff";
 import Worldnotes from "@/components/works/projects/Worldnotes";
+import ChiLove from "@/components/works/projects/ChiLove";
 
 const container = {
   hidden: {},
@@ -149,6 +150,7 @@ export default function ProjectPage() {
           {slug === "ycgh" && <YCGH/>}
           {slug === "graffgraff" && <Graffgraff />}
           {slug === "worldnotes" && <Worldnotes />}
+          {slug === "chilove" && <ChiLove />}
 
           {/* Bottom nav: prev / scroll-to-top / next */}
           {(() => {

@@ -138,10 +138,10 @@ function HeroFlower() {
   const sharedCaps = { strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
   return (
-    <div className="absolute inset-0 pointer-events-none" style={{ clipPath: "inset(0)" }}>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* scale down on small screens, anchored top-right */}
-      <div className="absolute right-[-5%] md:right-[-8%] lg:right-[-7%] top-[54%] sm:top-[30%] md:top-[18%] lg:top-[3%]
-      h-full origin-top-right scale-[0.42] sm:scale-[0.65] md:scale-[0.7] lg:scale-[0.80]">
+      <div className="absolute right-[2%] md:right-[0%] lg:right-[-1%] top-[50%] sm:top-[26%] md:top-[14%] lg:top-[0%]
+      h-full origin-top-right scale-[0.40] sm:scale-[0.58] md:scale-[0.62] lg:scale-[0.75]">
         <svg
           viewBox="0 0 1390.25 730.38"
           preserveAspectRatio="xMidYMid meet"
@@ -149,6 +149,9 @@ function HeroFlower() {
           style={{ minWidth: "55vw", overflow: "visible" }}
         >
           <defs>
+            <clipPath id="viewbox-clip">
+              <rect x="0" y="0" width="1390.25" height="730.38" />
+            </clipPath>
             <mask id={maskId}>
               <rect x="-20" y="-20" width="1440" height="800" fill="black" />
               <motion.path d={FLOWER_PATH1} stroke="white" strokeWidth={54} fill="none"
@@ -173,13 +176,13 @@ function HeroFlower() {
             {...sharedCaps} style={{ pathLength: pl2, opacity: op2 }} />
 
           {/* Video revealed through mask */}
-          <foreignObject x="0" y="0" width="1390.25" height="750" mask={`url(#${maskId})`}>
+          <foreignObject x="0" y="0" width="1390.25" height="730.38" mask={`url(#${maskId})`} clipPath="url(#viewbox-clip)">
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               ref={videoRef}
               src={HERO_VID}
               autoPlay muted loop playsInline preload="none" poster="/placeholder.png"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", clipPath: "inset(0 0 1px 0)" }}
             />
           </foreignObject>
         </svg>
@@ -210,13 +213,16 @@ export default function HomePage() {
   };
 
   return (
-    <main className="bg-white">
+    <main className="bg-white min-h-screen">
 
       {/* hero flower bg + text */}
-      <section className="relative w-full">
-        <div className="relative w-full overflow-hidden min-h-[100svh] sm:min-h-[80svh] md:min-h-[750px] lg:min-h-[800px]" style={{ clipPath: "inset(0)" }}>
+      <section className="relative w-full overflow-hidden bg-white lg:h-[700px]">
+        <div className="relative w-full max-w-[1640px] mx-auto min-h-[100svh] sm:min-h-[80svh] md:min-h-[820px] lg:min-h-[890px]">
 
           <HeroFlower />
+
+          {/* fade out bottom edge to hide any mask/clip artifacts */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent pointer-events-none z-20" />
 
           <motion.div
             className="relative z-10 pointer-events-none flex flex-col justify-start px-[5%] pt-24 pb-[10%] sm:absolute sm:inset-x-0 sm:top-0 lg:pt-20 sm:pb-12"
@@ -262,7 +268,6 @@ export default function HomePage() {
 
         </div>
       </section>
-      <div className=" mb-20"/>
 
       {/* ── projects + footer ── */}
       <div className="mx-auto w-full max-w-[1440px]">

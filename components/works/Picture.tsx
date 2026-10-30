@@ -10,6 +10,7 @@ type PictureProps = {
   source3?: string;
   title?: string;
   description?: string;
+  description2?: string;
   popup?: boolean;
 
   autoplay?: boolean;         
@@ -61,6 +62,13 @@ export default function Picture({
       </div>
     ) : null;
 
+ const sizesForType =
+    type === "wide" || type === "captioned" || type === "video"
+      ? "(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
+      : type === "third"
+      ? "(max-width: 640px) 100vw, 33vw"
+      : "(max-width: 640px) 100vw, 50vw";
+
  const ImageWithPopup = ({
   src,
   alt = title || "Project image",
@@ -84,7 +92,7 @@ export default function Picture({
       alt={alt}
       width={width}
       height={height}
-      sizes="(max-width: 768px) 100vw, 50vw"
+      sizes={sizesForType}
       className={className}
       onClick={() => popup && setPopupImage(src)}
     />
