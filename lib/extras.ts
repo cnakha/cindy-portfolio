@@ -15,20 +15,20 @@ export const extras: ExtraProject[] = [
       description: "Composition and photo editing practice and study.",
       title: "Fluid Time Poster",
     },
-    {
-      id: "coding-poster",
-      coverImage: "/extras/Coding_Poster.png",
-      images: [],
-      description: "Playful visual language following algorithmic code + design.",
-      title: "Coding Poster"
-    },
-    {
-      id: "vfx",
-      coverImage: "/extras/vfx/vfx.png",
-      images: ["/extras/vfx/spread1.png", "/extras/vfx/spread2.png", "/extras/vfx/tv.png"],
-      description: "Book on the social space of VFX, retro futurism style.",
-      title: "VFX and the Space Between"
-    },
+    // {
+    //   id: "coding-poster",
+    //   coverImage: "/extras/Coding_Poster.png",
+    //   images: [],
+    //   description: "Playful visual language following algorithmic code + design.",
+    //   title: "Coding Poster"
+    // },
+    // {
+    //   id: "vfx",
+    //   coverImage: "/extras/vfx/vfx.png",
+    //   images: ["/extras/vfx/spread1.png", "/extras/vfx/spread2.png", "/extras/vfx/tv.png"],
+    //   description: "Book on the social space of VFX, retro futurism style.",
+    //   title: "VFX and the Space Between"
+    // },
     {
       id: "riso-animation",
       coverImage: "/extras/Riso_Animation.gif",
@@ -97,12 +97,12 @@ export const extras: ExtraProject[] = [
       description: "Visualizing relationship maps.",
       title: "Love Through the Sky"
     },
-    {
-      id: "antparty",
-      coverImage: "/extras/ant_party.png",
-      images: ["/extras/Garden_Card2.png", "/extras/ticket.png"],
-      description: "Business card concepts",
-      title: "ANT PARTY Card"
-    },
+    // {
+    //   id: "antparty",
+    //   coverImage: "/extras/ant_party.png",
+    //   images: ["/extras/Garden_Card2.png", "/extras/ticket.png"],
+    //   description: "Business card concepts",
+    //   title: "ANT PARTY Card"
+    // },
    
   ];
